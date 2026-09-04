@@ -149,11 +149,12 @@ import heroPhoto from "../assets/hero.png";
      never fight over the same element's opacity/transform. */
   @media (prefers-reduced-motion: no-preference) {
     .headline {
-      animation: hero-copy-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: hero-copy-enter 1.6s cubic-bezier(0.19, 1, 0.22, 1) 0.1s
+        both;
     }
 
     .hero-media {
-      animation: hero-media-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s
+      animation: hero-media-enter 1.9s cubic-bezier(0.19, 1, 0.22, 1) 0.35s
         both;
     }
   }
@@ -161,7 +162,7 @@ import heroPhoto from "../assets/hero.png";
   @keyframes hero-copy-enter {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(36px);
     }
     to {
       opacity: 1;
@@ -172,7 +173,7 @@ import heroPhoto from "../assets/hero.png";
   @keyframes hero-media-enter {
     from {
       opacity: 0;
-      transform: translateY(60px);
+      transform: translateY(90px);
     }
     to {
       opacity: 1;
