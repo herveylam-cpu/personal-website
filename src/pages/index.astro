@@ -15,7 +15,6 @@ import heroPhoto from "../assets/hero.png";
   <section class="hero-stage">
     <div class="hero-pin">
       <div class="hero-copy">
-        <p class="byline">Lin Hongyu</p>
         <h1 class="headline">
           Design that grows the business, not just the interface.
         </h1>
@@ -119,23 +118,13 @@ import heroPhoto from "../assets/hero.png";
 
   .hero-copy {
     position: absolute;
-    top: 16%;
+    top: 108px;
     left: 50%;
     z-index: 2;
     width: min(90%, 900px);
     transform: translateX(-50%);
     text-align: center;
     opacity: 1;
-  }
-
-  .byline {
-    font-style: italic;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
-    margin-bottom: var(--space-2);
   }
 
   .headline {
@@ -152,6 +141,43 @@ import heroPhoto from "../assets/hero.png";
     position: absolute;
     inset: 0;
     z-index: 1;
+  }
+
+  /* Page-load entrance: the headline and the photo rise into place.
+     Lives on .headline/.hero-media themselves (not .hero-copy), which
+     is what the scroll-reveal script controls — so the two animations
+     never fight over the same element's opacity/transform. */
+  @media (prefers-reduced-motion: no-preference) {
+    .headline {
+      animation: hero-copy-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .hero-media {
+      animation: hero-media-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s
+        both;
+    }
+  }
+
+  @keyframes hero-copy-enter {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-media-enter {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .hero-media-img {
