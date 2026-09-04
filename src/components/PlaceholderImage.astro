@@ -2,19 +2,27 @@
 interface Props {
   label?: string;
   ratio?: string; // e.g. "16/9", "4/3", "1/1"
+  radius?: string; // e.g. "4px", "40px"
   class?: string;
 }
-const { label = "Image placeholder", ratio = "4/3", class: className = "" } = Astro.props;
+const {
+  label = "Image placeholder",
+  ratio = "4/3",
+  radius = "4px",
+  class: className = "",
+} = Astro.props;
 ---
 
-<div class:list={["ph", className]} style={`aspect-ratio: ${ratio};`}>
+<div
+  class:list={["ph", className]}
+  style={`aspect-ratio: ${ratio}; border-radius: ${radius};`}
+>
   <span class="ph-label">{label}</span>
 </div>
 
 <style>
   .ph {
     width: 100%;
-    border-radius: 4px;
     background: repeating-linear-gradient(
       135deg,
       rgba(23, 20, 15, 0.06) 0px,
