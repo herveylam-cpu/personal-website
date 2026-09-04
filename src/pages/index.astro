@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CaseCard from "../components/CaseCard.astro";
+import PeopleCard from "../components/PeopleCard.astro";
+import { workCases } from "../data/work";
+import { peopleTopics } from "../data/people";
+---
+
+<BaseLayout title="Lin Hongyu — Monee Design Head">
+  <!-- Hero / identity -->
+  <section class="section hero" style="border-top: none;">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--accent">Monee Design Head</p>
+      <h1>Lin Hongyu</h1>
+      <p class="lead">
+        Overseeing brand, product, and operations design across everything Monee — one corporate brand, <strong>Monee Corporate</strong>, and five core business lines: <strong>Digital Bank</strong>, <strong>Payment</strong>, <strong>Loan</strong>, <strong>Investment</strong>, and <strong>Insurance</strong>.
+      </p>
+      <ul class="scope-list">
+        <li>
+          Focus on business growth and user experience — define design
+          strategy and safeguard the quality of what ships.
+        </li>
+        <li>Connect and align resources across teams to raise efficiency.</li>
+        <li>
+          Lead the evolution of craft and the growth of design roles.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Design philosophy -->
+  <section class="section philosophy">
+    <div class="wrap">
+      <p class="eyebrow">On Design</p>
+      <p class="statement">
+        I see myself as a <em>Business Designer</em> — someone who reads
+        product and user-experience design through a business lens.
+        Business growth is the goal; user experience and product strategy
+        are how we get there.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Project -->
+  <section class="section" id="project">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow eyebrow--accent">About Project</p>
+          <h2>Work</h2>
+        </div>
+        <p class="section-note">
+          From ecosystem-level strategy to the shape of a single product
+          decision.
+        </p>
+      </div>
+      <div class="work-grid">
+        {workCases.map((work) => <CaseCard work={work} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- About People -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow eyebrow--accent">About People</p>
+          <h2>Leading People</h2>
+        </div>
+        <p class="section-note">Building the team that builds the work.</p>
+      </div>
+      <div class="people-grid">
+        {peopleTopics.map((topic) => <PeopleCard topic={topic} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: var(--space-6);
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(48px, 9vw, 96px);
+    line-height: 0.98;
+    margin-block: var(--space-2) var(--space-4);
+  }
+
+  .lead {
+    max-width: 640px;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-4);
+  }
+
+  .lead strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .scope-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 640px;
+  }
+
+  .scope-list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .scope-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .philosophy .statement {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 38px);
+    line-height: 1.35;
+    max-width: 900px;
+    margin-top: var(--space-3);
+  }
+
+  .philosophy .statement em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  h2 {
+    font-size: clamp(26px, 3vw, 34px);
+    margin-top: 6px;
+  }
+
+  .section-note {
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    max-width: 320px;
+    text-align: right;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4) var(--space-3);
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 900px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .people-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-note {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

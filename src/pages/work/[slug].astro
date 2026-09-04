@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PlaceholderImage from "../../components/PlaceholderImage.astro";
+import { workCases } from "../../data/work";
+
+export function getStaticPaths() {
+  return workCases.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+---
+
+<BaseLayout title={`${work.title} — Lin Hongyu`}>
+  <section class="section" style="border-top: none;">
+    <div class="wrap">
+      <a class="back" href="/#project">&larr; Back to Work</a>
+      <span class="tag">{work.category}</span>
+      <h1>{work.title}</h1>
+      {work.subtitle && <p class="subtitle">{work.subtitle}</p>}
+      <PlaceholderImage ratio="16/9" label="Case cover — coming soon" />
+      <p class="note">
+        Full case study coming soon — content for this page hasn't been
+        provided yet.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-4);
+  }
+
+  .back:hover {
+    color: var(--color-accent);
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(30px, 5vw, 48px);
+    margin-top: var(--space-2);
+    max-width: 800px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: var(--color-ink-soft);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .note {
+    margin-top: var(--space-3);
+    color: var(--color-ink-faint);
+    font-size: 14px;
+  }
+</style>

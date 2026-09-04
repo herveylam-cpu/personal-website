@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { peopleTopics } from "../../data/people";
+
+export function getStaticPaths() {
+  return peopleTopics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+---
+
+<BaseLayout title={`${topic.title} — Lin Hongyu`}>
+  <section class="section" style="border-top: none;">
+    <div class="wrap">
+      <a class="back" href="/#about">&larr; Back to Leading People</a>
+      <h1>{topic.title}</h1>
+      <p class="subtitle">{topic.description}</p>
+      <p class="note">
+        Full write-up coming soon — content for this page hasn't been
+        provided yet.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-4);
+  }
+
+  .back:hover {
+    color: var(--color-accent);
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(30px, 5vw, 48px);
+    margin-top: var(--space-2);
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: var(--color-ink-soft);
+    margin-top: var(--space-2);
+    max-width: 640px;
+  }
+
+  .note {
+    margin-top: var(--space-3);
+    color: var(--color-ink-faint);
+    font-size: 14px;
+  }
+</style>

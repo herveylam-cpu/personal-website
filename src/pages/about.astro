@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About — Lin Hongyu">
+  <section class="section" style="border-top: none;">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--accent">About</p>
+      <h1>More to come</h1>
+      <p class="note">
+        This page is waiting on its content outline — nothing here is
+        final yet.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(36px, 6vw, 56px);
+    margin-block: var(--space-2) var(--space-3);
+  }
+
+  .note {
+    color: var(--color-ink-soft);
+    max-width: 480px;
+  }
+</style>

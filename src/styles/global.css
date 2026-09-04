@@ -1,0 +1,142 @@
+/* ---------------------------------------------------------------
+   Design tokens
+   A restrained editorial palette: warm paper background, near-black
+   ink, one muted accent used sparingly for tags/links. No dark mode
+   yet — this is a deliberate v1 scope, add later if needed.
+------------------------------------------------------------------*/
+:root {
+  --color-bg: #faf8f4;
+  --color-ink: #17140f;
+  --color-ink-soft: #5c5648;
+  --color-ink-faint: #948f80;
+  --color-line: rgba(23, 20, 15, 0.14);
+  --color-accent: #a8452a;
+  --color-accent-soft: rgba(168, 69, 42, 0.1);
+  --color-card: #ffffff;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --maxw: 1160px;
+  --pad-inline: clamp(20px, 5vw, 64px);
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 96px;
+  --space-7: 140px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad-inline);
+}
+
+/* Small serif eyebrow label, e.g. "MONEE DESIGN HEAD" */
+.eyebrow {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.eyebrow--accent {
+  color: var(--color-accent);
+}
+
+.section {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent-soft);
+  background: var(--color-accent-soft);
+  border-radius: 100px;
+  padding: 4px 12px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding-block: var(--space-5);
+  }
+}
