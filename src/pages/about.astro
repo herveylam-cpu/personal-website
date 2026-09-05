@@ -171,20 +171,29 @@ import { experience } from "../data/experience";
     padding-bottom: var(--space-4);
   }
 
-  /* Entrance reveal for the module — fades/lifts in once as the user
-     scrolls to it (IntersectionObserver-driven, see the script below).
+  /* Entrance animation for the module — a page-load reveal (like the
+     Home hero), not scroll-triggered: this section sits right after
+     Module 1, so on plenty of viewport heights it's already at least
+     partly on screen the instant the page loads, meaning a "scroll
+     into view" trigger fires almost immediately and never looks like
+     anything happened. A load-time animation shows every time,
+     regardless of where it lands on first paint.
      Scoped to .exp-intro only, not .exp-stage: a transform on an
      ancestor of .exp-pin can interfere with its sticky positioning,
      and .exp-stage already has its own reveal via the company
      crossfade. */
   @media (prefers-reduced-motion: no-preference) {
     .exp-intro {
+      animation: exp-intro-enter 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
+    }
+  }
+
+  @keyframes exp-intro-enter {
+    from {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-
-    .exp-intro.is-visible {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
@@ -209,11 +218,13 @@ import { experience } from "../data/experience";
   }
 
   /* Module 2: experience scroll-stage. .exp-stage gives extra scroll
-     room (one "page" per company) for the reveal; .exp-pin is what
-     stays stuck to the viewport while that room scrolls past. */
+     room (one "step" per company) for the reveal; .exp-pin is what
+     stays stuck to the viewport while that room scrolls past. 35vh
+     per step (not a full 90vh) — one deliberate scroll/swipe should
+     be enough to land on the next company, not a long drag. */
   .exp-stage {
     position: relative;
-    height: calc(var(--exp-steps, 3) * 90vh);
+    height: calc(var(--exp-steps, 3) * 35vh);
   }
 
   /* .exp-pin's sticky containing block is .wrap (its direct parent),
@@ -473,27 +484,29 @@ import { experience } from "../data/experience";
 
   setupExperienceScroll();
 
-  // Entrance reveal for .exp-intro, plus a 0->12 count-up on its
-  // number, both firing once the first time the section scrolls into
-  // view (IntersectionObserver, not scroll position — this only ever
-  // needs to happen once, not continuously like the stage above).
-  function setupExpIntroReveal() {
-    const intro = document.querySelector<HTMLElement>(".exp-intro");
+  // 0->12 count-up on the experience title's number. Runs at page
+  // load, timed to start as .exp-intro's CSS entrance animation is
+  // fading in (not scroll-triggered — this section sits close enough
+  // to Module 1 that on plenty of viewport heights it's already at
+  // least partly on screen at load, so a "scrolled into view" trigger
+  // fires almost instantly and never looks like anything happened).
+  function setupExpCounter() {
     const counter = document.querySelector<HTMLElement>(".exp-counter");
-    if (!intro) return;
+    if (!counter) return;
 
+    const target = Number(counter.dataset.target ?? "0");
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    if (prefersReducedMotion) {
+      counter.textContent = String(target);
+      return;
+    }
 
-    function runCounter() {
-      if (!counter) return;
-      const target = Number(counter.dataset.target ?? "0");
-      if (prefersReducedMotion) {
-        counter.textContent = String(target);
-        return;
-      }
-      const duration = 700;
+    const duration = 700;
+    const delay = 150; // roughly matches the CSS entrance's fade-in
+
+    setTimeout(() => {
       const start = performance.now();
       function tick(now: number) {
         const t = Math.min(1, (now - start) / duration);
@@ -502,30 +515,8 @@ import { experience } from "../data/experience";
         if (t < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
-    }
-
-    if (prefersReducedMotion) {
-      // .exp-intro is already fully visible with no transition under
-      // reduced motion (the CSS is gated on no-preference); just set
-      // the counter's end value directly.
-      runCounter();
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            intro.classList.add("is-visible");
-            runCounter();
-            observer.unobserve(intro);
-          }
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(intro);
+    }, delay);
   }
 
-  setupExpIntroReveal();
+  setupExpCounter();
 </script>
