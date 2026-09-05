@@ -92,12 +92,30 @@ import { experience } from "../data/experience";
     </div>
   </section>
 
-  <!-- Module 3 (to be redesigned): the old summary cards + note,
-       kept below for now per the current plan -->
-  <section class="section role">
+  <!-- Module 3 -->
+  <section class="section focus-intro">
     <div class="wrap">
+      <h2 class="focus-title">
+        Over <span class="focus-counter" data-target="7">0</span> years
+        of design management experience
+      </h2>
+      <p class="focus-subtitle">
+        Experience building a team from zero to one. I currently lead
+        a design team of 30+, reporting to the CEO and each business
+        line's Business Head.<br />
+        My day-to-day work covers:
+      </p>
+
       <div class="focus-grid">
         <div class="focus-card">
+          <div class="focus-icon-wrap">
+            <PlaceholderImage
+              ratio="1/1"
+              radius="16px"
+              label="Icon"
+              class="focus-icon"
+            />
+          </div>
           <p class="focus-tag">Design Quality</p>
           <p>
             Focus on business growth and user experience — define
@@ -106,6 +124,14 @@ import { experience } from "../data/experience";
           </p>
         </div>
         <div class="focus-card">
+          <div class="focus-icon-wrap">
+            <PlaceholderImage
+              ratio="1/1"
+              radius="16px"
+              label="Icon"
+              class="focus-icon"
+            />
+          </div>
           <p class="focus-tag">Efficiency</p>
           <p>
             Connect and align resources to improve collaboration
@@ -113,6 +139,14 @@ import { experience } from "../data/experience";
           </p>
         </div>
         <div class="focus-card">
+          <div class="focus-icon-wrap">
+            <PlaceholderImage
+              ratio="1/1"
+              radius="16px"
+              label="Icon"
+              class="focus-icon"
+            />
+          </div>
           <p class="focus-tag">Capability Growth</p>
           <p>
             Lead the evolution of the design team's craft and role
@@ -360,9 +394,27 @@ import { experience } from "../data/experience";
     color: var(--color-ink-soft);
   }
 
-  /* Module 3 (to be redesigned): kept for now */
-  .role {
+  /* Module 3 */
+  .focus-intro {
     text-align: center;
+  }
+
+  .focus-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(34px, 5.5vw, 60px);
+    line-height: 1.15;
+    margin: 0 0 var(--space-3);
+  }
+
+  .focus-counter {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .focus-subtitle {
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-5);
   }
 
   .focus-grid {
@@ -373,19 +425,28 @@ import { experience } from "../data/experience";
   }
 
   .focus-card {
-    text-align: left;
-    padding: var(--space-3);
-    border: 1px solid var(--color-line);
-    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: var(--space-4) var(--space-3);
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+  }
+
+  .focus-icon-wrap {
+    width: 72px;
+    margin-bottom: 6px;
   }
 
   .focus-tag {
     font-weight: 700;
     font-size: 17px;
-    margin: 0 0 10px;
+    margin: 0;
   }
 
-  .focus-card p + p {
+  .focus-card p:last-child {
     font-size: 14px;
     line-height: 1.6;
     color: var(--color-ink-soft);
@@ -568,14 +629,17 @@ import { experience } from "../data/experience";
 
   setupExperienceScroll();
 
-  // Reveal .exp-intro (fade + lift) and count its number up 0->target
-  // the first time it scrolls into view. Driven by a plain scroll
-  // listener + getBoundingClientRect, same technique as the company
-  // switcher above (not IntersectionObserver) — this only needs to
-  // fire once, so it unregisters itself after triggering.
-  function setupExpIntroReveal() {
-    const intro = document.querySelector<HTMLElement>(".exp-intro");
-    const counter = document.querySelector<HTMLElement>(".exp-counter");
+  // Reveal a section (fade + lift, if its CSS opts in via .is-visible)
+  // and count its number up 0->target the first time it scrolls into
+  // view. Driven by a plain scroll listener + getBoundingClientRect,
+  // same technique as the company switcher above (not
+  // IntersectionObserver) — this only needs to fire once per section,
+  // so each call unregisters itself after triggering. Shared by both
+  // "Over 12 years..." and "Over 7 years..." — same mechanism, two
+  // different sections/counters.
+  function setupIntroReveal(sectionSelector: string, counterSelector: string) {
+    const intro = document.querySelector<HTMLElement>(sectionSelector);
+    const counter = document.querySelector<HTMLElement>(counterSelector);
     if (!intro) return;
 
     const target = Number(counter?.dataset.target ?? "0");
@@ -616,5 +680,6 @@ import { experience } from "../data/experience";
     window.addEventListener("scroll", check, { passive: true });
   }
 
-  setupExpIntroReveal();
+  setupIntroReveal(".exp-intro", ".exp-counter");
+  setupIntroReveal(".focus-intro", ".focus-counter");
 </script>
