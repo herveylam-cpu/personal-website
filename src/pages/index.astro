@@ -35,19 +35,18 @@ import heroPhoto from "../assets/hero.png";
 
   <section class="section hero-bio">
     <div class="wrap">
-      <p class="lead">
-        Overseeing brand, product, and operations design across everything Monee — one corporate brand, <strong>Monee Corporate</strong>, and five core business lines: <strong>Digital Bank</strong>, <strong>Payment</strong>, <strong>Loan</strong>, <strong>Investment</strong>, and <strong>Insurance</strong>.
+      <h2 class="statement-lg">
+        Business is the destination. User experience is the art of
+        getting there.
+      </h2>
+      <p class="sub-lead">
+        I am the Head of Design at Monee — overseeing brand, product,
+        and marketing design across everything we do: Digital Bank,
+        Payment, Loan, Investment, and Insurance.
       </p>
-      <ul class="scope-list">
-        <li>
-          Focus on business growth and user experience — define design
-          strategy and safeguard the quality of what ships.
-        </li>
-        <li>Connect and align resources across teams to raise efficiency.</li>
-        <li>
-          Lead the evolution of craft and the growth of design roles.
-        </li>
-      </ul>
+      <a class="btn" href="/about">
+        Know more about me <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
     </div>
   </section>
 
@@ -223,31 +222,21 @@ import heroPhoto from "../assets/hero.png";
     text-align: center;
   }
 
-  .lead {
-    max-width: 640px;
+  .statement-lg {
+    max-width: 780px;
     margin-inline: auto;
-    font-size: clamp(17px, 2vw, 20px);
-    line-height: 1.6;
-    color: var(--color-ink-soft);
-    margin-bottom: var(--space-5);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.25;
   }
 
-  .lead strong {
-    color: var(--color-ink);
-    font-weight: 600;
-  }
-
-  .scope-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-    max-width: 560px;
+  .sub-lead {
+    max-width: 620px;
     margin-inline: auto;
-  }
-
-  .scope-list li {
-    font-size: 15px;
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-4);
+    font-size: clamp(16px, 2vw, 18px);
     line-height: 1.6;
     color: var(--color-ink-soft);
   }
