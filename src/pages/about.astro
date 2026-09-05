@@ -32,21 +32,67 @@ import { experience } from "../data/experience";
     </div>
   </section>
 
-  <!-- Module 2: role & philosophy -->
+  <!-- Module 2: experience — title/subtitle, then a scroll-driven
+       two-column list (left: photo per company, right: company names
+       that expand into role detail as each becomes active) -->
+  <section class="section exp-intro">
+    <div class="wrap">
+      <h2 class="exp-title">Over 12 years of design experience</h2>
+      <p class="exp-subtitle">
+        including leading multiple 0-to-1 end-to-end product launches
+      </p>
+    </div>
+  </section>
+
+  <section class="exp-stage" style={`--exp-steps: ${experience.length}`}>
+    <div class="wrap">
+      <div class="exp-pin">
+        <div class="exp-media">
+          {
+            experience.map((company) => (
+              <PlaceholderImage
+                ratio="4/5"
+                radius="24px"
+                label={`${company.name} photo`}
+                class="exp-media-img"
+              />
+            ))
+          }
+        </div>
+        <div class="exp-list">
+          {
+            experience.map((company) => (
+              <div class="exp-item">
+                <p class="exp-item-name">{company.name}</p>
+                <div class="exp-item-detail">
+                  <div class="exp-item-detail-inner">
+                    <p class="exp-item-meta">{company.location}</p>
+                    {company.roles.map((role) => (
+                      <div class="exp-role">
+                        <div class="exp-role-head">
+                          <p class="exp-role-title">{role.title}</p>
+                          <p class="exp-role-date">
+                            {role.dateRange}
+                            {role.tag ? ` · ${role.tag}` : ""}
+                          </p>
+                        </div>
+                        <p class="exp-role-desc">{role.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 3 (to be redesigned): the old summary cards + note,
+       kept below for now per the current plan -->
   <section class="section role">
     <div class="wrap">
-      <p class="role-lead">
-        Over 12 years of design experience and more than 7 years in
-        design management
-      </p>
-      <p class="role-intro">
-        including building a team from zero to one and leading
-        multiple 0-to-1 product launches.<br />
-        I currently lead a design team of 30+, reporting to the CEO
-        and each business line's Business Head.<br />
-        My day-to-day work covers:
-      </p>
-
       <div class="focus-grid">
         <div class="focus-card">
           <p class="focus-tag">Design Quality</p>
@@ -80,51 +126,6 @@ import { experience } from "../data/experience";
         every project seeks solutions where UX balances and empowers
         business needs.
       </p>
-    </div>
-  </section>
-
-  <!-- Module 3: work experience -->
-  <section class="section experience">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Work Experience</h2>
-      </div>
-      <div class="experience-list">
-        {
-          experience.map((company) => (
-            <div class="company">
-              <div class="company-head">
-                <div class="company-logo-wrap">
-                  <PlaceholderImage
-                    ratio="1/1"
-                    radius="14px"
-                    label="Logo"
-                    class="company-logo"
-                  />
-                </div>
-                <div>
-                  <p class="company-name">{company.name}</p>
-                  <p class="company-location">{company.location}</p>
-                </div>
-              </div>
-              <div class="jobs">
-                {company.roles.map((role) => (
-                  <div class="job">
-                    <div class="job-head">
-                      <p class="job-title">{role.title}</p>
-                      <p class="job-date">
-                        {role.dateRange}
-                        {role.tag ? ` · ${role.tag}` : ""}
-                      </p>
-                    </div>
-                    <p class="job-desc">{role.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))
-        }
-      </div>
     </div>
   </section>
 </BaseLayout>
@@ -161,26 +162,150 @@ import { experience } from "../data/experience";
     color: var(--color-ink-soft);
   }
 
-  /* Module 2: role & philosophy */
-  .role {
+  /* Module 2: experience title/subtitle */
+  .exp-intro {
     text-align: center;
+    padding-bottom: var(--space-4);
   }
 
-  /* No max-width on these two — they're meant to span the same width
-     as .focus-grid below, which also has none (it just fills .wrap). */
-  .role-lead {
+  .exp-title {
     font-weight: 700;
     letter-spacing: -0.01em;
-    font-size: clamp(26px, 3.6vw, 38px);
-    line-height: 1.3;
-    margin-bottom: var(--space-3);
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+    margin: 0 0 var(--space-2);
   }
 
-  .role-intro {
+  .exp-subtitle {
     font-size: clamp(17px, 2vw, 20px);
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  /* Module 2: experience scroll-stage. .exp-stage gives extra scroll
+     room (one "page" per company) for the reveal; .exp-pin is what
+     stays stuck to the viewport while that room scrolls past. */
+  .exp-stage {
+    position: relative;
+    height: calc(var(--exp-steps, 3) * 90vh);
+  }
+
+  .exp-pin {
+    position: sticky;
+    top: 96px;
+    height: min(78vh, 640px);
+    display: grid;
+    grid-template-columns: minmax(220px, 340px) 1fr;
+    gap: var(--space-6);
+    align-items: center;
+    padding-block: var(--space-4);
+  }
+
+  .exp-media {
+    position: relative;
+    height: 100%;
+  }
+
+  .exp-media :global(.exp-media-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .exp-media :global(.exp-media-img:first-child) {
+    opacity: 1;
+  }
+
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .exp-item {
+    padding-block: var(--space-2);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .exp-item:first-child {
+    border-top: none;
+  }
+
+  .exp-item-name {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(20px, 2.6vw, 28px);
+    color: var(--color-ink-faint);
+    transition: color 0.4s ease;
+  }
+
+  .exp-item.is-active .exp-item-name {
+    color: var(--color-ink);
+  }
+
+  .exp-item-detail {
+    display: grid;
+    /* minmax(0, 0fr), not bare 0fr — a bare 0fr track still respects
+       the implicit auto/min-content floor and never actually
+       collapses; wrapping in minmax(0, …) overrides that floor. */
+    grid-template-rows: minmax(0, 0fr);
+    opacity: 0;
+    transition: grid-template-rows 0.5s ease, opacity 0.4s ease;
+  }
+
+  .exp-item.is-active .exp-item-detail {
+    grid-template-rows: minmax(0, 1fr);
+    opacity: 1;
+  }
+
+  .exp-item-detail-inner {
+    overflow: hidden;
+  }
+
+  .exp-item-meta {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+  }
+
+  .exp-role {
+    margin-top: var(--space-3);
+  }
+
+  .exp-role-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .exp-role-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .exp-role-date {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    white-space: nowrap;
+  }
+
+  .exp-role-desc {
+    margin: 6px 0 0;
+    font-size: 14px;
     line-height: 1.6;
     color: var(--color-ink-soft);
-    margin-bottom: var(--space-5);
+  }
+
+  /* Module 3 (to be redesigned): kept for now */
+  .role {
+    text-align: center;
   }
 
   .focus-grid {
@@ -225,86 +350,6 @@ import { experience } from "../data/experience";
     color: var(--color-accent);
   }
 
-  /* Module 3: work experience */
-  .experience-list {
-    max-width: 760px;
-    margin-inline: auto;
-    text-align: left;
-  }
-
-  .company {
-    padding-top: var(--space-5);
-    padding-bottom: var(--space-5);
-    border-top: 1px solid var(--color-line);
-  }
-
-  .company:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .company-head {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .company-logo-wrap {
-    width: 56px;
-    flex-shrink: 0;
-  }
-
-  .company-name {
-    margin: 0;
-    font-weight: 700;
-    font-size: 19px;
-  }
-
-  .company-location {
-    margin: 0;
-    font-size: 14px;
-    color: var(--color-ink-faint);
-  }
-
-  /* Named .job* (not .role*) so this can't collide with Module 2's
-     .role section class — that collision is exactly what caused
-     these to inherit text-align: center before. */
-  .jobs {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .job-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .job-title {
-    margin: 0;
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  .job-date {
-    margin: 0;
-    font-size: 13px;
-    color: var(--color-ink-faint);
-    white-space: nowrap;
-  }
-
-  .job-desc {
-    margin: 8px 0 0;
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--color-ink-soft);
-    text-align: left;
-  }
-
   @media (max-width: 800px) {
     .intro-grid {
       grid-template-columns: 1fr;
@@ -319,8 +364,78 @@ import { experience } from "../data/experience";
       grid-template-columns: 1fr;
     }
 
-    .job-date {
-      white-space: normal;
+    /* No room for a 2-column sticky scroll effect here, and no real
+       scroll-driven "reveal" reason to keep it on a touch device —
+       drop straight to a plain, fully expanded list. */
+    .exp-stage {
+      height: auto;
+    }
+
+    .exp-pin {
+      position: static;
+      height: auto;
+      display: block;
+    }
+
+    .exp-media {
+      display: none;
+    }
+
+    .exp-item-detail,
+    .exp-item.is-active .exp-item-detail {
+      grid-template-rows: 1fr;
+      opacity: 1;
     }
   }
 </style>
+
+<script>
+  // Scroll-driven "which company is active" for the experience
+  // section: as the user scrolls through .exp-stage's extra height,
+  // each company's name/photo becomes active in turn while .exp-pin
+  // stays stuck. Same technique as the Home hero reveal — a plain
+  // scroll listener recomputing state each event, no rAF (trivial
+  // per-event cost, and rAF can stay starved in backgrounded tabs).
+  function setupExperienceScroll() {
+    const stage = document.querySelector<HTMLElement>(".exp-stage");
+    const pin = document.querySelector<HTMLElement>(".exp-pin");
+    const items = document.querySelectorAll<HTMLElement>(".exp-item");
+    const images = document.querySelectorAll<HTMLElement>(".exp-media-img");
+    if (!stage || !pin || items.length === 0) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) {
+      // Skip the scroll-driven step-through; show every company
+      // expanded at once, with no extra scroll room needed.
+      stage.style.height = "auto";
+      pin.style.position = "static";
+      pin.style.height = "auto";
+      items.forEach((item) => item.classList.add("is-active"));
+      return;
+    }
+
+    const count = items.length;
+
+    function update() {
+      const rect = stage!.getBoundingClientRect();
+      const scrollRange = Math.max(1, stage!.offsetHeight - pin!.offsetHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollRange));
+      const activeIndex = Math.min(count - 1, Math.floor(progress * count));
+
+      items.forEach((item, i) => {
+        item.classList.toggle("is-active", i === activeIndex);
+      });
+      images.forEach((img, i) => {
+        img.style.opacity = i === activeIndex ? "1" : "0";
+      });
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+
+  setupExperienceScroll();
+</script>
