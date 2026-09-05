@@ -209,6 +209,35 @@ import { experience } from "../data/experience";
     color: var(--color-ink-soft);
   }
 
+  /* Module 1 sits above the fold, so it gets a page-load entrance
+     (like the Home hero) rather than a scroll-triggered one — there's
+     no "scrolling into view" moment to hook for content that's
+     already on screen at load. */
+  @media (prefers-reduced-motion: no-preference) {
+    /* :global() — .intro-photo's actual <div> is rendered inside
+       PlaceholderImage.astro's own template/scope, not this file's,
+       so a bare selector here never matches it (same issue fixed for
+       .cat-card-img/.exp-media-img on other pages). */
+    :global(.intro-photo) {
+      animation: intro-enter 0.9s cubic-bezier(0.19, 1, 0.22, 1) both;
+    }
+
+    .intro-copy {
+      animation: intro-enter 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s both;
+    }
+  }
+
+  @keyframes intro-enter {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Module 2: experience title/subtitle */
   .exp-intro {
     text-align: center;
@@ -414,6 +443,22 @@ import { experience } from "../data/experience";
     margin-top: var(--space-6);
   }
 
+  /* Scroll-triggered entrance, same as .exp-intro — this is below
+     the fold, so the class gets added by the shared
+     setupIntroReveal() call once it scrolls into view. */
+  @media (prefers-reduced-motion: no-preference) {
+    .focus-intro {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .focus-intro.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .focus-title {
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -478,6 +523,22 @@ import { experience } from "../data/experience";
     padding-block: var(--space-7);
   }
 
+  /* Scroll-triggered entrance, same mechanism as .exp-intro/
+     .focus-intro (setupIntroReveal(), called with no counter for
+     this one — see the script below). */
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-banner {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .cta-banner.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .cta-eyebrow {
     color: rgba(255, 255, 255, 0.6);
   }
@@ -501,7 +562,7 @@ import { experience } from "../data/experience";
       grid-template-columns: 1fr;
     }
 
-    .intro-photo {
+    :global(.intro-photo) {
       max-width: 320px;
       margin-inline: auto;
     }
@@ -665,9 +726,11 @@ import { experience } from "../data/experience";
   // so each call unregisters itself after triggering. Shared by both
   // "Over 12 years..." and "Over 7 years..." — same mechanism, two
   // different sections/counters.
-  function setupIntroReveal(sectionSelector: string, counterSelector: string) {
+  function setupIntroReveal(sectionSelector: string, counterSelector?: string) {
     const intro = document.querySelector<HTMLElement>(sectionSelector);
-    const counter = document.querySelector<HTMLElement>(counterSelector);
+    const counter = counterSelector
+      ? document.querySelector<HTMLElement>(counterSelector)
+      : null;
     if (!intro) return;
 
     const target = Number(counter?.dataset.target ?? "0");
@@ -710,4 +773,5 @@ import { experience } from "../data/experience";
 
   setupIntroReveal(".exp-intro", ".exp-counter");
   setupIntroReveal(".focus-intro", ".focus-counter");
+  setupIntroReveal(".cta-banner");
 </script>
