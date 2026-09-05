@@ -154,7 +154,15 @@ import { experience } from "../data/experience";
         </div>
       </div>
 
-      <p class="focus-note">
+    </div>
+  </section>
+
+  <!-- Full-bleed closing statement, echoing Home's "On Design" quote
+       treatment but as its own dark banner -->
+  <section class="cta-banner">
+    <div class="wrap">
+      <p class="eyebrow cta-eyebrow">On Design</p>
+      <p class="cta-statement">
         I'd define myself and my team as <em>Business Designers</em>,
         not <em>Product Designers</em> — we design strategy from a
         business point of view. Business growth is the goal; user
@@ -162,6 +170,9 @@ import { experience } from "../data/experience";
         every project seeks solutions where UX balances and empowers
         business needs.
       </p>
+      <a class="btn btn--light" href="#" download>
+        Download resume <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
     </div>
   </section>
 </BaseLayout>
@@ -458,17 +469,29 @@ import { experience } from "../data/experience";
     margin: 0;
   }
 
-  /* Sub-text level — a supplementary note under the focus cards, not
-     a big statement like Home's philosophy pull-quote. */
-  .focus-note {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-ink-faint);
-    max-width: 640px;
-    margin-inline: auto;
+  /* Full-bleed closing banner: dark ink background (not a new brand
+     color), white text, big bold statement, one light button. */
+  .cta-banner {
+    background: var(--color-ink);
+    color: #fff;
+    text-align: center;
+    padding-block: var(--space-7);
   }
 
-  .focus-note em {
+  .cta-eyebrow {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .cta-statement {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: clamp(26px, 3.4vw, 42px);
+    line-height: 1.35;
+    max-width: 900px;
+    margin: var(--space-3) auto var(--space-5);
+  }
+
+  .cta-statement em {
     font-style: italic;
     color: var(--color-accent);
   }

@@ -165,6 +165,13 @@ ul {
   padding: 12px 26px;
 }
 
+/* Light variant — for use on dark backgrounds, where the default
+   dark-ink pill would disappear into it. */
+.btn--light {
+  background: #fff;
+  color: var(--color-ink);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
