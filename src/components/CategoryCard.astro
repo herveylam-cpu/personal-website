@@ -33,9 +33,31 @@ const { card } = Astro.props;
   .cat-card {
     position: relative;
     display: block;
-    aspect-ratio: 4 / 5;
+    flex: 1 1 0%;
+    min-width: 0;
     border-radius: 28px;
     overflow: hidden;
+    transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Group-hover accordion: hovering one card widens it and squeezes
+     its siblings, which fade their own text out. .category-grid lives
+     in the parent page, hence :global() on just that token — :has()
+     and the rest stay scoped normally since .cat-card/.cat-card-panel
+     are this component's own classes. */
+  :global(.category-grid):has(.cat-card:hover) .cat-card {
+    flex-grow: 0.62;
+  }
+
+  :global(.category-grid):has(.cat-card:hover) .cat-card:hover {
+    flex-grow: 2.6;
+  }
+
+  :global(.category-grid):has(.cat-card:hover)
+    .cat-card:not(:hover)
+    .cat-card-panel {
+    opacity: 0;
+    pointer-events: none;
   }
 
   .cat-card :global(.cat-card-img) {
@@ -63,7 +85,7 @@ const { card } = Astro.props;
       rgba(0, 0, 0, 0) 65%
     );
     color: #fff;
-    transition: background 0.45s ease, color 0.45s ease;
+    transition: background 0.45s ease, color 0.45s ease, opacity 0.35s ease;
   }
 
   /* The "liquid glass" hover state: frosted, translucent, blurred. */
@@ -133,11 +155,22 @@ const { card } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .cat-card,
     .cat-card-panel,
     .cat-card-rest,
     .cat-card-hover,
     .cat-card-cta {
       transition: none;
+    }
+  }
+
+  /* The parent grid drops to a column stack below 900px (no room
+     for the accordion effect, and no real hover on touch anyway) —
+     each card needs its own height back since the row's fixed
+     height no longer applies. */
+  @media (max-width: 900px) {
+    .cat-card {
+      aspect-ratio: 4 / 5;
     }
   }
 </style>

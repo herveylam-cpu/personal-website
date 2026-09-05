@@ -273,10 +273,15 @@ import heroPhoto from "../assets/hero.png";
     margin-inline: auto;
   }
 
+  /* Flex row (not grid): equal-width by default, but the accordion
+     hover interaction (in CategoryCard.astro) drives each card's
+     flex-grow, so width has to come from flex, not fixed columns.
+     Height is fixed here instead of via aspect-ratio, so a card
+     growing wider doesn't also grow taller. */
   .category-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     gap: var(--space-3);
+    height: min(56vh, 520px);
   }
 
   .people-grid {
@@ -287,7 +292,8 @@ import heroPhoto from "../assets/hero.png";
 
   @media (max-width: 900px) {
     .category-grid {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      height: auto;
       max-width: 420px;
       margin-inline: auto;
     }
