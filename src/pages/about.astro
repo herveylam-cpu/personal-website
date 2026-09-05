@@ -190,6 +190,14 @@ import { experience } from "../data/experience";
     height: calc(var(--exp-steps, 3) * 90vh);
   }
 
+  /* .exp-pin's sticky containing block is .wrap (its direct parent),
+     not .exp-stage — .wrap has no height of its own, so without this
+     it just shrinks to .exp-pin's height, leaving zero room to
+     stick. height: 100% pulls the full .exp-stage height through. */
+  .exp-stage > .wrap {
+    height: 100%;
+  }
+
   .exp-pin {
     position: sticky;
     top: 96px;
