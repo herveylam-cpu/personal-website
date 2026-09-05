@@ -107,17 +107,17 @@ import { experience } from "../data/experience";
                   <p class="company-location">{company.location}</p>
                 </div>
               </div>
-              <div class="roles">
+              <div class="jobs">
                 {company.roles.map((role) => (
-                  <div class="role">
-                    <div class="role-head">
-                      <p class="role-title">{role.title}</p>
-                      <p class="role-date">
+                  <div class="job">
+                    <div class="job-head">
+                      <p class="job-title">{role.title}</p>
+                      <p class="job-date">
                         {role.dateRange}
                         {role.tag ? ` · ${role.tag}` : ""}
                       </p>
                     </div>
-                    <p class="role-desc">{role.description}</p>
+                    <p class="job-desc">{role.description}</p>
                   </div>
                 ))}
               </div>
@@ -267,13 +267,16 @@ import { experience } from "../data/experience";
     color: var(--color-ink-faint);
   }
 
-  .roles {
+  /* Named .job* (not .role*) so this can't collide with Module 2's
+     .role section class — that collision is exactly what caused
+     these to inherit text-align: center before. */
+  .jobs {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
 
-  .role-head {
+  .job-head {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -281,24 +284,25 @@ import { experience } from "../data/experience";
     gap: var(--space-2);
   }
 
-  .role-title {
+  .job-title {
     margin: 0;
     font-weight: 600;
     font-size: 16px;
   }
 
-  .role-date {
+  .job-date {
     margin: 0;
     font-size: 13px;
     color: var(--color-ink-faint);
     white-space: nowrap;
   }
 
-  .role-desc {
+  .job-desc {
     margin: 8px 0 0;
     font-size: 15px;
     line-height: 1.65;
     color: var(--color-ink-soft);
+    text-align: left;
   }
 
   @media (max-width: 800px) {
@@ -315,7 +319,7 @@ import { experience } from "../data/experience";
       grid-template-columns: 1fr;
     }
 
-    .role-date {
+    .job-date {
       white-space: normal;
     }
   }
