@@ -171,29 +171,21 @@ import { experience } from "../data/experience";
     padding-bottom: var(--space-4);
   }
 
-  /* Entrance animation for the module — a page-load reveal (like the
-     Home hero), not scroll-triggered: this section sits right after
-     Module 1, so on plenty of viewport heights it's already at least
-     partly on screen the instant the page loads, meaning a "scroll
-     into view" trigger fires almost immediately and never looks like
-     anything happened. A load-time animation shows every time,
-     regardless of where it lands on first paint.
+  /* Entrance animation for the module — triggered by scroll position
+     (see the script below), not on page load: this section is below
+     the fold for most people, and a load-time animation finishes
+     long before anyone has scrolled down far enough to see it.
      Scoped to .exp-intro only, not .exp-stage: a transform on an
      ancestor of .exp-pin can interfere with its sticky positioning,
-     and .exp-stage already has its own reveal via the company
-     crossfade. */
+     and .exp-stage already has its own reveal via the photo stack. */
   @media (prefers-reduced-motion: no-preference) {
     .exp-intro {
-      animation: exp-intro-enter 0.8s cubic-bezier(0.19, 1, 0.22, 1) both;
-    }
-  }
-
-  @keyframes exp-intro-enter {
-    from {
       opacity: 0;
       transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    to {
+
+    .exp-intro.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -249,19 +241,38 @@ import { experience } from "../data/experience";
   .exp-media {
     position: relative;
     height: 100%;
+    overflow: hidden;
+    border-radius: 24px;
   }
 
+  /* Each photo (after the first) sits translated fully below the
+     frame until its turn, then slides up to translateY(0) and stays
+     there, stacking on top of whichever one came before it — see the
+     per-image z-index below and the transform math in the script. */
   .exp-media :global(.exp-media-img) {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
   }
 
   .exp-media :global(.exp-media-img:first-child) {
-    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .exp-media :global(.exp-media-img:nth-child(1)) {
+    z-index: 1;
+  }
+  .exp-media :global(.exp-media-img:nth-child(2)) {
+    z-index: 2;
+  }
+  .exp-media :global(.exp-media-img:nth-child(3)) {
+    z-index: 3;
+  }
+  .exp-media :global(.exp-media-img:nth-child(4)) {
+    z-index: 4;
   }
 
   .exp-list {
@@ -453,10 +464,15 @@ import { experience } from "../data/experience";
     ).matches;
     if (prefersReducedMotion) {
       // Skip the scroll-driven step-through; show every company
-      // expanded at once, with no extra scroll room needed.
+      // expanded at once, with no extra scroll room needed. The photo
+      // stack has no story to tell without the scroll-linked motion,
+      // so hide that column entirely (same call as the mobile
+      // fallback below 800px).
       stage.style.height = "auto";
       pin.style.position = "static";
       pin.style.height = "auto";
+      const media = document.querySelector<HTMLElement>(".exp-media");
+      if (media) media.style.display = "none";
       items.forEach((item) => item.classList.add("is-active"));
       return;
     }
@@ -467,13 +483,20 @@ import { experience } from "../data/experience";
       const rect = stage!.getBoundingClientRect();
       const scrollRange = Math.max(1, stage!.offsetHeight - pin!.offsetHeight);
       const progress = Math.min(1, Math.max(0, -rect.top / scrollRange));
-      const activeIndex = Math.min(count - 1, Math.floor(progress * count));
+      const raw = progress * count; // continuous, 0..count
+      const activeIndex = Math.min(count - 1, Math.floor(raw));
 
       items.forEach((item, i) => {
         item.classList.toggle("is-active", i === activeIndex);
       });
+      // Each photo (after the first) slides up from below and stacks
+      // on top of the previous one as its turn arrives, staying put
+      // (fully covering) once revealed — later photos then stack on
+      // top of it in turn. Image 0 has nothing before it, so it's
+      // just always in place.
       images.forEach((img, i) => {
-        img.style.opacity = i === activeIndex ? "1" : "0";
+        const reveal = i === 0 ? 1 : Math.max(0, Math.min(1, raw - (i - 1)));
+        img.style.transform = `translateY(${(1 - reveal) * 100}%)`;
       });
     }
 
@@ -484,29 +507,29 @@ import { experience } from "../data/experience";
 
   setupExperienceScroll();
 
-  // 0->12 count-up on the experience title's number. Runs at page
-  // load, timed to start as .exp-intro's CSS entrance animation is
-  // fading in (not scroll-triggered — this section sits close enough
-  // to Module 1 that on plenty of viewport heights it's already at
-  // least partly on screen at load, so a "scrolled into view" trigger
-  // fires almost instantly and never looks like anything happened).
-  function setupExpCounter() {
+  // Reveal .exp-intro (fade + lift) and count its number up 0->target
+  // the first time it scrolls into view. Driven by a plain scroll
+  // listener + getBoundingClientRect, same technique as the company
+  // switcher above (not IntersectionObserver) — this only needs to
+  // fire once, so it unregisters itself after triggering.
+  function setupExpIntroReveal() {
+    const intro = document.querySelector<HTMLElement>(".exp-intro");
     const counter = document.querySelector<HTMLElement>(".exp-counter");
-    if (!counter) return;
+    if (!intro) return;
 
-    const target = Number(counter.dataset.target ?? "0");
+    const target = Number(counter?.dataset.target ?? "0");
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      counter.textContent = String(target);
+      intro.classList.add("is-visible");
+      if (counter) counter.textContent = String(target);
       return;
     }
 
-    const duration = 700;
-    const delay = 150; // roughly matches the CSS entrance's fade-in
-
-    setTimeout(() => {
+    function runCounter() {
+      if (!counter) return;
+      const duration = 700;
       const start = performance.now();
       function tick(now: number) {
         const t = Math.min(1, (now - start) / duration);
@@ -515,8 +538,22 @@ import { experience } from "../data/experience";
         if (t < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
-    }, delay);
+    }
+
+    function check() {
+      const rect = intro.getBoundingClientRect();
+      // Trigger once the section is meaningfully on screen, not just
+      // a sliver of it peeking in at the very edge.
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+        intro.classList.add("is-visible");
+        runCounter();
+        window.removeEventListener("scroll", check);
+      }
+    }
+
+    check(); // covers the case where it's already in view at load
+    window.addEventListener("scroll", check, { passive: true });
   }
 
-  setupExpCounter();
+  setupExpIntroReveal();
 </script>
