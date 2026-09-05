@@ -167,9 +167,9 @@ import { experience } from "../data/experience";
     text-align: center;
   }
 
+  /* No max-width on these two — they're meant to span the same width
+     as .focus-grid below, which also has none (it just fills .wrap). */
   .role-lead {
-    max-width: 720px;
-    margin-inline: auto;
     font-weight: 700;
     letter-spacing: -0.01em;
     font-size: clamp(26px, 3.6vw, 38px);
@@ -178,8 +178,6 @@ import { experience } from "../data/experience";
   }
 
   .role-intro {
-    max-width: 700px;
-    margin-inline: auto;
     font-size: clamp(17px, 2vw, 20px);
     line-height: 1.6;
     color: var(--color-ink-soft);
