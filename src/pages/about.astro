@@ -546,8 +546,38 @@ import { experience } from "../data/experience";
       applyStack(entries, raw);
     }
 
+    // Each company's "window" is a fairly narrow slice of the total
+    // scrollable distance. A plain 'scroll' listener only recomputes
+    // on whatever events the browser happens to batch out — and
+    // trackpad momentum/fling scrolling can easily cover an entire
+    // company's window between two such events, so the state jumps
+    // straight from one company to the one after next, skipping the
+    // one in between entirely (its window was never sampled). Running
+    // a requestAnimationFrame loop for as long as scrolling seems to
+    // be happening samples every rendered frame instead, so there's
+    // no gap fast scrolling can jump across.
+    let lastScrollAt = 0;
+    let looping = false;
+
+    function loop() {
+      update();
+      if (performance.now() - lastScrollAt < 200) {
+        requestAnimationFrame(loop);
+      } else {
+        looping = false;
+      }
+    }
+
+    function onScroll() {
+      lastScrollAt = performance.now();
+      if (!looping) {
+        looping = true;
+        requestAnimationFrame(loop);
+      }
+    }
+
     update();
-    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", update);
   }
 
