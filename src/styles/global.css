@@ -156,6 +156,15 @@ ul {
   transform: translateX(3px);
 }
 
+/* Outline variant — for use on photos/glass panels, where a solid
+   dark pill would compete with the image instead of sitting on it. */
+.btn--outline {
+  background: transparent;
+  color: inherit;
+  border: 1.5px solid currentColor;
+  padding: 12px 26px;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CaseCard from "../components/CaseCard.astro";
+import CategoryCard from "../components/CategoryCard.astro";
 import PeopleCard from "../components/PeopleCard.astro";
-import { workCases } from "../data/work";
+import { categoryCards } from "../data/categories";
 import { peopleTopics } from "../data/people";
 import heroPhoto from "../assets/hero.png";
 ---
@@ -70,17 +70,15 @@ import heroPhoto from "../assets/hero.png";
   <section class="section" id="project">
     <div class="wrap">
       <div class="section-head">
-        <div>
-          <p class="eyebrow eyebrow--accent">About Project</p>
-          <h2>Work</h2>
-        </div>
+        <h2>About project</h2>
         <p class="section-note">
-          From ecosystem-level strategy to the shape of a single product
-          decision.
+          I see myself as a Business Designer — defining design
+          strategy through a business-growth lens, and safeguarding
+          the quality of what we ship.
         </p>
       </div>
-      <div class="work-grid">
-        {workCases.map((work) => <CaseCard work={work} />)}
+      <div class="category-grid">
+        {categoryCards.map((card) => <CategoryCard card={card} />)}
       </div>
     </div>
   </section>
@@ -275,10 +273,10 @@ import heroPhoto from "../assets/hero.png";
     margin-inline: auto;
   }
 
-  .work-grid {
+  .category-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4) var(--space-3);
+    gap: var(--space-3);
   }
 
   .people-grid {
@@ -288,16 +286,12 @@ import heroPhoto from "../assets/hero.png";
   }
 
   @media (max-width: 900px) {
-    .work-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .category-grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin-inline: auto;
     }
     .people-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .work-grid {
       grid-template-columns: 1fr;
     }
   }
