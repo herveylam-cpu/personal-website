@@ -396,6 +396,11 @@ import { experience } from "../data/experience";
   /* Module 3 */
   .focus-intro {
     text-align: center;
+    /* On top of .section's own padding-top (var(--space-7)) — .exp-
+       stage (Module 2) has no bottom padding of its own, so without
+       this the gap between the two modules is noticeably tighter
+       than the gap around every other section. */
+    margin-top: var(--space-6);
   }
 
   .focus-title {
