@@ -35,13 +35,16 @@ import { experience } from "../data/experience";
   <!-- Module 2: role & philosophy -->
   <section class="section role">
     <div class="wrap">
-      <p class="role-intro">
+      <p class="role-lead">
         I have over 12 years of design experience and more than 7
-        years in design management, including building a team from
-        zero to one and leading multiple 0-to-1 product launches. I
-        currently lead a design team of 30+, reporting to the CEO and
-        each business line's Business Head. My day-to-day work
-        covers:
+        years in design management,
+      </p>
+      <p class="role-intro">
+        including building a team from zero to one and leading
+        multiple 0-to-1 product launches.<br />
+        I currently lead a design team of 30+, reporting to the CEO
+        and each business line's Business Head.<br />
+        My day-to-day work covers:
       </p>
 
       <div class="focus-grid">
@@ -162,6 +165,16 @@ import { experience } from "../data/experience";
   /* Module 2: role & philosophy */
   .role {
     text-align: center;
+  }
+
+  .role-lead {
+    max-width: 720px;
+    margin-inline: auto;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: clamp(26px, 3.6vw, 38px);
+    line-height: 1.3;
+    margin-bottom: var(--space-3);
   }
 
   .role-intro {
