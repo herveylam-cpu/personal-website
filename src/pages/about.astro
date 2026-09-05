@@ -224,19 +224,28 @@ import { experience } from "../data/experience";
   }
 
   .exp-pin {
+    --exp-pin-h: min(78vh, 640px);
     position: sticky;
     top: 96px;
-    height: min(78vh, 640px);
+    height: var(--exp-pin-h);
     display: grid;
     grid-template-columns: minmax(220px, 340px) 1fr;
     gap: var(--space-6);
-    align-items: center;
+    align-items: stretch;
     padding-block: var(--space-4);
   }
 
+  /* .exp-media/.exp-list get this height written out directly
+     (matching .exp-pin's own) rather than via height:100% — with
+     absolutely-positioned-only children inside a grid item, the
+     percentage-height chain doesn't reliably resolve to the row's
+     real height (align-items:stretch alone didn't fix it either;
+     both columns kept landing at the content height of whichever
+     entry happened to be tallest, ~560px instead of 640px), so this
+     sidesteps that resolution entirely. */
   .exp-media {
     position: relative;
-    height: 100%;
+    height: var(--exp-pin-h);
     overflow: hidden;
     border-radius: 24px;
   }
@@ -283,7 +292,7 @@ import { experience } from "../data/experience";
      flow anymore, just stacked on top of one another. */
   .exp-list {
     position: relative;
-    height: 100%;
+    height: var(--exp-pin-h);
   }
 
   .exp-entry {
