@@ -1,29 +1,311 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PlaceholderImage from "../components/PlaceholderImage.astro";
+import { experience } from "../data/experience";
 ---
 
-<BaseLayout title="About — Lin Hongyu">
-  <section class="section">
+<BaseLayout
+  title="About — Lin Hongyu"
+  description="Head of Design at Monee — background, focus areas, and work experience."
+>
+  <!-- Module 1: identity -->
+  <section class="section intro">
+    <div class="wrap intro-grid">
+      <PlaceholderImage
+        ratio="3/4"
+        radius="32px"
+        label="Personal photo"
+        class="intro-photo"
+      />
+      <div class="intro-copy">
+        <h1 class="intro-name">Lin Hongyu</h1>
+        <p class="eyebrow intro-role">Head of Design</p>
+        <p class="intro-body">
+          Monee is the fintech sub-group of SEA Limited (NYSE: SE),
+          Singapore's tech giant. As Head of Design, I oversee brand,
+          product, and operations design across everything Monee —
+          one corporate brand, Monee Corporate, and five core
+          business lines: Digital Bank, Payment, Loan, Investment,
+          and Insurance — spanning both B2B and B2C products.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Module 2: role & philosophy -->
+  <section class="section role">
     <div class="wrap">
-      <p class="eyebrow eyebrow--accent">About</p>
-      <h1>More to come</h1>
-      <p class="note">
-        This page is waiting on its content outline — nothing here is
-        final yet.
+      <p class="role-intro">
+        I have over 12 years of design experience and more than 7
+        years in design management, including building a team from
+        zero to one and leading multiple 0-to-1 product launches. I
+        currently lead a design team of 30+, reporting to the CEO and
+        each business line's Business Head. My day-to-day work
+        covers:
       </p>
+
+      <div class="focus-grid">
+        <div class="focus-card">
+          <p class="focus-tag">Design Quality</p>
+          <p>
+            Focus on business growth and user experience — define
+            design strategy and safeguard the quality of design
+            output.
+          </p>
+        </div>
+        <div class="focus-card">
+          <p class="focus-tag">Efficiency</p>
+          <p>
+            Connect and align resources to improve collaboration
+            efficiency, both within the team and across it.
+          </p>
+        </div>
+        <div class="focus-card">
+          <p class="focus-tag">Capability Growth</p>
+          <p>
+            Lead the evolution of the design team's craft and role
+            elevation — building and evolving the talent matrix.
+          </p>
+        </div>
+      </div>
+
+      <p class="statement">
+        Rather than <em>Product Designer</em>, I prefer to define
+        myself and my team as <em>Business Designers</em> — defining
+        design strategy from a business point of view. Business
+        growth is the goal; user experience and product strategy are
+        how we get there. So in our day-to-day projects, we're always
+        looking for solutions where user experience balances and
+        empowers business needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Module 3: work experience -->
+  <section class="section experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Work Experience</h2>
+      </div>
+      <div class="experience-list">
+        {
+          experience.map((company) => (
+            <div class="company">
+              <div class="company-head">
+                <div class="company-logo-wrap">
+                  <PlaceholderImage
+                    ratio="1/1"
+                    radius="14px"
+                    label="Logo"
+                    class="company-logo"
+                  />
+                </div>
+                <div>
+                  <p class="company-name">{company.name}</p>
+                  <p class="company-location">{company.location}</p>
+                </div>
+              </div>
+              <div class="roles">
+                {company.roles.map((role) => (
+                  <div class="role">
+                    <div class="role-head">
+                      <p class="role-title">{role.title}</p>
+                      <p class="role-date">
+                        {role.dateRange}
+                        {role.tag ? ` · ${role.tag}` : ""}
+                      </p>
+                    </div>
+                    <p class="role-desc">{role.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  h1 {
-    font-weight: 700;
-    font-size: clamp(36px, 6vw, 56px);
-    margin-block: var(--space-2) var(--space-3);
+  /* Module 1: identity */
+  .intro {
+    padding-top: var(--space-6);
   }
 
-  .note {
+  .intro-grid {
+    display: grid;
+    grid-template-columns: minmax(240px, 340px) 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .intro-name {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 var(--space-2);
+  }
+
+  .intro-role {
+    margin: 0 0 var(--space-3);
+  }
+
+  .intro-body {
+    max-width: 560px;
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.65;
     color: var(--color-ink-soft);
-    max-width: 480px;
+  }
+
+  /* Module 2: role & philosophy */
+  .role {
+    text-align: center;
+  }
+
+  .role-intro {
+    max-width: 700px;
+    margin-inline: auto;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-5);
+  }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .focus-card {
+    text-align: left;
+    padding: var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+  }
+
+  .focus-tag {
+    font-weight: 700;
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+
+  .focus-card p + p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .statement {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.4;
+    max-width: 820px;
+    margin-inline: auto;
+  }
+
+  .statement em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  /* Module 3: work experience */
+  .experience-list {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  .company {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .company:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .company-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .company-logo-wrap {
+    width: 56px;
+    flex-shrink: 0;
+  }
+
+  .company-name {
+    margin: 0;
+    font-weight: 700;
+    font-size: 19px;
+  }
+
+  .company-location {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-ink-faint);
+  }
+
+  .roles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .role-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .role-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .role-date {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    white-space: nowrap;
+  }
+
+  .role-desc {
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 800px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-photo {
+      max-width: 320px;
+      margin-inline: auto;
+    }
+
+    .focus-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .role-date {
+      white-space: normal;
+    }
   }
 </style>
