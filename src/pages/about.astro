@@ -37,7 +37,10 @@ import { experience } from "../data/experience";
        that expand into role detail as each becomes active) -->
   <section class="section exp-intro">
     <div class="wrap">
-      <h2 class="exp-title">Over 12 years of design experience</h2>
+      <h2 class="exp-title">
+        Over <span class="exp-counter" data-target="12">0</span> years
+        of design experience
+      </h2>
       <p class="exp-subtitle">
         including leading multiple 0-to-1 end-to-end product launches
       </p>
@@ -168,12 +171,35 @@ import { experience } from "../data/experience";
     padding-bottom: var(--space-4);
   }
 
+  /* Entrance reveal for the module — fades/lifts in once as the user
+     scrolls to it (IntersectionObserver-driven, see the script below).
+     Scoped to .exp-intro only, not .exp-stage: a transform on an
+     ancestor of .exp-pin can interfere with its sticky positioning,
+     and .exp-stage already has its own reveal via the company
+     crossfade. */
+  @media (prefers-reduced-motion: no-preference) {
+    .exp-intro {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .exp-intro.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .exp-title {
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.2;
-    margin: 0 0 var(--space-2);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.1;
+    margin: 0 0 var(--space-3);
+  }
+
+  .exp-counter {
+    font-variant-numeric: tabular-nums;
   }
 
   .exp-subtitle {
@@ -446,4 +472,60 @@ import { experience } from "../data/experience";
   }
 
   setupExperienceScroll();
+
+  // Entrance reveal for .exp-intro, plus a 0->12 count-up on its
+  // number, both firing once the first time the section scrolls into
+  // view (IntersectionObserver, not scroll position — this only ever
+  // needs to happen once, not continuously like the stage above).
+  function setupExpIntroReveal() {
+    const intro = document.querySelector<HTMLElement>(".exp-intro");
+    const counter = document.querySelector<HTMLElement>(".exp-counter");
+    if (!intro) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    function runCounter() {
+      if (!counter) return;
+      const target = Number(counter.dataset.target ?? "0");
+      if (prefersReducedMotion) {
+        counter.textContent = String(target);
+        return;
+      }
+      const duration = 700;
+      const start = performance.now();
+      function tick(now: number) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        counter.textContent = String(Math.round(eased * target));
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (prefersReducedMotion) {
+      // .exp-intro is already fully visible with no transition under
+      // reduced motion (the CSS is gated on no-preference); just set
+      // the counter's end value directly.
+      runCounter();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            intro.classList.add("is-visible");
+            runCounter();
+            observer.unobserve(intro);
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(intro);
+  }
+
+  setupExpIntroReveal();
 </script>
