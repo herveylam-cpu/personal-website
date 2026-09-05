@@ -1,21 +1,32 @@
 ---
 import { Image } from "astro:assets";
-import type { CategoryCard } from "../data/categories";
+import PlaceholderImage from "./PlaceholderImage.astro";
+import type { CategoryCardData } from "../data/card";
 
 interface Props {
-  card: CategoryCard;
+  card: CategoryCardData;
 }
 const { card } = Astro.props;
 ---
 
 <a class="cat-card" href={card.href}>
-  <Image
-    src={card.image}
-    alt={card.imageAlt}
-    widths={[400, 600, 800, 1000]}
-    sizes="(max-width: 900px) 90vw, 380px"
-    class="cat-card-img"
-  />
+  {card.image && (
+    <Image
+      src={card.image}
+      alt={card.imageAlt}
+      widths={[400, 600, 800, 1000]}
+      sizes="(max-width: 900px) 90vw, 380px"
+      class="cat-card-img"
+    />
+  )}
+  {!card.image && (
+    <PlaceholderImage
+      ratio="4/5"
+      radius="0"
+      label={`${card.label} — photo placeholder`}
+      class="cat-card-img"
+    />
+  )}
   <div class="cat-card-panel">
     <p class="cat-card-tag">{card.label}</p>
     <div class="cat-card-text">

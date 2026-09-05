@@ -2,9 +2,8 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CategoryCard from "../components/CategoryCard.astro";
-import PeopleCard from "../components/PeopleCard.astro";
 import { categoryCards } from "../data/categories";
-import { peopleTopics } from "../data/people";
+import { peopleCards } from "../data/peopleCards";
 import heroPhoto from "../assets/hero.png";
 ---
 
@@ -87,14 +86,15 @@ import heroPhoto from "../assets/hero.png";
   <section class="section" id="about">
     <div class="wrap">
       <div class="section-head">
-        <div>
-          <p class="eyebrow eyebrow--accent">About People</p>
-          <h2>Leading People</h2>
-        </div>
-        <p class="section-note">Building the team that builds the work.</p>
+        <h2>About people</h2>
+        <p class="section-note">
+          I see myself as a coach — connecting and aligning resources
+          to raise team efficiency, and leading the evolution of
+          skills and the elevation of roles.
+        </p>
       </div>
-      <div class="people-grid">
-        {peopleTopics.map((topic) => <PeopleCard topic={topic} />)}
+      <div class="category-grid">
+        {peopleCards.map((card) => <CategoryCard card={card} />)}
       </div>
     </div>
   </section>
@@ -284,21 +284,12 @@ import heroPhoto from "../assets/hero.png";
     height: min(56vh, 520px);
   }
 
-  .people-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-3);
-  }
-
   @media (max-width: 900px) {
     .category-grid {
       flex-direction: column;
       height: auto;
       max-width: 420px;
       margin-inline: auto;
-    }
-    .people-grid {
-      grid-template-columns: 1fr;
     }
   }
 

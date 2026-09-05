@@ -3,7 +3,7 @@
 // this card fronts the one that best matches its hover copy — the
 // other two Design cases still have real pages at /work/[slug], just
 // no direct link from Home yet).
-import type { ImageMetadata } from "astro";
+import type { CategoryCardData } from "./card";
 import { workCases } from "./work";
 import strategyImage from "../assets/work/strategy.png";
 import toneImage from "../assets/work/tone.png";
@@ -15,17 +15,7 @@ function caseBySlug(slug: string) {
   return found;
 }
 
-export interface CategoryCard {
-  label: string;
-  restDescription: string;
-  hoverTitle: string;
-  href: string;
-  buttonLabel: string;
-  image: ImageMetadata;
-  imageAlt: string;
-}
-
-export const categoryCards: CategoryCard[] = [
+export const categoryCards: CategoryCardData[] = [
   {
     label: "Strategy",
     restDescription:
