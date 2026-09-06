@@ -35,7 +35,7 @@ import heroPhoto from "../assets/hero.png";
   </section>
 
   <section class="section hero-bio">
-    <div class="wrap hero-bio-grid">
+    <div class="wrap hero-bio-grid reveal">
       <div class="hero-bio-copy">
         <h2 class="hero-bio-name">Lin Hongyu</h2>
         <p class="hero-bio-text">
@@ -63,7 +63,7 @@ import heroPhoto from "../assets/hero.png";
 
   <!-- Design philosophy: full-bleed dark banner, PayPal Open-style -->
   <section class="section philosophy">
-    <div class="wrap">
+    <div class="wrap reveal">
       <p class="eyebrow eyebrow--accent">On Design</p>
       <h2 class="philosophy-lead">A business-minded designer lead</h2>
       <p class="philosophy-sub">
@@ -79,7 +79,7 @@ import heroPhoto from "../assets/hero.png";
 
   <!-- About Project -->
   <section class="section" id="project">
-    <div class="wrap">
+    <div class="wrap reveal">
       <div class="section-head">
         <h2>About project</h2>
         <p class="section-note">
@@ -96,7 +96,7 @@ import heroPhoto from "../assets/hero.png";
 
   <!-- About People -->
   <section class="section" id="about">
-    <div class="wrap">
+    <div class="wrap reveal">
       <div class="section-head">
         <h2>About people</h2>
         <p class="section-note">
@@ -228,6 +228,23 @@ import heroPhoto from "../assets/hero.png";
     letter-spacing: -0.01em;
     font-size: clamp(32px, 6vw, 64px);
     opacity: 0;
+  }
+
+  /* Shared scroll-triggered entrance, applied to every module below
+     the hero (which has its own scroll-jacked reveal already): fades
+     and lifts in as a module enters the viewport, and fades back out
+     if the user scrolls back past it, via IntersectionObserver below. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .hero-bio {
@@ -444,4 +461,33 @@ import heroPhoto from "../assets/hero.png";
   }
 
   setupHeroReveal();
+
+  // Fade each below-the-fold module in as it enters the viewport, and
+  // back out if the user scrolls past it the other way — unlike the
+  // About page's one-shot reveal, this toggles both directions since
+  // that's what was asked for here.
+  function setupModuleReveal() {
+    const targets = document.querySelectorAll<HTMLElement>(".reveal");
+    if (targets.length === 0) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+
+  setupModuleReveal();
 </script>
