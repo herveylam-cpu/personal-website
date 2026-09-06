@@ -61,16 +61,19 @@ import heroPhoto from "../assets/hero.png";
     </div>
   </section>
 
-  <!-- Design philosophy -->
+  <!-- Design philosophy: full-bleed dark banner, PayPal Open-style -->
   <section class="section philosophy">
     <div class="wrap">
-      <p class="eyebrow">On Design</p>
-      <p class="statement">
-        I see myself as a <em>Business Designer</em> — someone who reads
-        product and user-experience design through a business lens.
-        Business growth is the goal; user experience and product strategy
-        are how we get there.
+      <p class="eyebrow eyebrow--accent">On Design</p>
+      <h2 class="philosophy-lead">A business-minded designer lead</h2>
+      <p class="philosophy-sub">
+        Translates strategy into design. Connects resources to boost
+        efficiency. Drives the skill evolution and role elevation.
       </p>
+      <div class="philosophy-scroll-cue">
+        <span>Scroll to see the work</span>
+        <span class="scroll-arrow" aria-hidden="true">&darr;</span>
+      </div>
     </div>
   </section>
 
@@ -263,23 +266,68 @@ import heroPhoto from "../assets/hero.png";
     margin-top: var(--space-3);
   }
 
+  /* Full-bleed dark banner — the one deliberate exception to the
+     page's white background, matching the PayPal Open-style
+     reference: big lead statement, sub-copy, scroll-down cue. */
   .philosophy {
+    background: var(--color-ink);
+    color: #fff;
     text-align: center;
   }
 
-  .philosophy .statement {
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    font-size: clamp(24px, 3.4vw, 38px);
-    line-height: 1.35;
-    max-width: 900px;
-    margin-inline: auto;
-    margin-top: var(--space-3);
+  .philosophy .eyebrow--accent {
+    color: var(--color-accent);
   }
 
-  .philosophy .statement em {
-    font-style: italic;
-    color: var(--color-accent);
+  .philosophy-lead {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(34px, 5.5vw, 64px);
+    line-height: 1.08;
+    max-width: 880px;
+    margin: var(--space-2) auto 0;
+  }
+
+  .philosophy-sub {
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.68);
+    max-width: 640px;
+    margin: var(--space-3) auto 0;
+  }
+
+  .philosophy-scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: var(--space-5);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .scroll-arrow {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-arrow {
+      animation: scroll-cue-bounce 1.8s ease-in-out infinite;
+    }
+  }
+
+  @keyframes scroll-cue-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
   }
 
   h2 {
