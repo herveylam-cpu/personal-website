@@ -372,9 +372,16 @@ import heroPhoto from "../assets/hero.png";
      Height is fixed here instead of via aspect-ratio, so a card
      growing wider doesn't also grow taller. */
   .category-grid {
+    /* Exposed as a custom property (not just the `height` below) so
+       CategoryCard.astro's hover-expand state can size itself to the
+       card photos' real aspect ratio — custom properties inherit
+       through the DOM regardless of Astro's per-component CSS
+       scoping, the same trick used for --exp-pin-h on the About
+       page. */
+    --cat-row-h: min(56vh, 520px);
     display: flex;
     gap: var(--space-3);
-    height: min(56vh, 520px);
+    height: var(--cat-row-h);
   }
 
   @media (max-width: 900px) {

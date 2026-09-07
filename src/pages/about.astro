@@ -1,7 +1,18 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PlaceholderImage from "../components/PlaceholderImage.astro";
 import { experience } from "../data/experience";
+import companyMonee from "../assets/about/company-monee.png";
+import companyJd from "../assets/about/company-jd.png";
+import companyTencent from "../assets/about/company-tencent.png";
+
+const companyImages: Record<string, ImageMetadata> = {
+  "SEA / Monee": companyMonee,
+  "JD.com": companyJd,
+  Tencent: companyTencent,
+};
 ---
 
 <BaseLayout
@@ -52,14 +63,24 @@ import { experience } from "../data/experience";
       <div class="exp-pin">
         <div class="exp-media">
           {
-            experience.map((company) => (
-              <PlaceholderImage
-                ratio="4/5"
-                radius="24px"
-                label={`${company.name} photo`}
-                class="exp-media-img"
-              />
-            ))
+            experience.map((company) =>
+              companyImages[company.name] ? (
+                <Image
+                  src={companyImages[company.name]}
+                  alt={company.logoAlt}
+                  widths={[320, 480, 640]}
+                  sizes="340px"
+                  class="exp-media-img"
+                />
+              ) : (
+                <PlaceholderImage
+                  ratio="4/5"
+                  radius="30px"
+                  label={`${company.name} photo`}
+                  class="exp-media-img"
+                />
+              )
+            )
           }
         </div>
         <div class="exp-list">
@@ -302,11 +323,15 @@ import { experience } from "../data/experience";
 
   .exp-pin {
     --exp-pin-h: min(78vh, 640px);
+    /* The company photos are 3850x4820 — this is that exact ratio,
+       used below so the media column's width strictly matches the
+       photos' own proportions instead of an arbitrary clamp. */
+    --exp-media-ratio: calc(3850 / 4820);
     position: sticky;
     top: 96px;
     height: var(--exp-pin-h);
     display: grid;
-    grid-template-columns: minmax(220px, 340px) 1fr;
+    grid-template-columns: calc(var(--exp-pin-h) * var(--exp-media-ratio)) 1fr;
     gap: var(--space-6);
     align-items: stretch;
     padding-block: var(--space-4);
@@ -325,7 +350,7 @@ import { experience } from "../data/experience";
     position: relative;
     height: var(--exp-pin-h);
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 30px;
   }
 
   /* Each photo (after the first) sits translated fully below the
@@ -342,6 +367,8 @@ import { experience } from "../data/experience";
     inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    display: block;
     transform: translateY(100%);
   }
 

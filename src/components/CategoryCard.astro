@@ -42,13 +42,18 @@ const { card } = Astro.props;
 
 <style>
   .cat-card {
+    /* The card photos are all 936x1200 — this is that ratio, used
+       below to size the hover-expanded card to exactly fit the full
+       photo instead of an arbitrary flex-grow crop. */
+    --cat-img-ratio: calc(936 / 1200);
     position: relative;
     display: block;
     flex: 1 1 0%;
     min-width: 0;
-    border-radius: 28px;
+    border-radius: 30px;
     overflow: hidden;
-    transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      flex-basis 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Group-hover accordion: hovering one card widens it and squeezes
@@ -60,8 +65,14 @@ const { card } = Astro.props;
     flex-grow: 0.62;
   }
 
+  /* The hovered card gets a fixed width (not a bigger flex-grow),
+     computed straight from the photo's own aspect ratio against the
+     row's shared height (--cat-row-h, set on .category-grid) — so
+     expanding always reveals the whole photo uncropped, whatever the
+     row height ends up being. */
   :global(.category-grid):has(.cat-card:hover) .cat-card:hover {
-    flex-grow: 1.8;
+    flex-grow: 0;
+    flex-basis: calc(var(--cat-row-h, 100%) * var(--cat-img-ratio));
   }
 
   :global(.category-grid):has(.cat-card:hover)
@@ -77,6 +88,10 @@ const { card } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* At rest the card is narrower than the photo's own ratio, so
+       this crops the sides — centered, not top/bottom, is the
+       intentional default framing. */
+    object-position: center;
     display: block;
   }
 
