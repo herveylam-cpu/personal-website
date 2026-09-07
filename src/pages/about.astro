@@ -436,15 +436,16 @@ const companyImages: Record<string, ImageMetadata> = {
      starts sliding into the frame (masking the seam while only a
      sliver is visible) and dissolving to fully transparent by the
      time it settles into place — opacity is 1 - reveal, set by the
-     same script that drives the slide itself. */
+     same script that drives the slide itself.
+     Flat, not a gradient: only the wrapper's own TOP portion is ever
+     visible during a partial slide (its bottom is always clipped
+     away below the frame), so a gradient shaded toward one edge risks
+     landing entirely in the clipped-off part — a flat tint is
+     visible wherever the photo itself is visible. */
   .exp-media-fade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.45),
-      rgba(0, 0, 0, 0) 55%
-    );
+    background: rgba(0, 0, 0, 0.45);
     pointer-events: none;
   }
 
