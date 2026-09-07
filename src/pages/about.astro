@@ -67,24 +67,27 @@ const companyImages: Record<string, ImageMetadata> = {
       <div class="exp-pin">
         <div class="exp-media">
           {
-            experience.map((company) =>
-              companyImages[company.name] ? (
-                <Image
-                  src={companyImages[company.name]}
-                  alt={company.logoAlt}
-                  widths={[320, 480, 640]}
-                  sizes="340px"
-                  class="exp-media-img"
-                />
-              ) : (
-                <PlaceholderImage
-                  ratio="4/5"
-                  radius="30px"
-                  label={`${company.name} photo`}
-                  class="exp-media-img"
-                />
-              )
-            )
+            experience.map((company) => (
+              <div class="exp-media-item">
+                {companyImages[company.name] ? (
+                  <Image
+                    src={companyImages[company.name]}
+                    alt={company.logoAlt}
+                    widths={[320, 480, 640]}
+                    sizes="340px"
+                    class="exp-media-img"
+                  />
+                ) : (
+                  <PlaceholderImage
+                    ratio="4/5"
+                    radius="0"
+                    label={`${company.name} photo`}
+                    class="exp-media-img"
+                  />
+                )}
+                <div class="exp-media-fade" aria-hidden="true" />
+              </div>
+            ))
           }
         </div>
         <div class="exp-list">
@@ -385,37 +388,64 @@ const companyImages: Record<string, ImageMetadata> = {
   /* Each photo (after the first) sits translated fully below the
      frame until its turn, then slides up to translateY(0) and stays
      there, stacking on top of whichever one came before it — see the
-     per-image z-index below and the transform math in the script.
+     per-item z-index below and the transform math in the script.
      No transition here on purpose: this transform is set on every
      scroll event to directly track scroll position, like a scrubber.
      A CSS transition would make it perpetually ease toward a moving
      target instead of matching the actual scroll position, which is
-     exactly what made it feel out of sync with the text. */
-  .exp-media :global(.exp-media-img) {
+     exactly what made it feel out of sync with the text.
+     Rounding + clipping live on this wrapper (not directly on
+     .exp-media-img) so a photo mid-slide shows a rounded top edge
+     where it cuts across the frame, instead of the sharp rectangular
+     seam a plain inset:0 image would leave. */
+  .exp-media-item {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 30px;
+    transform: translateY(100%);
+  }
+
+  .exp-media-item:first-child {
+    transform: translateY(0);
+  }
+
+  .exp-media-item:nth-child(1) {
+    z-index: 1;
+  }
+  .exp-media-item:nth-child(2) {
+    z-index: 2;
+  }
+  .exp-media-item:nth-child(3) {
+    z-index: 3;
+  }
+  .exp-media-item:nth-child(4) {
+    z-index: 4;
+  }
+
+  .exp-media-item :global(.exp-media-img) {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: translateY(100%);
   }
 
-  .exp-media :global(.exp-media-img:first-child) {
-    transform: translateY(0);
-  }
-
-  .exp-media :global(.exp-media-img:nth-child(1)) {
-    z-index: 1;
-  }
-  .exp-media :global(.exp-media-img:nth-child(2)) {
-    z-index: 2;
-  }
-  .exp-media :global(.exp-media-img:nth-child(3)) {
-    z-index: 3;
-  }
-  .exp-media :global(.exp-media-img:nth-child(4)) {
-    z-index: 4;
+  /* A dark scrim over the incoming photo, strongest right as it
+     starts sliding into the frame (masking the seam while only a
+     sliver is visible) and dissolving to fully transparent by the
+     time it settles into place — opacity is 1 - reveal, set by the
+     same script that drives the slide itself. */
+  .exp-media-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0) 55%
+    );
+    pointer-events: none;
   }
 
   /* "Drawer" list: all three company names stay visible at all
@@ -662,7 +692,7 @@ const companyImages: Record<string, ImageMetadata> = {
     const stage = document.querySelector<HTMLElement>(".exp-stage");
     const pin = document.querySelector<HTMLElement>(".exp-pin");
     const items = document.querySelectorAll<HTMLElement>(".exp-item");
-    const images = document.querySelectorAll<HTMLElement>(".exp-media-img");
+    const mediaItems = document.querySelectorAll<HTMLElement>(".exp-media-item");
     if (!stage || !pin || items.length === 0) return;
 
     const prefersReducedMotion = window.matchMedia(
@@ -712,12 +742,16 @@ const companyImages: Record<string, ImageMetadata> = {
 
       // Photo stack: each one slides up from translateY(100%) to
       // 0% and stays there, stacking on top of the one before it,
-      // which shrinks away (scale -> 0) in the same window.
-      images.forEach((img, i) => {
+      // which shrinks away (scale -> 0) in the same window. The fade
+      // scrim on each incoming photo dissolves (1 - reveal) over the
+      // exact same slide, so it's gone right as the photo settles.
+      mediaItems.forEach((item, i) => {
         const reveal = i === 0 ? 1 : stepProgress(raw, i);
         const nextReveal = i < count - 1 ? stepProgress(raw, i + 1) : 0;
         const scale = 1 - nextReveal;
-        img.style.transform = `translateY(${(1 - reveal) * 100}%) scale(${scale})`;
+        item.style.transform = `translateY(${(1 - reveal) * 100}%) scale(${scale})`;
+        const fade = item.querySelector<HTMLElement>(".exp-media-fade");
+        if (fade) fade.style.opacity = String(1 - reveal);
       });
 
       // Drawer list: every name stays visible (plain, normal-flow
