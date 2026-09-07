@@ -52,13 +52,15 @@ import heroBioPhoto from "../assets/hero-bio-photo.jpg";
           Know more about me <span class="arrow" aria-hidden="true">&rarr;</span>
         </a>
       </div>
-      <Image
-        src={heroBioPhoto}
-        alt="Lin Hongyu"
-        widths={[420, 640, 840]}
-        sizes="(max-width: 900px) 90vw, 420px"
-        class="hero-bio-photo"
-      />
+      <div class="hero-bio-photo-frame">
+        <Image
+          src={heroBioPhoto}
+          alt="Lin Hongyu"
+          widths={[420, 640, 840]}
+          sizes="(max-width: 900px) 90vw, 420px"
+          class="hero-bio-photo"
+        />
+      </div>
     </div>
   </section>
 
@@ -265,13 +267,29 @@ import heroBioPhoto from "../assets/hero-bio-photo.jpg";
   }
 
   /* Same personal photo as the About page's Module 1, cropped to
-     this slot's 4:5 frame (centered) instead of its own ratio. */
-  .hero-bio-photo {
+     this slot's 4:5 frame (centered) instead of its own ratio.
+     The aspect-ratio lives on this wrapping frame, not the <Image>
+     itself — Astro's <Image> writes the source photo's own
+     width/height as HTML attributes, and a browser's replaced-element
+     sizing prefers that intrinsic ratio over a CSS aspect-ratio set
+     directly on the <img>, so the ratio was silently lost. Sizing the
+     frame instead and absolutely-filling it (same technique as
+     .cat-card-img/.exp-media-img) sidesteps that entirely. */
+  .hero-bio-photo-frame {
+    position: relative;
     width: 100%;
     aspect-ratio: 4 / 5;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .hero-bio-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 24px;
     display: block;
   }
 
