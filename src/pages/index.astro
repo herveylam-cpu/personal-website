@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CategoryCard from "../components/CategoryCard.astro";
-import PlaceholderImage from "../components/PlaceholderImage.astro";
 import { categoryCards } from "../data/categories";
 import { peopleCards } from "../data/peopleCards";
 import heroPhoto from "../assets/hero.png";
+import heroBioPhoto from "../assets/hero-bio-photo.jpg";
 ---
 
 <BaseLayout title="Lin Hongyu — Monee Design Head">
@@ -52,10 +52,11 @@ import heroPhoto from "../assets/hero.png";
           Know more about me <span class="arrow" aria-hidden="true">&rarr;</span>
         </a>
       </div>
-      <PlaceholderImage
-        ratio="4/5"
-        radius="24px"
-        label="Personal photo"
+      <Image
+        src={heroBioPhoto}
+        alt="Lin Hongyu"
+        widths={[420, 640, 840]}
+        sizes="(max-width: 900px) 90vw, 420px"
         class="hero-bio-photo"
       />
     </div>
@@ -261,6 +262,17 @@ import heroPhoto from "../assets/hero.png";
     gap: var(--space-6);
     align-items: center;
     text-align: left;
+  }
+
+  /* Same personal photo as the About page's Module 1, cropped to
+     this slot's 4:5 frame (centered) instead of its own ratio. */
+  .hero-bio-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 24px;
+    display: block;
   }
 
   .hero-bio-name {

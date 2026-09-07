@@ -7,6 +7,7 @@ import { experience } from "../data/experience";
 import companyMonee from "../assets/about/company-monee.png";
 import companyJd from "../assets/about/company-jd.png";
 import companyTencent from "../assets/about/company-tencent.png";
+import portraitPhoto from "../assets/about/portrait.jpg";
 
 const companyImages: Record<string, ImageMetadata> = {
   "SEA / Monee": companyMonee,
@@ -22,10 +23,11 @@ const companyImages: Record<string, ImageMetadata> = {
   <!-- Module 1: identity -->
   <section class="section intro">
     <div class="wrap intro-grid">
-      <PlaceholderImage
-        ratio="3/4"
-        radius="32px"
-        label="Personal photo"
+      <Image
+        src={portraitPhoto}
+        alt="Lin Hongyu"
+        widths={[480, 720, 960]}
+        sizes="(max-width: 900px) 90vw, 420px"
         class="intro-photo"
       />
       <div class="intro-copy">
@@ -209,6 +211,19 @@ const companyImages: Record<string, ImageMetadata> = {
     grid-template-columns: minmax(240px, 340px) 1fr;
     gap: var(--space-6);
     align-items: center;
+  }
+
+  /* The photo itself is a plain 1200x1798 portrait, cropped to this
+     slot's 3:4 frame (centered) rather than shown at its own ratio —
+     unlike the company/card photos, there's no "show it uncropped"
+     requirement here. */
+  .intro-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 32px;
+    display: block;
   }
 
   .intro-name {
