@@ -1,7 +1,7 @@
 // Content for the standalone /project page's stacking card list — its
-// own copy (richer, partly Chinese) distinct from both work.ts (the
-// /work/[slug] case pages) and categories.ts (Home's shorter English
-// accordion cards). All five link to the same case slugs as work.ts.
+// own copy, distinct from both work.ts (the /work/[slug] case pages)
+// and categories.ts (Home's shorter accordion cards). All five link
+// to the same case slugs as work.ts.
 import type { ImageMetadata } from "astro";
 import strategyImage from "../assets/work/strategy.png";
 import toneImage from "../assets/work/tone.png";
@@ -21,46 +21,49 @@ export const projectStackCards: ProjectStackCard[] = [
   {
     slug: "monee-ecosystem-strategy",
     tag: "Strategy",
-    title: "Monee生态系统及产品设计策略定义",
+    title: "Monee Ecosystem & Product Design Strategy Definition",
     subtitle:
-      "基于high level业务发展策略，以系统性的视角定义Monee生态系统以及产品设计策略，使之与业务发展相向而行",
-    buttonLabel: "查看",
+      "Based on high-level business strategy, defining Monee's ecosystem and product design strategy from a systemic perspective, so it moves in lockstep with business growth.",
+    buttonLabel: "View case",
     image: strategyImage,
     imageAlt: "Strategy",
   },
   {
     slug: "maribank-ai-native-brand",
     tag: "Tone",
-    title: "maribank ai native brand creative&visual design system",
+    title: "Maribank AI-Native Brand Creative & Visual Design System",
     subtitle:
-      "基于high level业务发展策略，以系统性的视角定义Monee生态系统以及产品设计策略，使之与业务发展相向而行",
-    buttonLabel: "查看",
+      "Based on high-level business strategy, defining Monee's ecosystem and product design strategy from a systemic perspective, so it moves in lockstep with business growth.",
+    buttonLabel: "View case",
     image: toneImage,
     imageAlt: "Tone",
   },
   {
     slug: "maribank-homepage-redesign",
     tag: "Design",
-    title: "大道至简——Maribank首页redesign",
-    subtitle: "聚焦具体的产品设计方法与设计决策。做出兼顾用户体验和业务目标的产品设计",
-    buttonLabel: "查看",
+    title: "Simplicity Is the Ultimate Sophistication — Maribank Homepage Redesign",
+    subtitle:
+      "Focused on concrete product design methods and decisions — design that balances user experience with business goals.",
+    buttonLabel: "View case",
     image: designImage,
     imageAlt: "Design",
   },
   {
     slug: "marinvest",
     tag: "Design",
-    title: "Marinvest: 简单直接的理财产品设计",
-    subtitle: "聚焦具体的产品设计方法与设计决策。做出兼顾用户体验和业务目标的产品设计",
-    buttonLabel: "查看",
+    title: "Marinvest: A Simple, Direct Approach to Investment Product Design",
+    subtitle:
+      "Focused on concrete product design methods and decisions — design that balances user experience with business goals.",
+    buttonLabel: "View case",
     imageAlt: "Marinvest",
   },
   {
     slug: "mari-credit-card",
     tag: "Design",
-    title: "Mari Credit card: offering a no-frills and simple credit card experience",
-    subtitle: "聚焦具体的产品设计方法与设计决策。做出兼顾用户体验和业务目标的产品设计",
-    buttonLabel: "查看",
+    title: "Mari Credit Card: Offering a No-Frills, Simple Credit Card Experience",
+    subtitle:
+      "Focused on concrete product design methods and decisions — design that balances user experience with business goals.",
+    buttonLabel: "View case",
     imageAlt: "Mari Credit Card",
   },
 ];
