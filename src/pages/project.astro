@@ -86,9 +86,9 @@ import { projectStackCards } from "../data/projectStack";
      margin-bottom is the gap between cards during normal scroll,
      before the covering transition starts. Alternating tone + a cast
      shadow read as depth once the covered card is shrunk down behind
-     the incoming one. transform/opacity are NOT transitioned here —
-     setupProjectStack sets them every scroll frame to directly track
-     scroll position; a CSS transition would make them perpetually
+     the incoming one. transform is NOT transitioned here —
+     setupProjectStack sets it every scroll frame to directly track
+     scroll position; a CSS transition would make it perpetually
      ease toward a moving target instead (same reason the About page's
      photo stack skips one too). */
   .project-card {
@@ -154,11 +154,10 @@ import { projectStackCards } from "../data/projectStack";
       position: static;
       top: auto;
       height: auto;
-      /* No shrink/fade transition to run without sticky, and no
-         scroll listener bothering to compute one either (see the
-         script's own reduced-motion-style bail-out below). */
+      /* No shrink transition to run without sticky, and no scroll
+         listener bothering to compute one either (see the script's
+         own reduced-motion-style bail-out below). */
       transform: none !important;
-      opacity: 1 !important;
       grid-template-columns: 1fr;
     }
 
@@ -169,11 +168,16 @@ import { projectStackCards } from "../data/projectStack";
 </style>
 
 <script>
-  // As each card approaches its own sticky pin point (96px from the
-  // top), shrink and fade the card just before it in the stack, so
-  // it visibly recedes as the incoming one covers it — sticky itself
-  // only handles the "slide up, then hold" part; this is the extra
-  // transition on top of that.
+  // Shrinks the card just before the incoming one in the stack, so it
+  // visibly recedes as it's covered — sticky itself only handles the
+  // "slide up, then hold" part; this is the extra transition on top
+  // of that. Scale only, no opacity fade: an earlier version faded
+  // opacity too, but opacity on a card makes its whole (otherwise
+  // opaque) background see-through — and since this transition window
+  // is wider than the gap between cards, 3+ cards can easily be
+  // mid-transition at once, so several partly-transparent cards'
+  // text ends up bleeding through each other. Shrinking alone still
+  // reads clearly as "receding" without that.
   function setupProjectStack() {
     const cards = document.querySelectorAll<HTMLElement>(".project-card");
     if (cards.length < 2) return;
@@ -190,14 +194,12 @@ import { projectStackCards } from "../data/projectStack";
 
     const STICKY_TOP = 96;
     const MAX_SHRINK = 0.12;
-    const MAX_FADE = 0.85;
 
     function update() {
       cards.forEach((card, i) => {
         const next = cards[i + 1];
         if (!next) {
           card.style.transform = "";
-          card.style.opacity = "";
           return;
         }
         // This card is pinned at STICKY_TOP, so its own bottom edge
@@ -218,7 +220,6 @@ import { projectStackCards } from "../data/projectStack";
           Math.max(0, (overlapStart - nextTop) / cardHeight)
         );
         card.style.transform = `scale(${1 - progress * MAX_SHRINK})`;
-        card.style.opacity = String(1 - progress * MAX_FADE);
       });
     }
 
