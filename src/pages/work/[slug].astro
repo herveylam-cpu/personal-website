@@ -16,7 +16,7 @@ const { work } = Astro.props;
 <BaseLayout title={`${work.title} — Lin Hongyu`}>
   <section class="section">
     <div class="wrap">
-      <a class="back" href="/#project">&larr; Back to Work</a>
+      <a class="back" href="/project">&larr; Back to Work</a>
       <span class="tag">{work.category}</span>
       <h1>{work.title}</h1>
       {work.subtitle && <p class="subtitle">{work.subtitle}</p>}

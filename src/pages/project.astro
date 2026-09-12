@@ -1,0 +1,165 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PlaceholderImage from "../components/PlaceholderImage.astro";
+import { projectStackCards } from "../data/projectStack";
+---
+
+<BaseLayout
+  title="Project — Lin Hongyu"
+  description="Case studies across strategy, brand tone, and product design."
+>
+  <section class="section project-hero">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--accent">Work</p>
+      <h1>About project</h1>
+    </div>
+  </section>
+
+  <!-- Stacking card list: each card is sticky at a slightly increasing
+       top offset (--stack-i), so as the next one scrolls up and pins,
+       it covers the one before it while still leaving a thin sliver
+       of every earlier card peeking out above it — the cascading
+       "index card" effect from the reference layout. Pure CSS
+       sticky, no scroll-jacking JS needed (unlike the About page's
+       photo stack, which has to fight absolute positioning instead
+       of relying on each card's own real document height). -->
+  <section class="project-stack">
+    <div class="wrap">
+      {
+        projectStackCards.map((card, i) => (
+          <div class="project-card" style={`--stack-i: ${i};`}>
+            <div class="project-card-copy">
+              <p class="eyebrow eyebrow--accent">{card.tag}</p>
+              <h2 class="project-card-title">{card.title}</h2>
+              <p class="project-card-subtitle">{card.subtitle}</p>
+              <a class="btn btn--light" href={`/work/${card.slug}`}>
+                {card.buttonLabel}
+                <span class="arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+              </a>
+            </div>
+            {card.image ? (
+              <Image
+                src={card.image}
+                alt={card.imageAlt}
+                widths={[480, 720, 960]}
+                sizes="(max-width: 900px) 90vw, 440px"
+                class="project-card-img"
+              />
+            ) : (
+              <PlaceholderImage
+                ratio="4/5"
+                radius="0"
+                label={`${card.tag} photo`}
+                class="project-card-img"
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero {
+    text-align: center;
+    padding-bottom: var(--space-4);
+  }
+
+  .project-hero h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(34px, 5.5vw, 56px);
+    margin-top: var(--space-2);
+  }
+
+  .project-stack {
+    padding-bottom: var(--space-7);
+  }
+
+  /* Same sticky-top offset (96px, matching the header's own height)
+     as the About page's exp-pin, plus a small per-card increment so
+     each already-stuck card keeps a sliver of itself peeking out
+     above the next one instead of being fully hidden. z-index climbs
+     alongside it so each later card paints over the ones before.
+     Alternating tone (not a single flat --color-ink) + a cast shadow
+     are what actually make that peeking sliver visible — with every
+     card the exact same flat color, the sliver blends invisibly into
+     the one covering it. */
+  .project-card {
+    position: sticky;
+    top: calc(96px + var(--stack-i, 0) * 24px);
+    z-index: calc(var(--stack-i, 0) + 1);
+    height: min(74vh, 580px);
+    border-radius: 32px;
+    overflow: hidden;
+    background: var(--color-ink);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 440px);
+    align-items: stretch;
+  }
+
+  .project-card:nth-child(even) {
+    background: #262119;
+  }
+
+  .project-card-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-5) var(--space-6);
+    min-width: 0;
+  }
+
+  .project-card-title {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.3;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .project-card-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0;
+  }
+
+  .project-card-copy .btn {
+    margin-top: var(--space-2);
+  }
+
+  .project-card :global(.project-card-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .project-card {
+      position: static;
+      top: auto;
+      height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .project-card + .project-card {
+      margin-top: var(--space-3);
+    }
+
+    .project-card :global(.project-card-img) {
+      height: 260px;
+    }
+  }
+</style>
