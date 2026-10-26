@@ -192,20 +192,6 @@ const measurementTree = [
   },
 ];
 
-const tocSections = [
-  { id: "business-context", label: "Business context" },
-  { id: "our-thesis", label: "Our view on fintech" },
-  { id: "who-we-serve", label: "Who we serve" },
-  { id: "principles", label: "Experience principles" },
-  { id: "ecosystem-map", label: "Ecosystem map" },
-  { id: "phases-markets", label: "Phases & markets" },
-  { id: "shopeepay", label: "ShopeePay" },
-  { id: "spaylater", label: "SPayLater" },
-  { id: "maribank", label: "MariBank" },
-  { id: "insurance-seller", label: "Insurance & seller services" },
-  { id: "ai-stance", label: "AI in the experience" },
-  { id: "measuring-impact", label: "Measuring impact" },
-];
 ---
 
 <BaseLayout
@@ -301,31 +287,7 @@ const tocSections = [
 
   <!-- Body chapters: sticky TOC (desktop) / dropdown (mobile) -->
   <section class="section case-body">
-    <div class="wrap case-body-grid">
-      <nav class="case-toc" aria-label="Case study sections">
-        <p class="case-toc-label">On this page</p>
-        <ul>
-          {
-            tocSections.map((s) => (
-              <li>
-                <a href={`#${s.id}`} data-toc-link={s.id}>
-                  {s.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <select class="case-toc-mobile" aria-label="Jump to section">
-        <option value="">On this page…</option>
-        {
-          tocSections.map((s) => (
-            <option value={`#${s.id}`}>{s.label}</option>
-          ))
-        }
-      </select>
-
+    <div class="wrap">
       <div class="case-chapters">
         <!-- S-03: Business context -->
         <div class="case-chapter" id="business-context">
@@ -940,55 +902,6 @@ const tocSections = [
     line-height: 1.6;
   }
 
-  /* Body layout: sticky TOC + chapters */
-  .case-body-grid {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: var(--space-6);
-    align-items: start;
-  }
-
-  .case-toc {
-    position: sticky;
-    top: 96px;
-  }
-
-  .case-toc-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-ink-faint);
-    margin-bottom: var(--space-2);
-  }
-
-  .case-toc ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .case-toc a {
-    font-size: 14px;
-    color: var(--color-ink-soft);
-    border-left: 2px solid transparent;
-    padding-left: 10px;
-    display: block;
-  }
-
-  .case-toc a:hover {
-    color: var(--color-ink);
-  }
-
-  .case-toc a.is-active {
-    color: var(--color-accent);
-    border-left-color: var(--color-accent);
-    font-weight: 600;
-  }
-
-  .case-toc-mobile {
-    display: none;
-  }
-
   .case-chapters {
     display: flex;
     flex-direction: column;
@@ -1581,28 +1494,6 @@ const tocSections = [
   }
 
   @media (max-width: 900px) {
-    .case-body-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .case-toc {
-      display: none;
-    }
-
-    .case-toc-mobile {
-      display: block;
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 100px;
-      border: 1px solid var(--color-line);
-      background: var(--color-bg);
-      font-size: 14px;
-      margin-bottom: var(--space-4);
-      position: sticky;
-      top: 76px;
-      z-index: 5;
-    }
-
     .context-grid,
     .compare-two,
     .eco-map {
@@ -1620,49 +1511,6 @@ const tocSections = [
 </style>
 
 <script>
-  // Scroll-spy for the desktop TOC: whichever chapter is most in view
-  // gets the highlighted link. IntersectionObserver rather than the
-  // scroll-position math used elsewhere on the site — this only needs
-  // "which section is current", not a continuous progress value, so
-  // the browser-native observer is the simpler tool for the job.
-  function setupCaseToc() {
-    const links = document.querySelectorAll<HTMLAnchorElement>(
-      "[data-toc-link]"
-    );
-    const chapters = document.querySelectorAll<HTMLElement>(".case-chapter");
-    if (links.length === 0 || chapters.length === 0) return;
-
-    const linkById = new Map<string, HTMLAnchorElement>();
-    links.forEach((link) => {
-      const id = link.dataset.tocLink;
-      if (id) linkById.set(id, link);
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const link = linkById.get(entry.target.id);
-            if (!link) continue;
-            links.forEach((l) => l.classList.remove("is-active"));
-            link.classList.add("is-active");
-          }
-        }
-      },
-      { rootMargin: "-110px 0px -70% 0px" }
-    );
-    chapters.forEach((chapter) => observer.observe(chapter));
-
-    const mobileSelect = document.querySelector<HTMLSelectElement>(
-      ".case-toc-mobile"
-    );
-    mobileSelect?.addEventListener("change", () => {
-      const target = mobileSelect.value;
-      if (!target) return;
-      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
-    });
-  }
-
   // Tap-to-toggle for the ecosystem map nodes, so the detail reveal
   // (CSS :hover/:focus-visible) also works on touch devices that have
   // no real hover state.
@@ -1677,6 +1525,5 @@ const tocSections = [
     });
   }
 
-  setupCaseToc();
   setupEcoNodes();
 </script>
