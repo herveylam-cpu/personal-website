@@ -4,10 +4,15 @@ import PlaceholderImage from "../../components/PlaceholderImage.astro";
 import { workCases } from "../../data/work";
 
 export function getStaticPaths() {
-  return workCases.map((work) => ({
-    params: { slug: work.slug },
-    props: { work },
-  }));
+  // "monee-ecosystem-strategy" has its own dedicated page
+  // (monee-ecosystem-strategy.astro) now — excluded here so the two
+  // don't collide over the same URL.
+  return workCases
+    .filter((work) => work.slug !== "monee-ecosystem-strategy")
+    .map((work) => ({
+      params: { slug: work.slug },
+      props: { work },
+    }));
 }
 
 const { work } = Astro.props;

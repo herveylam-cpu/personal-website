@@ -1,0 +1,1682 @@
+---
+// Strategy case study — built from the spec doc section 4 (S-01
+// through S-16). English copy throughout, translated from the
+// (Chinese) spec to match the rest of the site's language; structure
+// and all numbers/claims follow the spec verbatim, including its own
+// [TBD] / [to verify] placeholders for content not yet supplied.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PlaceholderImage from "../../components/PlaceholderImage.astro";
+
+const overviewCards = [
+  {
+    n: "01",
+    title: "Segment by market",
+    body: "Markets are pulling away from Shopee's orbit at different speeds, so the experience roadmap differs by market.",
+  },
+  {
+    n: "02",
+    title: "Trust first",
+    body: "Experience principles have an order — growth defers to responsible finance.",
+  },
+  {
+    n: "03",
+    title: "Clear, measurable roles",
+    body: "Every product has a defined ecosystem role, metrics, and design levers.",
+  },
+];
+
+const statCards = [
+  { value: "$11.1B", label: "Loan book, up ~62% YoY" },
+  { value: "40M+", label: "Active credit users" },
+  { value: "$1.4B", label: "Monee quarterly revenue, up ~59% YoY" },
+  { value: "1.0%", label: "90+ day NPL ratio" },
+  { value: "$38.3B", label: "Shopee quarterly GMV" },
+];
+
+const principles = [
+  {
+    n: 1,
+    title: "Reliable",
+    body: "Security and trust matter most in a financial product.",
+  },
+  {
+    n: 2,
+    title: "Simple",
+    body: "Users can describe what each product does in one sentence.",
+  },
+  {
+    n: 3,
+    title: "Rewarding",
+    body: "Solve a real financial need with competitive value.",
+  },
+];
+
+const ecosystemNodes = [
+  {
+    name: "ShopeePay",
+    role: "Traffic gateway",
+    metrics: "Payment penetration, cross-sell conversion",
+  },
+  {
+    name: "SPayLater & Credit",
+    role: "Revenue engine",
+    metrics: "Credit-to-first-use conversion, on-time repayment rate",
+  },
+  {
+    name: "MariBank / SeaBank",
+    role: "Long-term growth engine",
+    metrics: "Deposit balance, products per household",
+  },
+  {
+    name: "Mari Invest",
+    role: "Attracting wealthier users",
+    metrics: "AUM, investor conversion rate",
+  },
+  {
+    name: "Insurance",
+    role: "Supplementary coverage in transaction moments",
+    metrics: "Attach rate",
+  },
+];
+
+const phases = [
+  { tag: "Phase 1", title: "Powering payments for e-commerce & gaming" },
+  { tag: "Phase 2", title: "A financial matrix inside the Shopee ecosystem" },
+  { tag: "Phase 3", title: "An independent financial ecosystem, beyond Shopee" },
+];
+
+const marketRows = [
+  {
+    group: "Licensed markets",
+    markets: "Singapore, Indonesia, Philippines",
+    vehicle: "Digital bank",
+    focus: "Capture deposits, move toward primary bank",
+  },
+  {
+    group: "Wallet + credit",
+    markets: "Malaysia, Thailand, Vietnam",
+    vehicle: "ShopeePay app, off-platform SPayLater",
+    focus: "Expand into offline & off-platform",
+  },
+  {
+    group: "Growth market",
+    markets: "Brazil",
+    vehicle: "On-platform credit, standalone app rolling out",
+    focus: "First-time credit experience, balancing growth and risk",
+  },
+];
+
+const shopeePayFunnel = [
+  {
+    stage: "Awareness",
+    body: "Embedded in payment moments, inside and outside Shopee.",
+  },
+  {
+    stage: "Retention",
+    body: "Unify funding sources, simplify the flow, reward usage.",
+  },
+  {
+    stage: "Conversion",
+    body: "Efficient home-screen distribution; landing pages designed for reach, understanding, and conversion.",
+  },
+];
+
+const sPayLaterLifecycle = [
+  { stage: "Get a credit line", lever: "Shorten the activation path" },
+  { stage: "First use", lever: "Show installments & fees clearly at checkout" },
+  { stage: "Ongoing use", lever: "Keep the experience consistent off-platform" },
+  {
+    stage: "On-time repayment",
+    lever: "Clear statements & reminders ahead of due dates",
+  },
+];
+
+const mariBankValueProps = [
+  {
+    title: "Unconditional savings",
+    body: "No salary credit required, no minimum balance.",
+  },
+  {
+    title: "No-frills credit card",
+    body: "Easy-to-calculate cashback, no cap, no minimum spend.",
+  },
+  {
+    title: "Low-fee investing",
+    body: "[To verify: wording must match MAS advertising guidelines]",
+  },
+];
+
+const mariBankSteps = [
+  {
+    stage: "Secondary bank",
+    status: "Parks spare cash, enjoys Shopee perks",
+    milestone: "Account opening, first deposit, first cross-sell",
+  },
+  {
+    stage: "First choice",
+    status: "Picks MariBank first for spending or investing",
+    milestone: "Card becomes a daily driver, recurring investing starts",
+  },
+  {
+    stage: "Primary bank",
+    status: "Income and daily spend both run through MariBank",
+    milestone: "Salary credit, GIRO, rising average balance",
+  },
+];
+
+const measurementTree = [
+  {
+    branch: "Ecosystem",
+    metric: "Products per household, cross-product retention",
+    design: "Cross-sell paths, home-page distribution",
+  },
+  {
+    branch: "ShopeePay",
+    metric: "Payment penetration, cross-sell conversion",
+    design: "Payment flow, landing pages",
+  },
+  {
+    branch: "SPayLater",
+    metric: "First-use conversion, on-time repayment",
+    design: "Checkout presentation, repayment flow",
+  },
+  {
+    branch: "Digital Bank",
+    metric: "Deposit balance, % salary credit",
+    design: "Onboarding flow, home information architecture",
+  },
+  {
+    branch: "Brand",
+    metric: "Brand awareness, % acquisition outside Shopee",
+    design: "Brand system & marketing assets",
+  },
+];
+
+const tocSections = [
+  { id: "business-context", label: "Business context" },
+  { id: "our-thesis", label: "Our view on fintech" },
+  { id: "who-we-serve", label: "Who we serve" },
+  { id: "principles", label: "Experience principles" },
+  { id: "ecosystem-map", label: "Ecosystem map" },
+  { id: "phases-markets", label: "Phases & markets" },
+  { id: "shopeepay", label: "ShopeePay" },
+  { id: "spaylater", label: "SPayLater" },
+  { id: "maribank", label: "MariBank" },
+  { id: "insurance-seller", label: "Insurance & seller services" },
+  { id: "ai-stance", label: "AI in the experience" },
+  { id: "measuring-impact", label: "Measuring impact" },
+];
+---
+
+<BaseLayout
+  title="Monee Ecosystem & Product Design Strategy — Lin Hongyu"
+  description="Defining each product's ecosystem role, experience principles, and design levers as Monee moves from a financial matrix inside Shopee to an independent financial ecosystem."
+>
+  <!-- S-01: Hero -->
+  <section class="section case-hero">
+    <div class="wrap">
+      <a class="back" href="/project">&larr; Back to Work</a>
+      <p class="eyebrow eyebrow--accent">Strategy</p>
+      <h1>Monee Ecosystem &amp; Product Design Strategy</h1>
+      <p class="case-subtitle">
+        Starting from where the business is today, defining each
+        product's role in the ecosystem, its experience principles,
+        and its design levers — so design and business move in the
+        same direction.
+      </p>
+      <p class="case-byline">Head of Design&ensp;|&ensp;2021–Present</p>
+
+      <!-- Ecosystem overview diagram: center "Monee", five product
+           nodes orbiting it, outer arc labeled "Shopee" — the
+           ecosystem grew out of Shopee and now extends beyond it.
+           Visual cover only; detail lives in #ecosystem-map below. -->
+      <div class="eco-hero-diagram" role="img" aria-label="Monee sits at the center of five products — ShopeePay, SPayLater, MariBank/SeaBank, Mari Invest, and Insurance — inside an outer arc labeled Shopee, showing the ecosystem growing out of Shopee and extending beyond it.">
+        <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M 60 340 A 370 370 0 0 1 740 340"
+            fill="none"
+            stroke="var(--color-line)"
+            stroke-width="2"
+            stroke-dasharray="4 8"
+          />
+          <text x="400" y="50" text-anchor="middle" class="eco-hero-arc-label">Shopee</text>
+          <g class="eco-hero-spokes">
+            <line x1="400" y1="230" x2="400" y2="120" />
+            <line x1="400" y1="230" x2="240" y2="300" />
+            <line x1="400" y1="230" x2="320" y2="340" />
+            <line x1="400" y1="230" x2="480" y2="340" />
+            <line x1="400" y1="230" x2="560" y2="300" />
+          </g>
+          <circle cx="400" cy="230" r="58" class="eco-hero-center" />
+          <text x="400" y="236" text-anchor="middle" class="eco-hero-center-label">Monee</text>
+
+          <g>
+            <circle cx="400" cy="120" r="40" class="eco-hero-node" />
+            <text x="400" y="124" text-anchor="middle" class="eco-hero-node-label">ShopeePay</text>
+          </g>
+          <g>
+            <circle cx="240" cy="300" r="40" class="eco-hero-node" />
+            <text x="240" y="298" text-anchor="middle" class="eco-hero-node-label">SPayLater</text>
+            <text x="240" y="312" text-anchor="middle" class="eco-hero-node-label">&amp; Credit</text>
+          </g>
+          <g>
+            <circle cx="320" cy="340" r="40" class="eco-hero-node" />
+            <text x="320" y="338" text-anchor="middle" class="eco-hero-node-label">MariBank /</text>
+            <text x="320" y="352" text-anchor="middle" class="eco-hero-node-label">SeaBank</text>
+          </g>
+          <g>
+            <circle cx="480" cy="340" r="40" class="eco-hero-node" />
+            <text x="480" y="344" text-anchor="middle" class="eco-hero-node-label">Mari Invest</text>
+          </g>
+          <g>
+            <circle cx="560" cy="300" r="40" class="eco-hero-node" />
+            <text x="560" y="304" text-anchor="middle" class="eco-hero-node-label">Insurance</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- S-02: Overview -->
+  <section class="section case-overview">
+    <div class="wrap">
+      <p class="case-intro">
+        Monee is moving from a financial matrix inside Shopee to an
+        independent financial ecosystem. That shift defines three
+        priorities for design strategy.
+      </p>
+      <div class="card-row">
+        {
+          overviewCards.map((card) => (
+            <div class="numbered-card">
+              <p class="numbered-card-n">{card.n}</p>
+              <p class="numbered-card-title">{card.title}</p>
+              <p class="numbered-card-body">{card.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Body chapters: sticky TOC (desktop) / dropdown (mobile) -->
+  <section class="section case-body">
+    <div class="wrap case-body-grid">
+      <nav class="case-toc" aria-label="Case study sections">
+        <p class="case-toc-label">On this page</p>
+        <ul>
+          {
+            tocSections.map((s) => (
+              <li>
+                <a href={`#${s.id}`} data-toc-link={s.id}>
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <select class="case-toc-mobile" aria-label="Jump to section">
+        <option value="">On this page…</option>
+        {
+          tocSections.map((s) => (
+            <option value={`#${s.id}`}>{s.label}</option>
+          ))
+        }
+      </select>
+
+      <div class="case-chapters">
+        <!-- S-03: Business context -->
+        <div class="case-chapter" id="business-context">
+          <h2>Business context</h2>
+          <div class="context-grid">
+            <div class="context-diagram" role="img" aria-label="Sea Limited branches into Garena (gaming), Shopee (e-commerce), and Monee (digital financial services, highlighted).">
+              <div class="context-root">Sea Limited</div>
+              <div class="context-branches">
+                <div class="context-branch">Garena<span>Gaming</span></div>
+                <div class="context-branch">Shopee<span>E-commerce</span></div>
+                <div class="context-branch context-branch--active">Monee<span>Digital financial services</span></div>
+              </div>
+            </div>
+            <div class="stat-grid">
+              {
+                statCards.map((s) => (
+                  <div class="stat-card">
+                    <p class="stat-value">{s.value}</p>
+                    <p class="stat-label">{s.label}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <p class="source-note">
+            Source: Sea Limited Q2 2026 results. Update with the
+            latest figures before launch.
+          </p>
+        </div>
+
+        <!-- S-04: Our view on fintech -->
+        <div class="case-chapter" id="our-thesis">
+          <h2>Our view on fintech</h2>
+          <div class="compare-two">
+            <div class="compare-col compare-col--muted">
+              <p class="compare-title">Traditional finance mindset</p>
+              <p class="compare-question">"What can we offer?"</p>
+              <p class="compare-arrow">Product &rarr; User</p>
+            </div>
+            <div class="compare-col compare-col--accent">
+              <p class="compare-title">Our mindset</p>
+              <p class="compare-question">"What do specific users need?"</p>
+              <p class="compare-arrow">User need &rarr; Product</p>
+            </div>
+          </div>
+          <p class="chapter-conclusion">
+            Real fintech uses digital platforms to design around
+            specific user needs, delivering simple, trustworthy
+            experiences.
+          </p>
+        </div>
+
+        <!-- S-05: Who we serve -->
+        <div class="case-chapter" id="who-we-serve">
+          <h2>Who we serve</h2>
+          <div class="card-row">
+            <div class="user-card">
+              <p class="user-card-title">The financially underserved</p>
+              <p class="user-card-markets">
+                Indonesia, Philippines, Vietnam, Brazil
+              </p>
+              <p class="user-card-body">
+                Few assets, limited financial literacy — often get
+                their first line of credit and first account through
+                Shopee.
+              </p>
+              <p class="user-card-focus">
+                Design focus: lower the barrier to understanding, earn
+                first-time trust.
+              </p>
+            </div>
+            <div class="user-card">
+              <p class="user-card-title">
+                Overlooked by experience and value
+              </p>
+              <p class="user-card-markets">
+                Urban users in Singapore, Malaysia, Thailand
+              </p>
+              <p class="user-card-body">
+                Already banked, but excluded by high thresholds,
+                bundling, and cold experiences.
+              </p>
+              <p class="user-card-focus">
+                Design focus: win them over from traditional banks
+                with unconditional, transparent value.
+              </p>
+            </div>
+          </div>
+          <div class="path-diagram">
+            <span>Few assets, little financial knowledge</span>
+            <span class="path-diagram-arrow">
+              the direction Monee grows with you &rarr;
+            </span>
+            <span>More assets, without needing to become a finance expert</span>
+          </div>
+          <p class="chapter-note">
+            Shared trait: young and middle-aged internet users,
+            price-sensitive, value-for-money. We compete off-axis from
+            traditional banks and brokerages.
+          </p>
+        </div>
+
+        <!-- S-06: Experience principles -->
+        <div class="case-chapter" id="principles">
+          <h2>Experience principles</h2>
+          <div class="principle-list">
+            {
+              principles.map((p) => (
+                <div class="principle-row">
+                  <span class="principle-n">{p.n}</span>
+                  <div>
+                    <p class="principle-title">{p.title}</p>
+                    <p class="principle-body">{p.body}</p>
+                  </div>
+                </div>
+              ))
+            }
+            <p class="principle-order">
+              &uarr; In a conflict, the principle higher on this list
+              wins.
+            </p>
+          </div>
+          <div class="callout">
+            <p class="callout-title">Responsible rewarding</p>
+            <p class="callout-body">
+              Rewards should reinforce long-term positive behavior —
+              saving, paying on time — not manufacture borrowing
+              beyond repayment capacity.
+            </p>
+          </div>
+        </div>
+
+        <!-- S-07: Ecosystem map (interactive) -->
+        <div class="case-chapter" id="ecosystem-map">
+          <h2>Monee ecosystem map</h2>
+          <p class="chapter-lead">
+            Hover (or tap) a product for its ecosystem role and core
+            metrics.
+          </p>
+          <div class="eco-map">
+            <div class="eco-map-col eco-map-col--source">
+              <p class="eco-map-col-label">Traffic sources</p>
+              <p>Inside Shopee</p>
+              <p>Outside Shopee</p>
+            </div>
+            <div class="eco-map-col eco-map-col--nodes">
+              {
+                ecosystemNodes.map((node) => (
+                  <button type="button" class="eco-node">
+                    <span class="eco-node-name">{node.name}</span>
+                    <span class="eco-node-detail">
+                      <span class="eco-node-detail-inner">
+                        <span class="eco-node-role">{node.role}</span>
+                        <span class="eco-node-metrics">{node.metrics}</span>
+                      </span>
+                    </span>
+                  </button>
+                ))
+              }
+            </div>
+            <div class="eco-map-col eco-map-col--value">
+              <p class="eco-map-col-label">Value captured</p>
+              <p>Revenue</p>
+              <p>Deposits</p>
+              <p>Assets</p>
+              <p>Loyalty</p>
+            </div>
+          </div>
+          <p class="chapter-note">
+            Cross-sell: ShopeePay &rarr; SPayLater, MariBank,
+            Insurance. MariBank &rarr; Mari Invest, Credit Card.
+          </p>
+        </div>
+
+        <!-- S-08: Phases & markets -->
+        <div class="case-chapter" id="phases-markets">
+          <h2>Business phases &amp; market segmentation</h2>
+          <div class="phase-timeline">
+            {
+              phases.map((p, i) => (
+                <>
+                  <div class="phase-step">
+                    <p class="phase-tag">{p.tag}</p>
+                    <p class="phase-title">{p.title}</p>
+                  </div>
+                  {i === 1 && <div class="phase-marker">We are here</div>}
+                </>
+              ))
+            }
+          </div>
+          <div class="market-table">
+            {
+              marketRows.map((row) => (
+                <div class="market-row">
+                  <p class="market-group">{row.group}</p>
+                  <p class="market-markets">{row.markets}</p>
+                  <p class="market-vehicle">{row.vehicle}</p>
+                  <p class="market-focus">{row.focus}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- S-09: ShopeePay -->
+        <div class="case-chapter" id="shopeepay">
+          <h2>ShopeePay: traffic gateway</h2>
+          <p class="chapter-lead">
+            Captures Shopee's traffic and distributes it to the rest
+            of the portfolio.
+          </p>
+          <div class="funnel">
+            {
+              shopeePayFunnel.map((step) => (
+                <div class="funnel-step">
+                  <p class="funnel-stage">{step.stage}</p>
+                  <p class="funnel-body">{step.body}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="product-shots">
+            <PlaceholderImage ratio="9/19" radius="24px" label="Payment page — funding source switch" />
+            <PlaceholderImage ratio="9/19" radius="24px" label="Payment success — cross-sell slot" />
+            <PlaceholderImage ratio="9/19" radius="24px" label="ShopeePay home" />
+          </div>
+          <div class="callout">
+            <p class="callout-title">Don't interrupt the transaction</p>
+            <p class="callout-body">
+              Cross-sell after payment completes and on the home
+              screen — never inside the payment flow itself.
+            </p>
+          </div>
+        </div>
+
+        <!-- S-10: SPayLater -->
+        <div class="case-chapter" id="spaylater">
+          <h2>SPayLater: revenue engine</h2>
+          <p class="chapter-lead">
+            Monee's largest revenue source, and most users' first
+            touchpoint with Monee credit.
+          </p>
+          <div class="lifecycle-ring">
+            {
+              sPayLaterLifecycle.map((step) => (
+                <div class="lifecycle-step">
+                  <p class="lifecycle-stage">{step.stage}</p>
+                  <p class="lifecycle-lever">{step.lever}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="stat-card stat-card--inline">
+            <p class="stat-value">~10%</p>
+            <p class="stat-label">
+              SPayLater's share of Shopee GMV in Brazil, below mature
+              markets.
+            </p>
+          </div>
+          <div class="product-shots">
+            <PlaceholderImage ratio="9/19" radius="24px" label="Checkout — installment picker" />
+            <PlaceholderImage ratio="9/19" radius="24px" label="Statement page" />
+            <PlaceholderImage ratio="9/19" radius="24px" label="Repayment reminder" />
+          </div>
+          <div class="callout">
+            <p class="callout-title">Growth defers to risk</p>
+            <p class="callout-body">
+              In new markets, make sure users understand fees and
+              repayment responsibility before chasing penetration.
+            </p>
+          </div>
+        </div>
+
+        <!-- S-11: MariBank -->
+        <div class="case-chapter" id="maribank">
+          <h2>MariBank: long-term growth engine</h2>
+          <p class="chapter-lead">
+            Captures traffic from ShopeePay and outside channels, and
+            converts it into high-value, loyal users.
+          </p>
+          <div class="challenge-row">
+            <div class="stat-card stat-card--inline">
+              <p class="stat-value">3+</p>
+              <p class="stat-label">
+                Average number of banking relationships per Singapore
+                user
+              </p>
+            </div>
+            <p class="challenge-body">
+              Traditional banks lock users in with bundling; banking
+              products look alike. Switching a primary account is
+              costly. Our wedge is experience: simple and clear.
+            </p>
+          </div>
+          <div class="card-row card-row--three">
+            {
+              mariBankValueProps.map((v) => (
+                <div class="value-card">
+                  <p class="value-card-title">{v.title}</p>
+                  <p class="value-card-body">{v.body}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="steps-diagram">
+            {
+              mariBankSteps.map((s) => (
+                <div class="steps-step">
+                  <p class="steps-stage">{s.stage}</p>
+                  <p class="steps-status">{s.status}</p>
+                  <p class="steps-milestone">{s.milestone}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="cross-sell-paths">
+            <div class="cross-sell-path">
+              <p class="cross-sell-title">Investing-minded</p>
+              <p class="cross-sell-flow">
+                Shopee high-interest perk or external channel &rarr;
+                Savings &rarr; Investing &amp; trading
+              </p>
+            </div>
+            <div class="cross-sell-path">
+              <p class="cross-sell-title">Spending-minded</p>
+              <p class="cross-sell-flow">
+                Shopee voucher or external channel &rarr; Savings
+                &rarr; Payments &amp; credit card
+              </p>
+            </div>
+            <p class="chapter-note">
+              Touchpoints: home screen, mission center, push. Clear
+              intent gets a direct entry point; unclear intent gets
+              loosely matched via the mission center.
+            </p>
+          </div>
+          <div class="card-row">
+            <div class="strategy-card">
+              <p class="strategy-card-title">Investing-minded</p>
+              <p class="strategy-card-body">
+                No fund supermarket or rankings — present by asset
+                class and risk/return to avoid over-choice.
+              </p>
+              <a class="strategy-card-link" href="/work/marinvest">
+                Mari Invest case &rarr;
+              </a>
+            </div>
+            <div class="strategy-card">
+              <p class="strategy-card-title">Spending-minded</p>
+              <p class="strategy-card-body">
+                Rewards that are easy to calculate, flows kept short —
+                one job per screen.
+              </p>
+              <a class="strategy-card-link" href="/work/mari-credit-card">
+                Mari Credit Card case &rarr;
+              </a>
+            </div>
+          </div>
+          <div class="product-shots">
+            <PlaceholderImage ratio="9/19" radius="24px" label="MariBank home" />
+            <PlaceholderImage ratio="9/19" radius="24px" label="Product entry points" />
+          </div>
+        </div>
+
+        <!-- S-12: Insurance & seller services -->
+        <div class="case-chapter" id="insurance-seller">
+          <h2>Insurance &amp; seller services</h2>
+          <div class="card-row">
+            <div class="simple-card">
+              <p class="simple-card-title">Insurance</p>
+              <p class="simple-card-body">
+                Embed product protection in transaction moments; spell
+                out coverage and price at checkout; keep claims simple
+                and trustworthy. [To add: specific project]
+              </p>
+            </div>
+            <div class="simple-card">
+              <p class="simple-card-title">Seller services</p>
+              <p class="simple-card-body">
+                B2B financial services like lending for Shopee sellers,
+                matched to their operating rhythm and cash-flow needs.
+                [To add]
+              </p>
+            </div>
+          </div>
+          <p class="chapter-note">
+            This module can wait until a concrete project exists.
+          </p>
+        </div>
+
+        <!-- S-13: AI stance -->
+        <div class="case-chapter" id="ai-stance">
+          <h2>Where AI stands in the product experience</h2>
+          <div class="callout">
+            <p class="callout-body">
+              [To add — suggested direction: lead with low-risk use
+              cases like support, statement explanation, and savings
+              coaching; keep credit and investment-advice scenarios
+              explainable and compliance-reviewed.]
+            </p>
+          </div>
+        </div>
+
+        <!-- S-14: Measuring impact -->
+        <div class="case-chapter" id="measuring-impact">
+          <h2>Measuring design's contribution</h2>
+          <div class="measurement-tree">
+            <div class="tree-root">Design's contribution</div>
+            <div class="tree-branches">
+              {
+                measurementTree.map((b) => (
+                  <div class="tree-branch">
+                    <p class="tree-branch-name">{b.branch}</p>
+                    <p class="tree-leaf">
+                      <span>Business metric</span>
+                      {b.metric}
+                    </p>
+                    <p class="tree-leaf">
+                      <span>Where design shows up</span>
+                      {b.design}
+                    </p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card stat-card--placeholder">
+              <p class="stat-value">[TBD]</p>
+              <p class="stat-label">Verified results go here once available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S-15: Reflection & next steps -->
+  <section class="section case-reflection">
+    <div class="wrap">
+      <h2>Reflection &amp; next steps</h2>
+      <ul class="reflection-list">
+        <li>
+          MariBank's move from secondary to primary bank needs
+          alignment with business on the goals and timeline for each
+          stage.
+        </li>
+        <li>
+          "Don't interrupt the transaction" needs to become a
+          conviction leadership shares, not just a design position.
+        </li>
+        <li>
+          Brazil needs its own experience strategy and closer
+          collaboration with risk.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- S-16: Next project -->
+  <section class="section case-next">
+    <div class="wrap">
+      <a class="next-card" href="/work/maribank-ai-native-brand">
+        <p class="next-card-label">Next project</p>
+        <p class="next-card-title">
+          Tone — MariBank AI-Native Brand Creative &amp; Visual Design
+          System
+        </p>
+        <span class="next-card-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-3);
+  }
+
+  .back:hover {
+    color: var(--color-accent);
+  }
+
+  /* S-01 */
+  .case-hero h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(32px, 5vw, 52px);
+    margin-top: var(--space-2);
+    max-width: 820px;
+  }
+
+  .case-subtitle {
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    max-width: 640px;
+    margin-top: var(--space-3);
+  }
+
+  .case-byline {
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    margin-top: var(--space-2);
+  }
+
+  .eco-hero-diagram {
+    margin-top: var(--space-5);
+  }
+
+  .eco-hero-diagram svg {
+    width: 100%;
+    height: auto;
+    max-width: 760px;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .eco-hero-arc-label {
+    font-size: 15px;
+    font-style: italic;
+    fill: var(--color-ink-faint);
+  }
+
+  .eco-hero-spokes line {
+    stroke: var(--color-line);
+    stroke-width: 2;
+  }
+
+  .eco-hero-center {
+    fill: var(--color-ink);
+  }
+
+  .eco-hero-center-label {
+    font-size: 16px;
+    font-weight: 700;
+    fill: #fff;
+  }
+
+  .eco-hero-node {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+  }
+
+  .eco-hero-node-label {
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--color-ink);
+  }
+
+  /* S-02 */
+  .case-intro {
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.5;
+    max-width: 760px;
+    margin-bottom: var(--space-4);
+  }
+
+  .card-row {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .card-row--three {
+    flex-wrap: wrap;
+  }
+
+  .numbered-card,
+  .user-card,
+  .value-card,
+  .simple-card,
+  .strategy-card {
+    flex: 1 1 0%;
+    min-width: 220px;
+    padding: var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+  }
+
+  .numbered-card-n {
+    font-style: italic;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+  }
+
+  .numbered-card-title,
+  .user-card-title,
+  .value-card-title,
+  .simple-card-title,
+  .strategy-card-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .numbered-card-body,
+  .user-card-body,
+  .user-card-focus,
+  .value-card-body,
+  .simple-card-body,
+  .strategy-card-body,
+  .chapter-conclusion,
+  .chapter-note,
+  .chapter-lead {
+    color: var(--color-ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Body layout: sticky TOC + chapters */
+  .case-body-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .case-toc {
+    position: sticky;
+    top: 96px;
+  }
+
+  .case-toc-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-2);
+  }
+
+  .case-toc ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .case-toc a {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+    display: block;
+  }
+
+  .case-toc a:hover {
+    color: var(--color-ink);
+  }
+
+  .case-toc a.is-active {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .case-toc-mobile {
+    display: none;
+  }
+
+  .case-chapters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    min-width: 0;
+  }
+
+  .case-chapter h2 {
+    font-size: clamp(22px, 2.8vw, 28px);
+    margin-bottom: var(--space-3);
+    scroll-margin-top: 110px;
+  }
+
+  /* S-03 */
+  .context-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .context-diagram {
+    text-align: center;
+  }
+
+  .context-root {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--color-line);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+
+  .context-branches {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .context-branch {
+    flex: 1;
+    padding: var(--space-2) 8px;
+    border-radius: 14px;
+    border: 1px solid var(--color-line);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .context-branch span {
+    display: block;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--color-ink-faint);
+    margin-top: 4px;
+  }
+
+  .context-branch--active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .stat-card {
+    padding: var(--space-2);
+  }
+
+  .stat-value {
+    font-weight: 700;
+    font-size: clamp(22px, 2.6vw, 30px);
+    letter-spacing: -0.01em;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    margin-top: 4px;
+  }
+
+  .stat-card--inline {
+    display: inline-block;
+    margin-bottom: var(--space-2);
+  }
+
+  .stat-card--placeholder .stat-value {
+    color: var(--color-ink-faint);
+  }
+
+  .source-note {
+    font-size: 12px;
+    color: var(--color-ink-faint);
+    margin-top: var(--space-2);
+  }
+
+  /* S-04 */
+  .compare-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .compare-col {
+    padding: var(--space-3);
+    border-radius: 20px;
+  }
+
+  .compare-col--muted {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .compare-col--accent {
+    background: var(--color-accent-soft);
+  }
+
+  .compare-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .compare-question {
+    font-style: italic;
+    color: var(--color-ink-soft);
+  }
+
+  .compare-arrow {
+    margin-top: var(--space-2);
+    font-weight: 600;
+  }
+
+  .chapter-conclusion {
+    margin-top: var(--space-3);
+    font-size: 17px;
+    max-width: 640px;
+  }
+
+  /* S-05 */
+  .user-card-markets {
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-2);
+  }
+
+  .user-card-body {
+    margin-bottom: var(--space-2);
+  }
+
+  .path-diagram {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    padding: var(--space-3);
+    border: 1px dashed var(--color-line);
+    border-radius: 20px;
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+
+  .path-diagram-arrow {
+    color: var(--color-accent);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .chapter-note {
+    margin-top: var(--space-3);
+  }
+
+  /* S-06 */
+  .principle-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .principle-row {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .principle-n {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .principle-title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .principle-body {
+    color: var(--color-ink-soft);
+  }
+
+  .principle-order {
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    margin-left: 48px;
+  }
+
+  .callout {
+    padding: var(--space-3);
+    border-radius: 20px;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-soft);
+  }
+
+  .callout-title {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+  }
+
+  .callout-body {
+    color: var(--color-ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* S-07 */
+  .eco-map {
+    display: grid;
+    grid-template-columns: 180px 1fr 140px;
+    gap: var(--space-4);
+    align-items: start;
+    margin-top: var(--space-3);
+  }
+
+  .eco-map-col-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-faint);
+    margin-bottom: var(--space-2);
+  }
+
+  .eco-map-col--source,
+  .eco-map-col--value {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 6px;
+  }
+
+  .eco-map-col--nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .eco-node {
+    text-align: left;
+    width: 100%;
+    background: rgba(23, 20, 15, 0.03);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .eco-node-name {
+    display: block;
+    font-weight: 700;
+  }
+
+  /* A single grid child (.eco-node-detail-inner) is what actually
+     collapses — grid-template-rows only has one explicit track to
+     work with this way. Two direct children here (role + metrics)
+     would push the second into an auto-sized implicit row that never
+     collapses. minmax(0, 0fr), not bare 0fr — bare 0fr still respects
+     the row's min-content floor and never fully collapses either. */
+  .eco-node-detail {
+    display: grid;
+    grid-template-rows: minmax(0, 0fr);
+    opacity: 0;
+    transition: grid-template-rows 0.3s ease, opacity 0.3s ease;
+  }
+
+  .eco-node-detail-inner {
+    overflow: hidden;
+  }
+
+  .eco-node:hover .eco-node-detail,
+  .eco-node:focus-visible .eco-node-detail,
+  .eco-node.is-open .eco-node-detail {
+    grid-template-rows: minmax(0, 1fr);
+    opacity: 1;
+    margin-top: 6px;
+  }
+
+  .eco-node-role {
+    display: block;
+    font-size: 13px;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .eco-node-metrics {
+    display: block;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+  }
+
+  /* S-08 */
+  .phase-timeline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .phase-step {
+    flex: 1 1 160px;
+    padding: var(--space-2);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+  }
+
+  .phase-tag {
+    font-size: 12px;
+    color: var(--color-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .phase-title {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .phase-marker {
+    flex: 0 0 auto;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-accent);
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+
+  .market-table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .market-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1.4fr;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--color-line);
+    font-size: 14px;
+  }
+
+  .market-group {
+    font-weight: 700;
+  }
+
+  .market-markets,
+  .market-vehicle {
+    color: var(--color-ink-soft);
+  }
+
+  .market-focus {
+    color: var(--color-ink-faint);
+  }
+
+  /* Funnel (S-09) / lifecycle ring (S-10) / steps (S-11) */
+  .funnel,
+  .lifecycle-ring,
+  .steps-diagram {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-3);
+    margin-block: var(--space-3);
+  }
+
+  .funnel-step,
+  .lifecycle-step,
+  .steps-step {
+    padding: var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+  }
+
+  .funnel-stage,
+  .lifecycle-stage,
+  .steps-stage {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .funnel-body,
+  .lifecycle-lever,
+  .steps-status,
+  .steps-milestone {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+
+  .steps-milestone {
+    color: var(--color-ink-faint);
+    margin-top: 6px;
+  }
+
+  .product-shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-2);
+    margin-block: var(--space-3);
+  }
+
+  /* S-11 extras */
+  .challenge-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+  }
+
+  .challenge-body {
+    flex: 1 1 320px;
+    color: var(--color-ink-soft);
+  }
+
+  .cross-sell-paths {
+    margin-block: var(--space-3);
+  }
+
+  .cross-sell-path {
+    margin-bottom: var(--space-2);
+  }
+
+  .cross-sell-title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .cross-sell-flow {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+
+  .strategy-card-link {
+    display: inline-block;
+    margin-top: var(--space-2);
+    font-size: 14px;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  /* S-14 */
+  .measurement-tree {
+    text-align: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .tree-root {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: var(--color-ink);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+  }
+
+  .tree-branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-2);
+  }
+
+  .tree-branch {
+    text-align: left;
+    padding: var(--space-2);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+  }
+
+  .tree-branch-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .tree-leaf {
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    margin-top: 6px;
+  }
+
+  .tree-leaf span {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-faint);
+  }
+
+  /* S-15 */
+  .case-reflection h2 {
+    font-size: clamp(22px, 2.8vw, 28px);
+    margin-bottom: var(--space-3);
+  }
+
+  .reflection-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 720px;
+  }
+
+  .reflection-list li {
+    padding-left: 20px;
+    position: relative;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .reflection-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  /* S-16 */
+  .case-next {
+    padding-top: 0;
+  }
+
+  .next-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-radius: 28px;
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .next-card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .next-card-title {
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 700;
+    max-width: 640px;
+  }
+
+  .next-card-arrow {
+    font-size: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  .next-card:hover .next-card-arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 900px) {
+    .case-body-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-toc {
+      display: none;
+    }
+
+    .case-toc-mobile {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--color-line);
+      background: var(--color-bg);
+      font-size: 14px;
+      margin-bottom: var(--space-4);
+      position: sticky;
+      top: 76px;
+      z-index: 5;
+    }
+
+    .context-grid,
+    .compare-two,
+    .eco-map {
+      grid-template-columns: 1fr;
+    }
+
+    .card-row {
+      flex-direction: column;
+    }
+
+    .market-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-spy for the desktop TOC: whichever chapter is most in view
+  // gets the highlighted link. IntersectionObserver rather than the
+  // scroll-position math used elsewhere on the site — this only needs
+  // "which section is current", not a continuous progress value, so
+  // the browser-native observer is the simpler tool for the job.
+  function setupCaseToc() {
+    const links = document.querySelectorAll<HTMLAnchorElement>(
+      "[data-toc-link]"
+    );
+    const chapters = document.querySelectorAll<HTMLElement>(".case-chapter");
+    if (links.length === 0 || chapters.length === 0) return;
+
+    const linkById = new Map<string, HTMLAnchorElement>();
+    links.forEach((link) => {
+      const id = link.dataset.tocLink;
+      if (id) linkById.set(id, link);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const link = linkById.get(entry.target.id);
+            if (!link) continue;
+            links.forEach((l) => l.classList.remove("is-active"));
+            link.classList.add("is-active");
+          }
+        }
+      },
+      { rootMargin: "-110px 0px -70% 0px" }
+    );
+    chapters.forEach((chapter) => observer.observe(chapter));
+
+    const mobileSelect = document.querySelector<HTMLSelectElement>(
+      ".case-toc-mobile"
+    );
+    mobileSelect?.addEventListener("change", () => {
+      const target = mobileSelect.value;
+      if (!target) return;
+      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // Tap-to-toggle for the ecosystem map nodes, so the detail reveal
+  // (CSS :hover/:focus-visible) also works on touch devices that have
+  // no real hover state.
+  function setupEcoNodes() {
+    const nodes = document.querySelectorAll<HTMLButtonElement>(".eco-node");
+    nodes.forEach((node) => {
+      node.addEventListener("click", () => {
+        const wasOpen = node.classList.contains("is-open");
+        nodes.forEach((n) => n.classList.remove("is-open"));
+        if (!wasOpen) node.classList.add("is-open");
+      });
+    });
+  }
+
+  setupCaseToc();
+  setupEcoNodes();
+</script>
