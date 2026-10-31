@@ -344,7 +344,7 @@ const measurementRows = [
         </div>
         <div class="journey">
           <span class="pill pill--on-dark">Few assets · little financial knowledge</span>
-          <span class="vs-arrow vs-arrow--accent">&#10230;</span>
+          <span class="vs-arrow vs-arrow--accent">&rarr;</span>
           <span class="pill pill--goal">More assets · still no need to become a finance expert</span>
         </div>
       </div>
@@ -949,7 +949,7 @@ const measurementRows = [
 
   .pill--on-dark {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
     color: #fff;
   }
 
@@ -971,6 +971,8 @@ const measurementRows = [
   }
 
   .vs-arrow {
+    display: inline-flex;
+    align-items: center;
     font-weight: 600;
     color: var(--color-ink-faint);
   }
@@ -1247,7 +1249,8 @@ const measurementRows = [
   .common-body {
     margin-top: 8px;
     max-width: 44em;
-    font-size: 14px;
+    font-size: 17px;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
   }
 
