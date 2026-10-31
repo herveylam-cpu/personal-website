@@ -1,0 +1,1529 @@
+---
+// Tone case study — content translated from a Chinese design memo
+// ("MariBank Brand Tone"), laid out to match the Strategy case page:
+// same section shell (.sh headers, pills/chips, card recipes), same
+// local accent override, same hero pattern reusing the Home page's
+// own case image. The memo's own visual system (script webfont,
+// bespoke orange tokens) isn't used — this reuses the site's
+// existing component vocabulary instead.
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PlaceholderImage from "../../components/PlaceholderImage.astro";
+import toneImage from "../../assets/work/tone.png";
+
+const overviewCards = [
+  {
+    n: "01",
+    title: "Redefine what the brand means",
+    body: "Shift the target audience toward young people just starting their careers.",
+  },
+  {
+    n: "02",
+    title: "Build three memory anchors",
+    body: "A signature mark, a point of view behind the lens, and storytelling — with rules for when to lean “approachable” and when to lean “leading.”",
+  },
+  {
+    n: "03",
+    title: "Run it AI-native",
+    body: "Standards live in a knowledge base; a multi-agent pipeline produces day-to-day assets. People define the standard and review at key checkpoints.",
+  },
+];
+
+const ownedAssets = [
+  { mark: "just work", title: "Signature mark", sub: "Handwritten script" },
+  { mark: "◎", title: "Lens point of view", sub: "A distinctive shooting angle" },
+  { mark: "“ ”", title: "Brand voice", sub: "Storytelling" },
+];
+
+const frameworkTop = {
+  label: "Framework",
+  title: "Brand operating framework",
+  sub: "Defined by people, AI-assisted",
+  steps: [
+    { title: "Semantic layer", sub: "Positioning · tone" },
+    { title: "Visual parameter layer", sub: "Locked · flexible" },
+    { title: "Asset template layer", sub: "Templates · components" },
+  ],
+};
+
+const frameworkBottom = {
+  label: "Execution",
+  title: "System execution logic",
+  sub: "AI executes, people review at key checkpoints",
+  steps: [
+    { title: "Knowledge base", sub: "Single source of truth" },
+    { title: "Skills & workflows", sub: "Multi-agent collaboration" },
+    { title: "Tools", sub: "Generate · package · publish" },
+  ],
+};
+
+const qNav = [
+  { q: "Q1", label: "How we define ourselves", href: "#q1" },
+  { q: "Q2", label: "What we want users to see", href: "#q2" },
+  { q: "Q3", label: "How users remember us", href: "#memory" },
+];
+
+const ageStats = [
+  { label: "Current median user age", value: "~40" },
+  { label: "Target · 21–30 share of new accounts", value: "20% → 60%+" },
+];
+
+const directions = [
+  { tag: "Direction A", title: "Light luxury, fashion-forward", body: "Minimal layout and styling paired with fashion-forward models, for a sense of quality." },
+  { tag: "Direction B", title: "Fresh and youthful", body: "Fresh colors and relaxed, approachable young models, for an energetic, no-distance feel." },
+  { tag: "Direction C", title: "Rich, story-driven scenes", body: "Saturated color and scenes with a story, carrying a deeper brand image through the lens." },
+];
+
+const scenes = [
+  { lean: "orange", title: "Approachable", context: "Acquisition ads, social media, inside Shopee", body: "Lower the distance, lift conversion." },
+  { lean: "graphite", title: "Neutral, leaning steady", context: "In-product UI, statements, risk disclosures", body: "Trust first — clarity matters more than emotional expression." },
+  { lean: "ink", title: "Leading", context: "Wealth & investing, outdoor ads, flagship campaigns", body: "Build a sense of expertise and quality." },
+];
+
+const stories = [
+  { label: "Product benefit", line: "Daily interest", quote: "Wake up, and the interest is already in." },
+  { label: "Product benefit", line: "Effortless investing", quote: "Give the time you’d spend researching the market back to your life.", note: "Paired with a risk disclosure" },
+];
+
+const lockedChips = ["Logo & signature-mark usage", "Primary color & ratio", "Typeface", "Grid & layout rules", "Photography principles", "Compliance placement & style"];
+const flexibleChips = ["Secondary palette", "Lens choice", "Layout variation", "Scene & casting"];
+
+const kbNodes = [
+  { title: "Business knowledge", body: "Product, selling points, target audience" },
+  { title: "Brand positioning", body: "Approachable / leading rules by scene" },
+  { title: "Design system", body: "Component library" },
+  { title: "Tone & voice", body: "Tone, wording, length" },
+  { title: "Compliance rules", body: "Banned phrasing, required risk disclosures", hot: true },
+  { title: "Visual asset library", body: "Signature mark, lens references, templates" },
+];
+
+const flowLanes = [
+  {
+    name: "Static banner & microsite",
+    steps: [
+      { phase: "Content", title: "Copy agent", body: "Generates copy within the tone & voice rules and length limits." },
+      { phase: "Visual", title: "Key visual agent", body: "Generates visuals from the asset library, brand guideline, and prompt." },
+      { phase: "Packaging", title: "Template agent", body: "Applies the asset template, design spec, and layout rules." },
+    ],
+  },
+  {
+    name: "Motion video",
+    steps: [
+      { phase: "Content", title: "Script agent", body: "Script and rough keyframes." },
+      { phase: "Visual", title: "Video agent", body: "First-cut video." },
+      { phase: "Packaging", title: "Packaging", body: "Voiceover and final mix." },
+    ],
+  },
+];
+
+const reviewCheckpoints = ["Input confirmed", "Key-visual review", "Compliance review", "Final review before launch"];
+
+const works = [
+  { tag: "Website", title: "Brand website", ratio: "21/9" },
+  { tag: "Campaign", title: "Campaign pages & microsites", ratio: "4/3" },
+  { tag: "Product", title: "Product UI", ratio: "4/3" },
+  { tag: "OOH", title: "MariBank out-of-home ads", ratio: "21/9" },
+];
+
+const results = [
+  { title: "Brand health", chips: ["Unaided awareness", "Trust & other brand attribute scores", "Consideration among non-Shopee users"] },
+  { title: "Acquisition mix", chips: ["Non-Shopee channel share of new accounts", "21–30 share of new users"] },
+  { title: "Production efficiency", chips: ["Asset turnaround time", "First-pass review rate", "Click-through rate"] },
+];
+---
+
+<BaseLayout
+  title="Tone — MariBank AI-Native Brand Creative & Visual Design System — Lin Hongyu"
+  description="MariBank borrows Shopee's trust to win its first users, then needs to be remembered on its own once the business moves beyond Shopee — redefining the brand's meaning and handing its standard to a system where people define the rules and AI executes them."
+>
+  <div class="case-page">
+    <!-- Hero -->
+    <section class="section case-hero">
+      <div class="wrap case-hero-center">
+        <h1>MariBank AI-Native Brand, Creative &amp; Visual Design System</h1>
+        <p class="case-subtitle">
+          MariBank borrows Shopee's trust to win its first wave of
+          users — then needs to be remembered on its own once the
+          business moves beyond Shopee. We redefined what the brand
+          means, built three distinctive brand assets, and handed the
+          brand standard to a system where people define the rules
+          and AI executes them.
+        </p>
+      </div>
+      <div class="wrap">
+        <div class="case-hero-banner-frame">
+          <Image
+            src={toneImage}
+            alt="MariBank brand tone"
+            widths={[800, 1200, 1600, 2000]}
+            sizes="100vw"
+            class="case-hero-banner-img"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 Overview -->
+    <section class="section case-chapter case-chapter--center" id="overview">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">01</span>Overview</p>
+          <h2>MariBank's brand needs to do two things at once</h2>
+          <p class="sh-sub">Borrow Shopee's trust to win the first wave of users, while being remembered independently once the business moves beyond Shopee. We did three things:</p>
+        </header>
+        <div class="focus3">
+          {overviewCards.map((c) => (
+            <div class="focus-card">
+              <span class="ghost-n">{c.n}</span>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Brand element strategy -->
+    <section class="section case-chapter case-chapter--alt case-chapter--center" id="system">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">02</span>Brand element strategy</p>
+          <h2>When the business needs users beyond Shopee, what makes the brand remembered on its own?</h2>
+          <p class="sh-sub">Orange gives MariBank Shopee's trust by nature — and that's also the challenge. Our answer: split brand elements into two groups.</p>
+        </header>
+        <div class="groups">
+          <div class="group group--keep">
+            <span class="label">Keep the link</span>
+            <div class="swatch"><i aria-hidden="true"></i><div><b>Color</b><p class="muted">MariBank orange</p></div></div>
+            <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
+          </div>
+          <div class="group group--own">
+            <span class="label" style="color:rgba(255,255,255,.55)">Build independent recognition</span>
+            <div class="owns">
+              {ownedAssets.map((a) => (
+                <div><span class="owns-mark" aria-hidden="true">{a.mark}</span><b>{a.title}</b><span>{a.sub}</span></div>
+              ))}
+            </div>
+            <p style="color:rgba(255,255,255,.7)">The part the brand can take with it once it moves beyond Shopee.</p>
+          </div>
+        </div>
+        <div class="weightbar">
+          <span class="label">Weight shift</span>
+          <div class="weightbar-bar" aria-hidden="true"></div>
+          <div class="weightbar-ends"><span>Today: color carries most of the recognition</span><span>As the share of users from beyond Shopee grows, the owned assets carry more weight &rarr;</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 AI-native operating framework -->
+    <section class="section case-chapter case-chapter--center" id="framework">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">03</span>AI-native operating framework</p>
+          <h2>People define the brand standard, the system executes it</h2>
+        </header>
+        <div class="layers" role="img" aria-label="Two-layer framework: the brand operating framework above is defined by people with AI assistance; the system execution logic below is executed by AI with human review at key checkpoints.">
+          <div class="layer layer--top">
+            <div class="layer-who"><span class="label">{frameworkTop.label}</span><h3>{frameworkTop.title}</h3><p class="muted">{frameworkTop.sub}</p></div>
+            <div class="layer-steps">
+              {frameworkTop.steps.map((s) => (
+                <div class="layer-step">{s.title}<small>{s.sub}</small></div>
+              ))}
+            </div>
+          </div>
+          <div class="layer-between"><i aria-hidden="true"></i><span>Standards are written into the system</span><i aria-hidden="true"></i></div>
+          <div class="layer layer--bottom">
+            <div class="layer-who"><span class="label" style="color:rgba(255,255,255,.5)">{frameworkBottom.label}</span><h3>{frameworkBottom.title}</h3><p style="color:rgba(255,255,255,.65)">{frameworkBottom.sub}</p></div>
+            <div class="layer-steps">
+              {frameworkBottom.steps.map((s) => (
+                <div class="layer-step layer-step--dark">{s.title}<small>{s.sub}</small></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Semantic layer -->
+    <section class="section case-chapter case-chapter--alt case-chapter--center" id="semantic">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">04</span>Semantic layer</p>
+          <h2>From "Shopee's financial service" to "the bank for young people"</h2>
+        </header>
+        <div class="vs-grid">
+          <div class="vs-side vs-side--old">
+            <span class="vs-label">Stage 1 · How users saw us</span>
+            <p class="vs-q">We're Shopee's financial service, backed by Sea — safe and reliable.</p>
+            <div class="kv"><span class="label">Business strategy</span><p>As a 0-to-1 product, tying closely to Shopee was the fastest way to earn users' trust and traffic.</p></div>
+          </div>
+          <div class="vs-mid" aria-hidden="true">&rarr;</div>
+          <div class="vs-side vs-side--new">
+            <span class="vs-label">Stage 2 · How we define ourselves</span>
+            <p class="vs-q">We're the bank for young people: we handle the complicated banking so you can focus on living.</p>
+            <div class="kv"><span class="label" style="color:rgba(255,255,255,.6)">Business strategy</span><p style="color:rgba(255,255,255,.78)">Having built a base of users through Shopee, continued growth needs an independent brand identity that opens acquisition channels beyond Shopee.</p></div>
+          </div>
+        </div>
+        <p class="sub-p" style="margin:var(--space-4) auto 0">Stage 2 breaks into three questions:</p>
+        <div class="qnav">
+          {qNav.map((q) => (
+            <a class="pill" href={q.href}><b>{q.q}</b>{q.label}</a>
+          ))}
+        </div>
+
+        <h3 class="sub-h" id="q1"><span class="no">Q1</span>How we define ourselves: toward young people just starting their careers</h3>
+        <div class="shift">
+          <div class="stats">
+            {ageStats.map((s) => (
+              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
+            ))}
+          </div>
+          <div class="ages">
+            <div class="age age--old">
+              <h3>Users 40+</h3><span class="label">Core depositors</span>
+              <p>Higher average deposits, but value stability and existing trust — the cost of moving a primary bank relationship over is high, so growth here hits a ceiling.</p>
+            </div>
+            <div class="vs-mid" aria-hidden="true">&rarr;</div>
+            <div class="age age--young">
+              <h3>Users 18–28</h3><span class="label" style="color:rgba(255,255,255,.55)">Growth opportunity</span>
+              <p style="color:rgba(255,255,255,.78)">Just started working and managing their own money, not yet deeply tied to a traditional bank — more room for MariBank to become their primary bank.</p>
+            </div>
+          </div>
+        </div>
+        <p class="note">The brand expresses a young attitude — it doesn't segment users by age. Users 40+ remain the main source of deposits; the brand shift can't make them feel left behind.</p>
+
+        <h3 class="sub-h" id="q2"><span class="no">Q2</span>What we want users to see: approachable and leading</h3>
+        <p class="sub-p">We explored three visual directions for "young."</p>
+        <div class="dirs">
+          {directions.map((d) => (
+            <div class="dir">
+              <PlaceholderImage ratio="4/5" radius="14px" label={`${d.tag} mood board`} />
+              <h3>{d.title}</h3><p class="muted">{d.body}</p>
+            </div>
+          ))}
+        </div>
+        <div class="range">
+          <p class="sub-p" style="margin-bottom:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
+          <div class="axis" aria-hidden="true">
+            <div class="axis-track"></div>
+            <span class="axis-end axis-end--l">Approachable<small>I'm one of you</small></span>
+            <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
+            <span class="axis-dot" style="left:10%;border-color:var(--color-accent)"></span>
+            <span class="axis-dot" style="left:50%;border-color:var(--color-ink-soft)"></span>
+            <span class="axis-dot" style="left:90%"></span>
+          </div>
+          <div class="scenes">
+            {scenes.map((s) => (
+              <div class="scene">
+                <div class="scene-lean"><i class={`scene-dot--${s.lean}`}></i>{s.title}</div>
+                <h4>{s.context}</h4>
+                <p class="muted">{s.body}</p>
+              </div>
+            ))}
+          </div>
+          <p class="muted" style="font-size:13px;margin-top:var(--space-2)">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Memory -->
+    <section class="section case-chapter case-chapter--dark" id="memory">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">05 · Q3</span>Memory: how users remember us</p>
+          <h2>Distinctive brand assets, used consistently</h2>
+          <p class="sh-sub" style="color:rgba(255,255,255,.65)">Building on Byron Sharp's idea of Distinctive Brand Assets, we built three memory anchors for MariBank.</p>
+        </header>
+
+        <div class="jw">
+          <span class="jw-mark">just work</span>
+          <div>
+            <span class="label" style="color:var(--color-accent)">Memory anchor 1 · Signature mark</span>
+            <h3 style="font-size:26px;margin-top:8px">The handwritten mark "just work"</h3>
+            <p class="sub-p" style="color:rgba(255,255,255,.75);margin-top:12px">The script stands for an attitude: young, driven, full of life. "just work" is short for "it just works" — banking should be as effortless and reliable as a tool that simply works.</p>
+            <div class="rules">
+              <div><b>01</b><span>Set a minimum size so it stays legible.</span></div>
+              <div><b>02</b><span>The script is only used for the mark itself — body copy uses the standard typeface.</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery gallery--3" style="margin-top:var(--space-4)">
+          <PlaceholderImage ratio="1/1" radius="14px" label="just work icon" />
+          <PlaceholderImage ratio="1/1" radius="14px" label="Applied example" />
+          <PlaceholderImage ratio="1/1" radius="14px" label="Applied example" />
+        </div>
+
+        <h3 class="sub-h" style="color:#fff"><span class="no">2</span>Lens: a point of view that's ours</h3>
+        <p class="sub-p" style="color:rgba(255,255,255,.75)">A distinctive shooting angle paired with the signature mark brings a youthful energy and impact.</p>
+        <div class="gallery gallery--3">
+          <figure><PlaceholderImage ratio="4/5" radius="14px" label="Angle" /><figcaption>Angle</figcaption></figure>
+          <figure><PlaceholderImage ratio="4/5" radius="14px" label="Framing" /><figcaption>Framing</figcaption></figure>
+          <figure><PlaceholderImage ratio="4/5" radius="14px" label="Composition" /><figcaption>Composition</figcaption></figure>
+        </div>
+
+        <h3 class="sub-h" style="color:#fff"><span class="no">3</span>Storytelling</h3>
+        <p class="sub-p" style="color:rgba(255,255,255,.75)">A number is cold; a story or an attitude toward life is what gets remembered and shared. We turn product selling points into everyday scenes.</p>
+        <div class="stories">
+          {stories.map((s) => (
+            <div class="story story--dark">
+              <div class="story-copy">
+                <span class="label" style="color:rgba(255,255,255,.55)">{s.label}</span>
+                <h4 class="muted" style="color:rgba(255,255,255,.65)">{s.line}</h4>
+                <p class="story-quote">{s.quote}</p>
+                {s.note && <small class="muted" style="color:rgba(255,255,255,.5)">{s.note}</small>}
+              </div>
+              <PlaceholderImage ratio="16/9" radius="14px" label={`${s.line} key visual`} />
+            </div>
+          ))}
+        </div>
+
+        <h3 class="sub-h" style="color:#fff"><span class="no">4</span>How the assets work together</h3>
+        <p class="sub-p" style="color:rgba(255,255,255,.75)">The flagship brand carries emotion and attitude; individual products use concrete stories to carry the selling point. Mix the mark, the lens, and storytelling with intention — leave room to breathe, and don't stack every element onto one piece.</p>
+        <div class="gallery gallery--4">
+          <PlaceholderImage ratio="4/5" radius="14px" label="Flagship material" />
+          <PlaceholderImage ratio="4/5" radius="14px" label="Flagship material" />
+          <PlaceholderImage ratio="4/5" radius="14px" label="Product material" />
+          <PlaceholderImage ratio="4/5" radius="14px" label="Product material" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Visual parameters -->
+    <section class="section case-chapter case-chapter--center" id="params">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">06</span>Visual parameter layer</p>
+          <h2>Locked and flexible: part of the system repeats until it's remembered, part stays open for creativity</h2>
+        </header>
+        <div class="lockflex">
+          <div class="lf lf--lock">
+            <h3>Locked</h3><span class="muted" style="color:rgba(255,255,255,.6)">Guarantees brand unity</span>
+            <div class="chips">{lockedChips.map((c) => <span class="pill pill--dark">{c}</span>)}</div>
+          </div>
+          <div class="lf lf--flex">
+            <h3>Flexible</h3><span class="muted">Keeps room for creativity</span>
+            <div class="chips">{flexibleChips.map((c) => <span class="pill">{c}</span>)}</div>
+          </div>
+        </div>
+        <PlaceholderImage ratio="21/9" radius="20px" label="Visual parameter guideline overview" />
+      </div>
+    </section>
+
+    <!-- 07 AI-native execution -->
+    <section class="section case-chapter case-chapter--alt case-chapter--center" id="ai">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">07</span>AI-native execution</p>
+          <h2>People define the standard, the system executes it</h2>
+          <p class="sh-sub">This case focuses on how the brand standard gets defined and handed to AI to execute; the infrastructure and process changes sit in the Platform case.</p>
+        </header>
+
+        <h3 class="sub-h" style="margin-top:0"><span class="no">1</span>Knowledge base: single source of truth</h3>
+        <div class="kb">
+          <div class="kb-core">Brand knowledge base<small>Single source of truth</small></div>
+          <div class="kb-grid">
+            {kbNodes.map((n) => (
+              <div class={`kb-node ${n.hot ? "kb-node--hot" : ""}`}><b>{n.title}</b><span>{n.body}</span></div>
+            ))}
+          </div>
+        </div>
+        <div class="gallery gallery--4" style="margin-top:var(--space-3)">
+          <PlaceholderImage ratio="4/3" radius="14px" label="Knowledge base screenshot" />
+          <PlaceholderImage ratio="4/3" radius="14px" label="Knowledge base screenshot" />
+          <PlaceholderImage ratio="4/3" radius="14px" label="Knowledge base screenshot" />
+          <PlaceholderImage ratio="4/3" radius="14px" label="Knowledge base screenshot" />
+        </div>
+
+        <h3 class="sub-h"><span class="no">2</span>Multi-agent pipeline, with human review checkpoints</h3>
+        <p class="sub-p">Generates standardized brand operating assets (banners, microsites, online &amp; offline marketing material, short video) from the knowledge base, then hands off to the backend for publishing.</p>
+        <div class="flow">
+          <div class="flow-input"><b>Input · Google Sheet</b><span class="muted">Marketing fills in campaign rules, key selling points, and target metrics.</span></div>
+          {flowLanes.map((lane) => (
+            <div class="flow-lane">
+              <span class="flow-lane-name">{lane.name}</span>
+              <div class="flow-steps">
+                {lane.steps.map((s) => (
+                  <div class="flow-step"><span class="flow-step-phase">{s.phase}</span><b>{s.title}</b><p>{s.body}</p></div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div class="flow-review"><b>Review &amp; launch</b><span class="muted">Creative review, compliance review, then handed to the backend to publish.</span></div>
+        </div>
+        <div class="legend">
+          {reviewCheckpoints.map((c) => <span class="pill pill--accent">{c}</span>)}
+        </div>
+
+        <h3 class="sub-h"><span class="no">3</span>Principles for AI-generated people</h3>
+        <PlaceholderImage ratio="21/9" radius="20px" label="Principles for AI-generated people (full diagram)" />
+      </div>
+    </section>
+
+    <!-- 08 Works -->
+    <section class="section case-chapter case-chapter--center" id="works">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">08</span>Works showcase</p>
+          <h2>A sample of what the system produces</h2>
+        </header>
+        <div class="works">
+          {works.map((w) => (
+            <figure class="works-item"><PlaceholderImage ratio={w.ratio} radius="18px" label={w.title} /><figcaption><b>{w.title}</b></figcaption></figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Results -->
+    <section class="section case-chapter case-chapter--alt case-chapter--center" id="results">
+      <div class="wrap">
+        <header class="sh">
+          <p class="eyebrow"><span class="no">09</span>Results</p>
+        </header>
+        <div class="focus3">
+          {results.map((r) => (
+            <div class="focus-card">
+              <h3>{r.title}</h3>
+              <div class="chips chips--sm">{r.chips.map((c) => <span class="pill">{c}</span>)}</div>
+              <div class="pending">Pending</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Next project -->
+    <section class="section case-next">
+      <div class="wrap">
+        <a class="next-card" href="/work/maribank-homepage-redesign">
+          <p class="next-card-label">Next project</p>
+          <p class="next-card-title">Design — Maribank Homepage Redesign: Simplicity Is the Ultimate Sophistication</p>
+          <span class="next-card-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* This page swaps the site's muted terracotta accent for the same
+     brighter brand orange used on the Strategy case, scoped locally
+     so every other page keeps the global --color-accent. */
+  .case-page {
+    --color-accent: #ff6000;
+    --color-accent-soft: rgba(255, 96, 0, 0.1);
+  }
+
+  /* Hero */
+  .case-hero {
+    padding-top: var(--space-4);
+  }
+
+  .case-hero-center {
+    text-align: center;
+  }
+
+  .case-hero h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.15;
+  }
+
+  .case-subtitle {
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin-top: var(--space-3);
+    max-width: 44em;
+    margin-inline: auto;
+  }
+
+  .case-hero-banner-frame {
+    position: relative;
+    aspect-ratio: 21 / 9;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-top: var(--space-5);
+  }
+
+  .case-hero-banner-frame :global(.case-hero-banner-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Chapter shell */
+  .case-chapter--alt {
+    background: rgba(23, 20, 15, 0.025);
+  }
+
+  .case-chapter--dark {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .case-chapter--center .sh {
+    text-align: center;
+  }
+
+  .case-chapter--center .sh h2 {
+    margin-inline: auto;
+  }
+
+  .sh {
+    margin-bottom: var(--space-4);
+  }
+
+  .sh .no {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-right: 8px;
+  }
+
+  .case-chapter--dark .eyebrow {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .sh h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.35;
+    max-width: 26em;
+    margin-top: 10px;
+  }
+
+  .sh-sub {
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    max-width: 38em;
+    margin-top: var(--space-2);
+  }
+
+  .case-chapter--center .sh-sub {
+    margin-inline: auto;
+  }
+
+  .sub-p {
+    color: var(--color-ink-soft);
+    font-size: 16px;
+    max-width: 44em;
+    margin-inline: auto;
+  }
+
+  .case-chapter--dark .sub-p {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .sub-h {
+    font-size: 21px;
+    margin: var(--space-5) 0 var(--space-2);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    justify-content: center;
+  }
+
+  .sub-h .no {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .muted {
+    color: var(--color-ink-faint);
+  }
+
+  .note {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    color: var(--color-ink-faint);
+    max-width: 44em;
+    margin-inline: auto;
+  }
+
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    font-weight: 600;
+  }
+
+  /* Pills & chips */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 13px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    white-space: nowrap;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .pill b {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .pill--accent {
+    background: var(--color-accent-soft);
+    border-color: transparent;
+    color: var(--color-accent);
+  }
+
+  .pill--dark {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .chips--sm .pill {
+    font-size: 12px;
+    padding: 4px 11px;
+  }
+
+  .gallery {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .gallery--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .gallery figure {
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .gallery figcaption {
+    font-size: 12px;
+    color: var(--color-ink-faint);
+    text-align: center;
+  }
+
+  /* 01 Overview — reuses the Strategy page's ghost-number card recipe */
+  .focus3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .focus-card {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    text-align: left;
+  }
+
+  .case-chapter--alt .focus-card {
+    background: var(--color-bg);
+  }
+
+  .ghost-n {
+    font-weight: 200;
+    font-style: italic;
+    font-size: 54px;
+    line-height: 0.9;
+    color: var(--color-line);
+  }
+
+  .focus-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .focus-card p {
+    font-size: 15px;
+    color: var(--color-ink-soft);
+  }
+
+  .pending {
+    font-weight: 200;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--color-ink-faint);
+  }
+
+  /* 02 Brand element strategy */
+  .groups {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: var(--space-3);
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .group {
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .group--keep {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .group--own {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .swatch {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .swatch i {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--color-accent);
+    flex: none;
+  }
+
+  .owns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .owns > div {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 4px;
+  }
+
+  .owns b {
+    font-size: 15px;
+  }
+
+  .owns span {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .owns-mark {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--color-accent);
+  }
+
+  .weightbar {
+    margin-top: var(--space-3);
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-3) var(--space-4);
+    display: grid;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .weightbar-bar {
+    height: 12px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent) 20%, var(--color-ink) 100%);
+  }
+
+  .weightbar-ends {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    flex-wrap: wrap;
+  }
+
+  /* 03 Framework */
+  .layers {
+    display: grid;
+    gap: 0;
+  }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 12em minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: center;
+    border-radius: 20px;
+    padding: var(--space-3);
+    text-align: left;
+  }
+
+  .layer--top {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .layer--bottom {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .layer-who h3 {
+    font-size: 19px;
+    margin-top: 4px;
+  }
+
+  .layer-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .layer-step {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    padding: var(--space-2);
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .layer-step--dark {
+    background: #1c1d21;
+    border-color: #33353b;
+  }
+
+  .layer-step small {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 4px;
+    opacity: 0.65;
+  }
+
+  .layer-between {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+  }
+
+  .layer-between i {
+    width: 2px;
+    height: 24px;
+    background: var(--color-line);
+    display: block;
+  }
+
+  /* 04 Semantic layer — vs-grid is already a light/arrow/dark recipe,
+     reused for the positioning shift and the age-shift comparison. */
+  .vs-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .vs-side {
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+
+  .vs-side--old {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .vs-side--new {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .vs-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    font-weight: 600;
+  }
+
+  .vs-side--new .vs-label {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .vs-q {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .vs-mid {
+    display: grid;
+    place-content: center;
+    font-weight: 300;
+    font-size: 32px;
+    color: var(--color-ink-faint);
+  }
+
+  .kv p {
+    font-size: 14px;
+    margin-top: 4px;
+    color: var(--color-ink-soft);
+  }
+
+  .qnav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: var(--space-2);
+  }
+
+  .qnav .pill:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: #fff;
+  }
+
+  .shift {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: var(--space-3);
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .stats {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .stat {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 6px;
+  }
+
+  .stat-n {
+    font-weight: 200;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .ages {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .age {
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    height: 100%;
+  }
+
+  .age--old {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .age--young {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .age h3 {
+    font-size: 19px;
+  }
+
+  .age p {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+
+  .dirs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    text-align: left;
+  }
+
+  .dirs h3 {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+
+  .range {
+    margin-top: var(--space-5);
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-4);
+    text-align: left;
+  }
+
+  .axis {
+    position: relative;
+    height: 80px;
+    margin: 0 8% var(--space-3);
+  }
+
+  .axis-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, var(--color-ink));
+  }
+
+  .axis-end {
+    position: absolute;
+    top: 0;
+    font-weight: 900;
+    font-size: 18px;
+    transform: translateX(-50%);
+    background: rgba(23, 20, 15, 0.04);
+    padding: 0 8px;
+  }
+
+  .axis-end--l {
+    left: 0;
+  }
+
+  .axis-end--r {
+    left: 100%;
+  }
+
+  .axis-end small {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--color-ink-faint);
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .axis-dot {
+    position: absolute;
+    top: 43px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 4px solid var(--color-ink);
+    transform: translateX(-50%);
+  }
+
+  .scenes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .scene {
+    background: var(--color-bg);
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .scene-lean {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .scene-lean i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .scene-dot--orange {
+    background: var(--color-accent);
+  }
+
+  .scene-dot--graphite {
+    background: var(--color-ink-soft);
+  }
+
+  .scene-dot--ink {
+    background: var(--color-ink);
+  }
+
+  .scene h4 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .scene p {
+    font-size: 13px;
+  }
+
+  /* 05 Memory (dark band) */
+  .jw {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-4);
+    align-items: center;
+    text-align: left;
+  }
+
+  .jw-mark {
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    color: var(--color-accent);
+    display: inline-block;
+  }
+
+  .rules {
+    display: grid;
+    gap: 10px;
+    margin-top: var(--space-2);
+  }
+
+  .rules div {
+    display: grid;
+    grid-template-columns: 2.5em minmax(0, 1fr);
+    gap: 8px;
+    border-top: 1px solid #2e3036;
+    padding-top: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .rules b {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .stories {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--space-3);
+    align-items: center;
+    border-radius: 20px;
+    padding: var(--space-3);
+    text-align: left;
+  }
+
+  .story--dark {
+    background: #1c1d21;
+  }
+
+  .story-copy {
+    display: grid;
+    gap: 6px;
+  }
+
+  .story-quote {
+    font-size: clamp(19px, 2.4vw, 24px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  /* 06 Visual parameters */
+  .lockflex {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    text-align: left;
+  }
+
+  .lf {
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .lf--lock {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .lf--flex {
+    background: rgba(23, 20, 15, 0.04);
+  }
+
+  .lf h3 {
+    font-size: 20px;
+  }
+
+  /* 07 AI-native execution */
+  .kb {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: center;
+  }
+
+  .kb-core {
+    background: var(--color-ink);
+    color: #fff;
+    border-radius: 20px;
+    padding: var(--space-3) var(--space-4);
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .kb-core small {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  .kb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .kb-node {
+    background: rgba(23, 20, 15, 0.04);
+    border: 1px solid transparent;
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .kb-node--hot {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  .kb-node b {
+    font-size: 15px;
+  }
+
+  .kb-node span {
+    font-size: 13px;
+    color: var(--color-ink-soft);
+  }
+
+  .flow {
+    display: grid;
+    gap: var(--space-2);
+    text-align: left;
+  }
+
+  .flow-input,
+  .flow-review {
+    border: 1.5px dashed var(--color-ink);
+    border-radius: 14px;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  .flow-lane {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 18px;
+    padding: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .flow-lane-name {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .flow-step {
+    background: var(--color-bg);
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 4px;
+  }
+
+  .flow-step-phase {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .flow-step p {
+    font-size: 13px;
+    color: var(--color-ink-soft);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: var(--space-3);
+  }
+
+  /* 08 Works */
+  .works {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--space-3);
+  }
+
+  .works-item {
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .works-item figcaption {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  /* Next project */
+  .case-next {
+    padding-top: var(--space-5);
+  }
+
+  .next-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-radius: 28px;
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .next-card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .next-card-title {
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 700;
+    max-width: 640px;
+  }
+
+  .next-card-arrow {
+    font-size: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  .next-card:hover .next-card-arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 900px) {
+    .groups,
+    .layer,
+    .vs-grid,
+    .shift,
+    .jw,
+    .story,
+    .lockflex,
+    .works {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .vs-mid {
+      transform: rotate(90deg);
+    }
+
+    .focus3,
+    .dirs,
+    .scenes,
+    .owns,
+    .gallery--3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .gallery--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ages {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ages .vs-mid {
+      justify-self: center;
+    }
+
+    .flow-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .kb-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-hero-banner-frame {
+      aspect-ratio: 4 / 5;
+    }
+  }
+</style>

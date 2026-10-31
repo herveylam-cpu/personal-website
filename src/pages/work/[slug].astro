@@ -4,11 +4,10 @@ import PlaceholderImage from "../../components/PlaceholderImage.astro";
 import { workCases } from "../../data/work";
 
 export function getStaticPaths() {
-  // "monee-ecosystem-strategy" has its own dedicated page
-  // (monee-ecosystem-strategy.astro) now — excluded here so the two
+  // Slugs with their own dedicated page file — excluded here so they
   // don't collide over the same URL.
   return workCases
-    .filter((work) => work.slug !== "monee-ecosystem-strategy")
+    .filter((work) => !["monee-ecosystem-strategy", "maribank-ai-native-brand"].includes(work.slug))
     .map((work) => ({
       params: { slug: work.slug },
       props: { work },
