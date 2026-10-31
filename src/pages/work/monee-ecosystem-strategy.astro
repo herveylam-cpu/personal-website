@@ -219,27 +219,28 @@ const measurementRows = [
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">01</span>Business background</p>
-        <h2>Sea's third business: from a gaming prepaid-card network to a financial platform spanning payments, credit, banking, wealth, and insurance</h2>
+        <h2>
+          Sea Limited is made up of three businesses: Garena (gaming),
+          Shopee (e-commerce), and Monee (digital finance). Monee
+          began as a prepaid card network for Garena's gamers, then
+          grew through Shopee into a financial platform spanning
+          payments, credit, banking, wealth management, and
+          insurance.
+        </h2>
       </header>
-      <div class="sea-grid">
-        <div class="org" role="img" aria-label="Sea Limited branches into Garena (gaming), Shopee (e-commerce), and Monee (digital finance, highlighted), covering payments, credit, banking, wealth, and insurance.">
-          <div class="org-root">Sea Limited</div>
-          <div class="org-kids">
-            <div class="bubble">Garena<small>Gaming</small></div>
-            <div class="bubble">Shopee<small>E-commerce</small></div>
-            <div class="bubble bubble--hot">Monee<small>Digital finance</small></div>
-          </div>
-          <div class="org-chips">
-            <span class="pill pill--accent">Payments</span>
-            <span class="pill pill--accent">Credit</span>
-            <span class="pill pill--accent">Banking</span>
-            <span class="pill pill--accent">Wealth</span>
-            <span class="pill pill--accent">Insurance</span>
-          </div>
+      <div class="org" role="img" aria-label="Sea Limited branches into Garena (gaming), Shopee (e-commerce), and Monee (digital finance, highlighted), covering payments, credit, banking, wealth, and insurance.">
+        <div class="org-root">Sea Limited</div>
+        <div class="org-kids">
+          <div class="bubble">Garena<small>Gaming</small></div>
+          <div class="bubble">Shopee<small>E-commerce</small></div>
+          <div class="bubble bubble--hot">Monee<small>Digital finance</small></div>
         </div>
-        <div class="prose">
-          <p>Sea Limited is made up of three businesses: Garena (gaming), Shopee (e-commerce), and Monee (digital finance).</p>
-          <p>Monee began as a prepaid card network for Garena's gamers, then grew through Shopee into a financial platform spanning payments, credit, banking, wealth management, and insurance.</p>
+        <div class="org-chips">
+          <span class="pill pill--accent">Payments</span>
+          <span class="pill pill--accent">Credit</span>
+          <span class="pill pill--accent">Banking</span>
+          <span class="pill pill--accent">Wealth</span>
+          <span class="pill pill--accent">Insurance</span>
         </div>
       </div>
     </div>
@@ -845,15 +846,6 @@ const measurementRows = [
     margin-top: 10px;
   }
 
-  .prose {
-    max-width: 44em;
-    color: var(--color-ink-soft);
-    font-size: 16px;
-    line-height: 1.7;
-    display: grid;
-    gap: 12px;
-  }
-
   .sub-p {
     color: var(--color-ink-soft);
     font-size: 16px;
@@ -967,17 +959,12 @@ const measurementRows = [
   }
 
   /* 01 Business background */
-  .sea-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--space-5);
-    align-items: center;
-  }
-
   .org {
     display: grid;
     gap: var(--space-3);
     justify-items: center;
+    max-width: 480px;
+    margin-inline: auto;
   }
 
   .org-root {
@@ -2095,7 +2082,6 @@ const measurementRows = [
   }
 
   @media (max-width: 900px) {
-    .sea-grid,
     .belief-grid,
     .divider,
     .tree {
