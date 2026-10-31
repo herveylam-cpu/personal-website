@@ -1276,27 +1276,35 @@ const measurementRows = [
   }
 
   /* 04 Growth path */
+  /* One merged card for all three phases — was three separate cards
+     with a gap between them; now a single rounded outline with a
+     thin divider between each phase instead. Phases 1-2 (the past)
+     stay light, phase 3 (the current one, flagged via p.here) is
+     dark to stand out. */
   .phases {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-3);
+    border-radius: 20px;
+    overflow: hidden;
   }
 
-  /* One merged card per phase — was a chevron header strip + a
-     separate card below; phases 1-2 (the past) stay light, phase 3
-     (the current one, flagged via p.here) is dark to stand out. */
   .phase {
-    border-radius: 20px;
     padding: var(--space-3);
     background: rgba(23, 20, 15, 0.04);
     display: grid;
     gap: 8px;
     align-content: start;
+    border-right: 1px solid var(--color-line);
+  }
+
+  .phase:last-child {
+    border-right: none;
   }
 
   .phase--active {
     background: var(--color-ink);
     color: #fff;
+    border-right-color: transparent;
   }
 
   .phase-tag-row {
@@ -2195,7 +2203,23 @@ const measurementRows = [
       grid-template-columns: 1fr;
     }
 
-    .phases,
+    .phases {
+      grid-template-columns: 1fr;
+    }
+
+    .phase {
+      border-right: none;
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .phase:last-child {
+      border-bottom: none;
+    }
+
+    .phase--active {
+      border-bottom-color: transparent;
+    }
+
     .stages {
       grid-template-columns: 1fr;
       gap: 16px;
