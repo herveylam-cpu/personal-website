@@ -1116,9 +1116,20 @@ const measurementRows = [
 
   .flowline {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-size: 13px;
+  }
+
+  /* "User need" is wide enough that, combined with the arrow and
+     "Product", it was overflowing past the card's right padding
+     while the left side stayed flush — scoped smaller pills here
+     (not a global .pill change) fit it back inside the card with
+     even spacing on both sides. */
+  .flowline .pill {
+    padding: 6px 11px;
+    font-size: 12px;
   }
 
   .vs-note {
