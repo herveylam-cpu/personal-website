@@ -370,18 +370,20 @@ const measurementRows = [
           </div>
         ))}
       </div>
-      <p class="sub-p">That shift defines three priorities for our design strategy:</p>
-      <div class="arrow-down" aria-hidden="true">
-        <svg viewBox="0 0 24 44" xmlns="http://www.w3.org/2000/svg">
+      <div class="arrow-block">
+        <p class="sub-p arrow-caption">That shift defines three priorities for our design strategy:</p>
+        <div class="arrow-down" aria-hidden="true">
+        <svg viewBox="0 0 36 66" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="arrowFade" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="var(--color-ink-faint)" stop-opacity="0.1" />
               <stop offset="100%" stop-color="var(--color-ink-faint)" stop-opacity="0.9" />
             </linearGradient>
           </defs>
-          <line x1="12" y1="2" x2="12" y2="32" stroke="url(#arrowFade)" stroke-width="2" />
-          <path d="M3 25 L12 36 L21 25" stroke="var(--color-ink-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          <line x1="18" y1="3" x2="18" y2="48" stroke="url(#arrowFade)" stroke-width="2.5" />
+          <path d="M4.5 38 L18 54 L31.5 38" stroke="var(--color-ink-faint)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+        </div>
       </div>
       <div class="focus3">
         {strategyPriorities.map((s) => (
@@ -1337,15 +1339,23 @@ const measurementRows = [
     white-space: nowrap;
   }
 
+  .arrow-block {
+    text-align: center;
+  }
+
+  .arrow-caption {
+    margin-inline: auto;
+  }
+
   .arrow-down {
     display: flex;
     justify-content: center;
-    margin-top: var(--space-3);
+    margin-top: var(--space-2);
   }
 
   .arrow-down svg {
-    width: 24px;
-    height: 44px;
+    width: 36px;
+    height: 66px;
   }
 
   .focus3 {
