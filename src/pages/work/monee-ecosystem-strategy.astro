@@ -371,6 +371,18 @@ const measurementRows = [
         ))}
       </div>
       <p class="sub-p">That shift defines three priorities for our design strategy:</p>
+      <div class="arrow-down" aria-hidden="true">
+        <svg viewBox="0 0 24 44" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="arrowFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--color-ink-faint)" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="var(--color-ink-faint)" stop-opacity="0.9" />
+            </linearGradient>
+          </defs>
+          <line x1="12" y1="2" x2="12" y2="32" stroke="url(#arrowFade)" stroke-width="2" />
+          <path d="M3 25 L12 36 L21 25" stroke="var(--color-ink-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
       <div class="focus3">
         {strategyPriorities.map((s) => (
           <div class="focus-card">
@@ -1325,14 +1337,28 @@ const measurementRows = [
     white-space: nowrap;
   }
 
+  .arrow-down {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-3);
+  }
+
+  .arrow-down svg {
+    width: 24px;
+    height: 44px;
+  }
+
   .focus3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-3);
-    margin-top: var(--space-4);
+    margin-top: var(--space-2);
   }
 
   .focus-card {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-3);
     display: grid;
     gap: 10px;
   }
@@ -1346,11 +1372,12 @@ const measurementRows = [
   }
 
   .focus-card h3 {
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: 700;
   }
 
   .focus-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-ink-soft);
   }
 
