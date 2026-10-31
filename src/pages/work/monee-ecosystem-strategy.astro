@@ -83,6 +83,7 @@ const ecoNodes = [
   {
     role: "Revenue engine",
     name: "SPayLater & Credit",
+    dot: "orange",
     chips: ["BNPL", "Cash loans", "Seller financing"],
     body: "Monee's main source of revenue and profit",
     metrics: "Credit-to-first-use conversion, GMV penetration, on-time repayment rate",
@@ -90,6 +91,7 @@ const ecoNodes = [
   {
     role: "Long-term growth engine",
     name: "MariBank",
+    dot: "orange",
     chips: ["Savings", "Fixed deposits", "Credit cards", "Cash loans"],
     body: "Converts traffic into high-value, loyal users with low-cost funding",
     metrics: "Deposit balance, products per household, primary-bank metrics",
@@ -97,6 +99,7 @@ const ecoNodes = [
   {
     role: "Asset retention",
     name: "Investment",
+    dot: "green",
     chips: ["Mari Invest funds", "Stock trading", "Gold"],
     body: "Attracts wealthier users, deepens asset retention",
     metrics: "AUM, investor conversion rate",
@@ -104,6 +107,7 @@ const ecoNodes = [
   {
     role: "Transaction coverage",
     name: "Insurance",
+    dot: "blue",
     chips: ["Product protection", "Digital product insurance"],
     body: "Supplementary coverage in transaction moments, lifts order value",
     metrics: "Attach rate, claims satisfaction",
@@ -419,7 +423,7 @@ const measurementRows = [
           </div>
         </div>
         <div class="eco-hub">
-          <span class="eco-role eco-role--hub"><i></i>Traffic gateway</span>
+          <span class="eco-role eco-role--hub"><i class="eco-dot--orange"></i>Traffic gateway</span>
           <div class="eco-hub-name">ShopeePay</div>
           <div class="chips chips--sm">
             <span class="pill">E-wallet</span><span class="pill">In/out-of-app payment</span><span class="pill">QR scan</span><span class="pill">Bill payment</span>
@@ -430,7 +434,7 @@ const measurementRows = [
         <div class="eco-branch">
           {ecoNodes.map((n) => (
             <div class="eco-node">
-              <span class="eco-role"><i></i>{n.role}</span>
+              <span class="eco-role"><i class={`eco-dot--${n.dot}`}></i>{n.role}</span>
               <div class="eco-node-name">{n.name}</div>
               <div class="chips chips--sm">{n.chips.map((c) => <span class="pill">{c}</span>)}</div>
               <p class="eco-node-desc">{n.body}</p>
@@ -1458,8 +1462,7 @@ const measurementRows = [
   }
 
   .eco-hub {
-    background: var(--color-bg);
-    border: 2px solid var(--color-ink);
+    background: rgba(23, 20, 15, 0.025);
     border-radius: 24px;
     padding: var(--space-3) var(--space-4);
     max-width: 560px;
@@ -1487,11 +1490,19 @@ const measurementRows = [
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: currentColor;
+    background: var(--color-ink-faint);
   }
 
-  .eco-role--hub {
-    color: var(--color-accent);
+  .eco-dot--orange {
+    background: var(--color-accent) !important;
+  }
+
+  .eco-dot--green {
+    background: #1fa667 !important;
+  }
+
+  .eco-dot--blue {
+    background: #2f6fed !important;
   }
 
   .eco-hub-desc {
