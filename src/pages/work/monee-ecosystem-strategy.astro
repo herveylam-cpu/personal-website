@@ -774,12 +774,17 @@ const measurementRows = [
 </BaseLayout>
 
 <style>
-  /* Hero: centered headline/lede/CTA/lockup, then a full-width
-     banner image below — per the reference layout. */
+  /* Hero: centered headline + lede, then a full-width banner image
+     below — per the reference layout. The text block matches the
+     banner's own width (the .wrap below it), rather than a narrower
+     centered column, and the section sits closer to the header than
+     a standard .section's padding-block would put it. */
+  .case-hero {
+    padding-top: var(--space-4);
+  }
+
   .case-hero-center {
     text-align: center;
-    max-width: 760px;
-    margin-inline: auto;
   }
 
   .case-hero h1 {
