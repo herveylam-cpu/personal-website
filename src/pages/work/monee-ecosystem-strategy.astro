@@ -359,16 +359,14 @@ const measurementRows = [
         <h2>Monee is moving from "a financial matrix inside Shopee" toward "an independent financial ecosystem"</h2>
       </header>
       <div class="phases">
-        {phases.map((p, i) => (
-          <div class="phase">
-            <div class={`phase-chev phase-chev--${i + 1}`}>
-              {p.tag}
+        {phases.map((p) => (
+          <div class={`phase ${p.here ? "phase--active" : ""}`}>
+            <div class="phase-tag-row">
+              <span class="phase-tag">{p.tag}</span>
               {p.here && <span class="here-badge">We are here</span>}
             </div>
-            <div class="phase-body">
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </div>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
           </div>
         ))}
       </div>
@@ -1267,57 +1265,53 @@ const measurementRows = [
   .phases {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
+    gap: var(--space-3);
   }
 
-  .phase-chev {
-    height: 62px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 36px 0 24px;
-    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%, 12px 50%);
-    font-weight: 600;
-    font-size: 16px;
+  /* One merged card per phase — was a chevron header strip + a
+     separate card below; phases 1-2 (the past) stay light, phase 3
+     (the current one, flagged via p.here) is dark to stand out. */
+  .phase {
+    border-radius: 20px;
+    padding: var(--space-3);
+    background: rgba(23, 20, 15, 0.04);
+    display: grid;
+    gap: 8px;
+    align-content: start;
   }
 
-  .phase:first-child .phase-chev {
-    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
-    border-radius: 14px 0 0 14px;
-  }
-
-  .phase-chev--1 {
-    background: rgba(23, 20, 15, 0.06);
-  }
-
-  .phase-chev--2 {
-    background: var(--color-ink-soft);
-    color: #fff;
-  }
-
-  .phase-chev--3 {
+  .phase--active {
     background: var(--color-ink);
     color: #fff;
   }
 
-  .phase-body {
-    background: rgba(23, 20, 15, 0.025);
-    border-radius: 16px;
-    margin-top: 12px;
-    margin-right: 6px;
-    padding: var(--space-2);
-    display: grid;
-    gap: 6px;
+  .phase-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .phase-body h3 {
+  .phase-tag {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .phase h3 {
     font-size: 17px;
     font-weight: 600;
+    margin-top: 4px;
   }
 
-  .phase-body p {
-    font-size: 13px;
+  .phase p {
+    font-size: 14px;
     color: var(--color-ink-faint);
+  }
+
+  .phase--active p {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .here-badge {
@@ -2170,15 +2164,12 @@ const measurementRows = [
       gap: 16px;
     }
 
-    .phase-chev,
-    .phase:first-child .phase-chev,
     .stage-chev,
     .stage:first-child .stage-chev {
       clip-path: none;
       border-radius: 14px;
     }
 
-    .phase-body,
     .stage-body {
       margin-right: 0;
     }
