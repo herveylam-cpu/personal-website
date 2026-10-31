@@ -1297,6 +1297,10 @@ const measurementRows = [
     border-right: 1px solid var(--color-line);
   }
 
+  .phase:first-child {
+    border-right: none;
+  }
+
   .phase:last-child {
     border-right: none;
   }
@@ -1349,6 +1353,7 @@ const measurementRows = [
 
   .arrow-block {
     text-align: center;
+    margin-top: var(--space-4);
   }
 
   .arrow-caption {
@@ -1358,7 +1363,7 @@ const measurementRows = [
   .arrow-down {
     display: flex;
     justify-content: center;
-    margin-top: var(--space-2);
+    margin-top: 8px;
   }
 
   .arrow-down svg {
@@ -2210,6 +2215,10 @@ const measurementRows = [
     .phase {
       border-right: none;
       border-bottom: 1px solid var(--color-line);
+    }
+
+    .phase:first-child {
+      border-bottom: none;
     }
 
     .phase:last-child {
