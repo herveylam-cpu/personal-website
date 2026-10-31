@@ -13,18 +13,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PlaceholderImage from "../../components/PlaceholderImage.astro";
 
-const toc = [
-  { id: "background", n: "01", label: "Business background" },
-  { id: "belief", n: "02", label: "Our view on fintech" },
-  { id: "users", n: "03", label: "Who we serve" },
-  { id: "path", n: "04", label: "Growth path" },
-  { id: "eco", n: "05", label: "Ecosystem overview" },
-  { id: "markets", n: "06", label: "Market segmentation" },
-  { id: "principles", n: "07", label: "Experience principles" },
-  { id: "products", n: "08", label: "Product strategy" },
-  { id: "measure", n: "09", label: "Measuring impact" },
-];
-
 const personas = [
   {
     avatar: "a",
@@ -215,16 +203,6 @@ const measurementRows = [
         </p>
       </div>
       <PlaceholderImage ratio="9/19" radius="28px" label="Hero visual — product composite" class="case-hero-phone" />
-    </div>
-  </section>
-
-  <!-- TOC pills -->
-  <section class="section case-toc-band">
-    <div class="wrap">
-      <p class="eyebrow">Contents</p>
-      <nav class="toc-pills" aria-label="Sections">
-        {toc.map((t) => <a href={`#${t.id}`}><span>{t.n}</span>{t.label}</a>)}
-      </nav>
     </div>
   </section>
 
@@ -825,40 +803,6 @@ const measurementRows = [
   .case-hero-phone {
     justify-self: center;
     max-width: 260px;
-  }
-
-  /* TOC pills */
-  .case-toc-band {
-    padding-block: var(--space-3) var(--space-4);
-  }
-
-  .toc-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: var(--space-2);
-  }
-
-  .toc-pills a {
-    display: inline-flex;
-    gap: 8px;
-    align-items: baseline;
-    border: 1px solid var(--color-line);
-    border-radius: 100px;
-    padding: 8px 16px;
-    font-size: 13px;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .toc-pills a span {
-    font-weight: 600;
-    color: var(--color-accent);
-  }
-
-  .toc-pills a:hover {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-    color: #fff;
   }
 
   /* Chapter shell */
