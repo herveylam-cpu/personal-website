@@ -179,6 +179,7 @@ const measurementRows = [
   title="Monee Ecosystem & Product Design Strategy — Lin Hongyu"
   description="How Monee's design team is building an independent financial ecosystem out of Shopee, with a clear role, principles, and design levers for every product."
 >
+  <div class="case-page">
   <!-- Flag icon sprite, reused by the persona and market cards. Flat
        geometric renditions (not photographic), ported as-is. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -802,9 +803,18 @@ const measurementRows = [
       </a>
     </div>
   </section>
+  </div>
 </BaseLayout>
 
 <style>
+  /* This page swaps the site's muted terracotta accent for a
+     brighter brand orange, scoped locally so every other page keeps
+     the global --color-accent. */
+  .case-page {
+    --color-accent: #ff6000;
+    --color-accent-soft: rgba(255, 96, 0, 0.1);
+  }
+
   /* Hero: centered headline + lede, then a full-width banner image
      below — per the reference layout. The text block matches the
      banner's own width (the .wrap below it), rather than a narrower
