@@ -13,6 +13,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PlaceholderImage from "../../components/PlaceholderImage.astro";
+import PhoneFrame from "../../components/PhoneFrame.astro";
 import strategyImage from "../../assets/work/strategy.png";
 
 const personas = [
@@ -525,9 +526,9 @@ const measurementRows = [
           <p>Embed ShopeePay into payment moments inside and outside Shopee, so users notice it every time they pay.</p>
         </div>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="In-app checkout" /><figcaption>In-app checkout</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Off-platform merchant payment" /><figcaption>Off-platform merchant payment</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="QR scan & bill pay" /><figcaption>QR scan & bill pay</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="In-app checkout" /></PhoneFrame><figcaption>In-app checkout</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Off-platform merchant payment" /></PhoneFrame><figcaption>Off-platform merchant payment</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="QR scan & bill pay" /></PhoneFrame><figcaption>QR scan & bill pay</figcaption></figure>
         </div>
       </div>
 
@@ -542,9 +543,9 @@ const measurementRows = [
           <div class="bullet-card"><h4>Reward</h4><p>Borrow e-commerce growth tactics to lift engagement, within the bounds of responsible rewarding.</p></div>
         </div>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Funding source switch" /><figcaption>Funding source switch</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Simplified checkout" /><figcaption>Simplified checkout</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Reward moment" /><figcaption>Reward moment</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Funding source switch" /></PhoneFrame><figcaption>Funding source switch</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Simplified checkout" /></PhoneFrame><figcaption>Simplified checkout</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Reward moment" /></PhoneFrame><figcaption>Reward moment</figcaption></figure>
         </div>
       </div>
 
@@ -560,13 +561,13 @@ const measurementRows = [
             <p>Separating soft conversion (content, perks) from hard conversion (direct application entry points).</p>
             <div class="chips" style="margin-top:6px"><span class="pill pill--blue">Soft conversion</span><span class="pill pill--accent">Hard conversion</span></div>
           </div>
-          <figure class="phone-row phone-row--single"><PlaceholderImage ratio="9/19" radius="20px" label="ShopeePay home" /><figcaption>ShopeePay home</figcaption></figure>
+          <figure class="phone-row phone-row--single"><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="ShopeePay home" /></PhoneFrame><figcaption>ShopeePay home</figcaption></figure>
         </div>
         <p class="split-note"><span class="label">Landing pages</span> designed around reach, understanding, and conversion.</p>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Reach" /><figcaption>Step 1 — Reach</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Understanding" /><figcaption>Step 2 — Understanding</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Conversion" /><figcaption>Step 3 — Conversion</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Reach" /></PhoneFrame><figcaption>Step 1 — Reach</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Understanding" /></PhoneFrame><figcaption>Step 2 — Understanding</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Conversion" /></PhoneFrame><figcaption>Step 3 — Conversion</figcaption></figure>
         </div>
       </div>
 
@@ -599,9 +600,9 @@ const measurementRows = [
           <p>Shortening the path from getting a credit line to first use.</p>
         </div>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Product-page exposure" /><figcaption>Product-page exposure</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Cart & checkout" /><figcaption>Cart & checkout</figcaption></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Installment picker" /><figcaption>Installment picker</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Product-page exposure" /></PhoneFrame><figcaption>Product-page exposure</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Cart & checkout" /></PhoneFrame><figcaption>Cart & checkout</figcaption></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Installment picker" /></PhoneFrame><figcaption>Installment picker</figcaption></figure>
         </div>
       </div>
 
@@ -612,7 +613,7 @@ const measurementRows = [
             <h4 class="split-h4">Cross-sell &amp; promotion</h4>
             <p>SPayLater home redesign: efficient cross-sell of goods and add-on products.</p>
           </div>
-          <figure class="phone-row phone-row--single"><PlaceholderImage ratio="9/19" radius="20px" label="SPayLater home redesign" /><figcaption>SPayLater home redesign</figcaption></figure>
+          <figure class="phone-row phone-row--single"><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="SPayLater home redesign" /></PhoneFrame><figcaption>SPayLater home redesign</figcaption></figure>
         </div>
       </div>
     </div>
@@ -654,7 +655,7 @@ const measurementRows = [
               <div class="kv"><span class="label">Experience milestones</span><div class="chips chips--sm">{s.milestones.map((m) => <span class="pill pill--blue">{m}</span>)}</div></div>
               <div class="phone-row phone-row--compact">
                 {s.screens.map((sc) => (
-                  <figure><PlaceholderImage ratio="9/19" radius="14px" label={sc} /></figure>
+                  <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="14px" label={sc} /></PhoneFrame></figure>
                 ))}
               </div>
             </div>
@@ -671,15 +672,15 @@ const measurementRows = [
           <div class="duo-card">
             <h4>Clear-goal users</h4>
             <p>A direct entry point straight to the product.</p>
-            <figure class="phone-row phone-row--single"><PlaceholderImage ratio="9/19" radius="20px" label="Direct entry point" /></figure>
+            <figure class="phone-row phone-row--single"><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Direct entry point" /></PhoneFrame></figure>
           </div>
           <div class="duo-card">
             <h4>Unclear-goal users</h4>
             <p>Loosely matched via Shopee perks and the mission center.</p>
             <div class="phone-row phone-row--compact">
-              <figure><PlaceholderImage ratio="9/19" radius="14px" label="Shopee perks" /></figure>
-              <figure><PlaceholderImage ratio="9/19" radius="14px" label="Mission center" /></figure>
-              <figure><PlaceholderImage ratio="9/19" radius="14px" label="Match result" /></figure>
+              <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="14px" label="Shopee perks" /></PhoneFrame></figure>
+              <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="14px" label="Mission center" /></PhoneFrame></figure>
+              <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="14px" label="Match result" /></PhoneFrame></figure>
             </div>
           </div>
         </div>
@@ -709,9 +710,9 @@ const measurementRows = [
             keeps the product line lean.
           </p>
           <div class="phone-row">
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="Wealth home" /></figure>
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="Asset class & risk-return map" /></figure>
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="Stock trading" /></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Wealth home" /></PhoneFrame></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Asset class & risk-return map" /></PhoneFrame></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Stock trading" /></PhoneFrame></figure>
           </div>
         </div>
         <div class="need">
@@ -723,9 +724,9 @@ const measurementRows = [
           </div>
           <p>Rewards that are simple to calculate (credit card cashback, transparent exchange rates); flows as short as compliance allows; one job per screen.</p>
           <div class="phone-row">
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="Credit card cashback" /></figure>
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="Transparent FX" /></figure>
-            <figure><PlaceholderImage ratio="9/19" radius="20px" label="One job per screen" /></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Credit card cashback" /></PhoneFrame></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Transparent FX" /></PhoneFrame></figure>
+            <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="One job per screen" /></PhoneFrame></figure>
           </div>
         </div>
       </div>
@@ -749,9 +750,9 @@ const measurementRows = [
           <h3>Build habits, drive repeat purchase</h3>
         </div>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></PhoneFrame></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></PhoneFrame></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></PhoneFrame></figure>
         </div>
       </div>
       <div class="lever">
@@ -761,10 +762,10 @@ const measurementRows = [
           <p>e.g. an insurance product explainer, a digital-product (DP) train ticket.</p>
         </div>
         <div class="phone-row">
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Insurance product intro" /></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="Coverage explainer" /></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="DP train ticket" /></figure>
-          <figure><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Insurance product intro" /></PhoneFrame></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="Coverage explainer" /></PhoneFrame></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="DP train ticket" /></PhoneFrame></figure>
+          <figure><PhoneFrame><PlaceholderImage ratio="9/19" radius="20px" label="[To add]" /></PhoneFrame></figure>
         </div>
       </div>
     </div>

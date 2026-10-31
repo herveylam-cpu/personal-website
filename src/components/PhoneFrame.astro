@@ -1,0 +1,83 @@
+---
+// A minimal iPhone-style device frame: dark bezel, Dynamic Island,
+// and a home indicator. Wraps a 9:19 screen (a PlaceholderImage or
+// real screenshot) passed as the default slot, which is stretched to
+// fill the screen area regardless of its own sizing/radius props.
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["phone-frame", className]}>
+  <div class="phone-frame-screen">
+    <slot />
+    <span class="phone-frame-island" aria-hidden="true"></span>
+    <span class="phone-frame-home" aria-hidden="true"></span>
+  </div>
+</div>
+
+<style>
+  .phone-frame {
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    background: #0b0b0c;
+    border-radius: 19%;
+    padding: 3.2%;
+    box-sizing: border-box;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 12px 28px rgba(23, 20, 15, 0.16);
+  }
+
+  .phone-frame-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 15%;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .phone-frame-screen :global(.ph) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .phone-frame-screen :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .phone-frame-island {
+    position: absolute;
+    top: 3.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32%;
+    height: 3%;
+    background: #0b0b0c;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .phone-frame-home {
+    position: absolute;
+    bottom: 1.6%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34%;
+    height: 0.6%;
+    min-height: 3px;
+    background: rgba(23, 20, 15, 0.35);
+    border-radius: 100px;
+    z-index: 2;
+  }
+</style>
