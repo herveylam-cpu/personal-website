@@ -113,14 +113,14 @@ const ecoNodes = [
 const markets = [
   {
     tone: "bank",
-    title: "Licensed markets",
+    title: "Bank licensed markets",
     flags: ["sg", "id", "ph"],
     vehicle: "Digital bank",
     focus: "Capture deposits, move from secondary to primary bank, cross-sell",
   },
   {
     tone: "wallet",
-    title: "Wallet + credit",
+    title: "E-wallet + credit",
     flags: ["my", "th", "vn", "br"],
     vehicle: "ShopeePay app, off-platform SPayLater",
     focus: "Expand into offline & off-platform payments, build an off-platform credit experience",
@@ -455,7 +455,7 @@ const measurementRows = [
               <span class="label">Market type</span>
               <h3>{m.title}</h3>
               <div class="flags">
-                {m.flags.map((f) => <span class="flag"><svg><use href={`#f-${f}`}/></svg>{flagNames[f]}</span>)}
+                {m.flags.map((f) => <span class="flag" aria-label={flagNames[f]}><svg aria-hidden="true"><use href={`#f-${f}`}/></svg></span>)}
               </div>
             </div>
             <dl>
