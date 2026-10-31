@@ -424,22 +424,32 @@ const measurementRows = [
           </div>
         </div>
         <div class="eco-hub">
-          <span class="eco-role eco-role--hub"><i class="eco-dot--orange"></i>Traffic gateway</span>
-          <div class="eco-hub-name">ShopeePay</div>
-          <div class="chips chips--sm">
-            <span class="pill">E-wallet</span><span class="pill">In/out-of-app payment</span><span class="pill">QR scan</span><span class="pill">Bill payment</span>
+          <div class="eco-hub-copy">
+            <span class="eco-role eco-role--hub"><i class="eco-dot--orange"></i>Traffic gateway</span>
+            <div class="eco-hub-name">ShopeePay</div>
+            <div class="chips chips--sm">
+              <span class="pill">E-wallet</span><span class="pill">In/out-of-app payment</span><span class="pill">QR scan</span><span class="pill">Bill payment</span>
+            </div>
+            <p class="eco-hub-desc">Captures Shopee's traffic and distributes it to other financial products</p>
+            <p class="eco-hub-metrics"><span class="muted">Core metrics:</span> payment penetration, MAU, cross-sell conversion</p>
           </div>
-          <p class="eco-hub-desc">Captures Shopee's traffic and distributes it to other financial products</p>
-          <p class="eco-hub-metrics"><span class="muted">Core metrics:</span> payment penetration, MAU, cross-sell conversion</p>
+          <div class="eco-hub-phone">
+            <PhoneFrame><PlaceholderImage ratio="9/19" label="ShopeePay home" /></PhoneFrame>
+          </div>
         </div>
         <div class="eco-branch">
           {ecoNodes.map((n) => (
             <div class="eco-node">
-              <span class="eco-role"><i class={`eco-dot--${n.dot}`}></i>{n.role}</span>
-              <div class="eco-node-name">{n.name}</div>
-              <div class="chips chips--sm">{n.chips.map((c) => <span class="pill">{c}</span>)}</div>
-              <p class="eco-node-desc">{n.body}</p>
-              <div class="eco-node-metrics"><b>Core metrics</b>{n.metrics}</div>
+              <div class="eco-node-copy">
+                <span class="eco-role"><i class={`eco-dot--${n.dot}`}></i>{n.role}</span>
+                <div class="eco-node-name">{n.name}</div>
+                <div class="chips chips--sm">{n.chips.map((c) => <span class="pill">{c}</span>)}</div>
+                <p class="eco-node-desc">{n.body}</p>
+                <div class="eco-node-metrics"><b>Core metrics</b>{n.metrics}</div>
+              </div>
+              <div class="eco-node-phone">
+                <PhoneFrame><PlaceholderImage ratio="9/19" label={`${n.name} home`} /></PhoneFrame>
+              </div>
             </div>
           ))}
         </div>
@@ -1464,13 +1474,20 @@ const measurementRows = [
   .eco-hub {
     background: rgba(23, 20, 15, 0.025);
     border-radius: 24px;
-    padding: var(--space-3) var(--space-4);
-    max-width: 560px;
+    padding: var(--space-4);
+    max-width: 720px;
     width: 100%;
     display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: var(--space-4);
+    align-items: center;
+    text-align: left;
+  }
+
+  .eco-hub-copy {
+    display: grid;
     gap: 10px;
-    text-align: center;
-    justify-items: center;
+    justify-items: start;
   }
 
   .eco-hub-name {
@@ -1516,7 +1533,7 @@ const measurementRows = [
 
   .eco-branch {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
     width: 100%;
     position: relative;
@@ -1528,8 +1545,8 @@ const measurementRows = [
     content: "";
     position: absolute;
     top: 14px;
-    left: 12.5%;
-    right: 12.5%;
+    left: 25%;
+    right: 25%;
     border-top: 2px solid var(--color-line);
   }
 
@@ -1545,11 +1562,17 @@ const measurementRows = [
   .eco-node {
     background: rgba(23, 20, 15, 0.025);
     border-radius: 18px;
-    padding: var(--space-2) var(--space-2);
+    padding: var(--space-3);
+    display: grid;
+    grid-template-columns: 1fr 110px;
+    gap: var(--space-3);
+    align-items: center;
+    position: relative;
+  }
+
+  .eco-node-copy {
     display: grid;
     gap: 10px;
-    align-content: start;
-    position: relative;
   }
 
   .eco-node-name {
@@ -2245,6 +2268,23 @@ const measurementRows = [
     .eco-branch::after,
     .eco-node::before {
       display: none;
+    }
+
+    .eco-hub,
+    .eco-node {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .eco-hub-copy {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .eco-hub-phone,
+    .eco-node-phone {
+      width: 130px;
     }
 
     .focus3,
