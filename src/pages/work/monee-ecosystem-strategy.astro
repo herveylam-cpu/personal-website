@@ -89,8 +89,8 @@ const ecoNodes = [
   },
   {
     role: "Long-term growth engine",
-    name: "Digital Bank",
-    chips: ["MariBank (Singapore)", "SeaBank (Indonesia, Philippines)", "Savings", "Fixed deposits", "Credit cards", "Cash loans"],
+    name: "MariBank",
+    chips: ["Savings", "Fixed deposits", "Credit cards", "Cash loans"],
     body: "Converts traffic into high-value, loyal users with low-cost funding",
     metrics: "Deposit balance, products per household, primary-bank metrics",
   },
@@ -406,10 +406,17 @@ const measurementRows = [
       </header>
       <div class="eco">
         <div class="eco-source">
-          <span class="pill pill--solid">Inside-Shopee traffic</span>
-          <span class="pill">Outside-Shopee scenarios</span>
+          <div class="eco-source-item">
+            <span class="pill">Inside-Shopee traffic</span>
+            <span class="eco-source-line" aria-hidden="true"></span>
+            <span class="eco-source-arrow" aria-hidden="true"></span>
+          </div>
+          <div class="eco-source-item">
+            <span class="pill">Outside-Shopee scenarios</span>
+            <span class="eco-source-line" aria-hidden="true"></span>
+            <span class="eco-source-arrow" aria-hidden="true"></span>
+          </div>
         </div>
-        <div class="eco-vline" aria-hidden="true"></div>
         <div class="eco-hub">
           <span class="eco-role eco-role--hub"><i></i>Traffic gateway</span>
           <div class="eco-hub-name">ShopeePay</div>
@@ -1417,12 +1424,27 @@ const measurementRows = [
     gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
   }
 
-  .eco-vline {
+  .eco-source-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .eco-source-line {
     width: 2px;
-    height: 28px;
+    height: 20px;
     background: var(--color-line);
+  }
+
+  .eco-source-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--color-ink-faint);
   }
 
   .eco-hub {
@@ -1493,9 +1515,9 @@ const measurementRows = [
   .eco-branch::after {
     content: "";
     position: absolute;
-    top: -14px;
+    top: -28px;
     left: 50%;
-    height: 14px;
+    height: 42px;
     border-left: 2px solid var(--color-line);
   }
 
