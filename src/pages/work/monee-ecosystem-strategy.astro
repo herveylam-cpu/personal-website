@@ -227,11 +227,23 @@ const measurementRows = [
         </h2>
       </header>
       <div class="org" role="img" aria-label="Sea Limited branches into Garena (gaming), Shopee (e-commerce), and Monee (digital finance, highlighted), covering payments, credit, banking, wealth, and insurance.">
-        <div class="org-root">Sea Limited</div>
+        <div class="org-root">
+          <img src="/logos/sea.svg" alt="" class="org-root-logo" />
+          Sea Limited
+        </div>
         <div class="org-kids">
-          <div class="bubble">Garena<small>Gaming</small></div>
-          <div class="bubble">Shopee<small>E-commerce</small></div>
-          <div class="bubble bubble--hot">Monee<small>Digital finance</small></div>
+          <div class="bubble">
+            <img src="/logos/garena.png" alt="Garena" class="org-logo" />
+            <small>Gaming</small>
+          </div>
+          <div class="bubble">
+            <img src="/logos/shopee.svg" alt="Shopee" class="org-logo" />
+            <small>E-commerce</small>
+          </div>
+          <div class="bubble bubble--hot">
+            Monee
+            <small>Digital finance</small>
+          </div>
         </div>
         <div class="org-chips">
           <span class="pill pill--accent">Payments</span>
@@ -967,6 +979,22 @@ const measurementRows = [
     border-radius: 100px;
     padding: 10px 28px;
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .org-root-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  .org-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    margin-bottom: 4px;
   }
 
   .org-kids {
