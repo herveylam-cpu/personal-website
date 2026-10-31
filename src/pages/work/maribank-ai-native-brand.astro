@@ -594,11 +594,35 @@ const results = [
     margin-top: 10px;
   }
 
+  /* Where a section header has a sh-sub, flip the visual hierarchy:
+     the sh-sub (often the fuller, more substantive sentence here)
+     reads as the headline, and the h2 above it reads as a lead-in
+     line. Sections with no sh-sub keep the plain h2 styling above. */
+  .sh:has(.sh-sub) h2 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    max-width: 38em;
+  }
+
+  .case-chapter--dark .sh:has(.sh-sub) h2 {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
   .sh-sub {
     font-size: 16px;
     color: var(--color-ink-soft);
     max-width: 38em;
     margin-top: var(--space-2);
+  }
+
+  .sh:has(.sh-sub) .sh-sub {
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-ink);
+    max-width: 26em;
   }
 
   .case-chapter--center .sh-sub {
