@@ -457,7 +457,6 @@ const measurementRows = [
         {markets.map((m) => (
           <article class={`market market--${m.tone}`}>
             <div class="market-top">
-              <span class="label">Market type</span>
               <h3>{m.title}</h3>
               <div class="flags">
                 {m.flags.map((f) => <span class="flag" aria-label={flagNames[f]}><svg aria-hidden="true"><use href={`#f-${f}`}/></svg></span>)}
@@ -1596,6 +1595,8 @@ const measurementRows = [
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
+    max-width: 880px;
+    margin-inline: auto;
   }
 
   .market {
@@ -1611,7 +1612,7 @@ const measurementRows = [
   }
 
   .market-top h3 {
-    font-size: 21px;
+    font-size: 26px;
   }
 
   .market dl {
