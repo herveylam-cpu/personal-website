@@ -257,7 +257,7 @@ const measurementRows = [
   </section>
 
   <!-- 02 Our view on fintech -->
-  <section class="section case-chapter case-chapter--alt" id="belief">
+  <section class="section case-chapter case-chapter--alt case-chapter--center" id="belief">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">02</span>Our view on fintech</p>
@@ -352,7 +352,7 @@ const measurementRows = [
   </section>
 
   <!-- 04 Growth path -->
-  <section class="section case-chapter case-chapter--alt" id="path">
+  <section class="section case-chapter case-chapter--alt case-chapter--center" id="path">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">04</span>Growth path</p>
@@ -398,7 +398,7 @@ const measurementRows = [
   </section>
 
   <!-- 05 Ecosystem overview -->
-  <section class="section case-chapter" id="eco">
+  <section class="section case-chapter case-chapter--center" id="eco">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">05</span>Ecosystem overview</p>
@@ -435,7 +435,7 @@ const measurementRows = [
   </section>
 
   <!-- 06 Market segmentation -->
-  <section class="section case-chapter case-chapter--alt" id="markets">
+  <section class="section case-chapter case-chapter--alt case-chapter--center" id="markets">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">06</span>Market segmentation</p>
@@ -462,7 +462,7 @@ const measurementRows = [
   </section>
 
   <!-- 07 Experience principles -->
-  <section class="section case-chapter" id="principles">
+  <section class="section case-chapter case-chapter--center" id="principles">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">07</span>Experience principles</p>
@@ -760,7 +760,7 @@ const measurementRows = [
   </section>
 
   <!-- 09 Measuring design's contribution -->
-  <section class="section case-chapter" id="measure">
+  <section class="section case-chapter case-chapter--center" id="measure">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">09</span>Measuring design's contribution</p>
@@ -859,7 +859,8 @@ const measurementRows = [
     margin-bottom: var(--space-4);
   }
 
-  .sh .no {
+  .sh .no,
+  .prod-head .no {
     font-style: italic;
     font-weight: 600;
     color: var(--color-accent);
@@ -1713,6 +1714,11 @@ const measurementRows = [
   /* Product blocks */
   .prod-head {
     margin-bottom: var(--space-4);
+    text-align: center;
+  }
+
+  .prod-head > div {
+    margin-inline: auto;
   }
 
   .rolecard {
