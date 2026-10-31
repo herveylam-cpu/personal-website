@@ -1071,7 +1071,11 @@ const measurementRows = [
 
   .vs-grid {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    /* minmax(0, 1fr), not bare 1fr — a bare 1fr track still respects
+       its content's min-content width, so the card with the longer
+       quote ("What do specific users need?") was claiming extra
+       width over the other one instead of splitting evenly. */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: var(--space-3);
     align-items: stretch;
   }
