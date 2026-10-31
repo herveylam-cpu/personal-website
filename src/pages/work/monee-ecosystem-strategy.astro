@@ -291,11 +291,12 @@ const measurementRows = [
   </section>
 
   <!-- 03 Who we serve -->
-  <section class="section case-chapter" id="users">
+  <section class="section case-chapter case-chapter--center" id="users">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">03</span>Who we serve</p>
-        <h2>Our users are people traditional financial services overlook — but "overlooked" means something different in each market</h2>
+        <h2>Our users are people traditional financial services overlook</h2>
+        <p class="sh-sub">But "overlooked" means something different in each market.</p>
       </header>
       <div class="personas">
         {personas.map((p) => (
@@ -858,6 +859,17 @@ const measurementRows = [
     line-height: 1.35;
     max-width: 24em;
     margin-top: 10px;
+  }
+
+  .sh-sub {
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    max-width: 32em;
+    margin-top: var(--space-2);
+  }
+
+  .case-chapter--center .sh-sub {
+    margin-inline: auto;
   }
 
   .sub-p {
