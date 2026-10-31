@@ -10,8 +10,10 @@
 // badges, the hub-and-spoke ecosystem diagram, the overlapping
 // principle circles, the persona cards with real flag icons, the
 // product-strategy chapter divider, and the bracketed metrics tree.
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PlaceholderImage from "../../components/PlaceholderImage.astro";
+import strategyImage from "../../assets/work/strategy.png";
 
 const personas = [
   {
@@ -191,18 +193,32 @@ const measurementRows = [
 
   <!-- Hero -->
   <section class="section case-hero">
-    <div class="wrap case-hero-grid">
-      <div>
-        <a class="back" href="/project">&larr; Back to Work</a>
-        <p class="eyebrow eyebrow--accent">Strategy</p>
-        <h1>Monee Ecosystem &amp; Product Design Strategy</h1>
-        <p class="case-subtitle">
-          Based on high-level business strategy, defining Monee's
-          ecosystem and product design strategy from a systemic
-          perspective, so it moves in lockstep with business growth.
-        </p>
+    <div class="wrap case-hero-center">
+      <h1>Monee Ecosystem &amp; Product Design Strategy</h1>
+      <p class="case-subtitle">
+        Based on high-level business strategy, defining Monee's
+        ecosystem and product design strategy from a systemic
+        perspective, so it moves in lockstep with business growth.
+      </p>
+      <a class="btn case-hero-btn" href="/project">
+        Back to Work <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <p class="case-hero-lockup">
+        <span class="eyebrow eyebrow--accent">Strategy</span>
+        <span class="case-hero-sep">·</span>
+        Head of Design, Monee
+      </p>
+    </div>
+    <div class="wrap">
+      <div class="case-hero-banner-frame">
+        <Image
+          src={strategyImage}
+          alt="Monee ecosystem strategy"
+          widths={[800, 1200, 1600, 2000]}
+          sizes="100vw"
+          class="case-hero-banner-img"
+        />
       </div>
-      <PlaceholderImage ratio="9/19" radius="28px" label="Hero visual — product composite" class="case-hero-phone" />
     </div>
   </section>
 
@@ -766,23 +782,12 @@ const measurementRows = [
 </BaseLayout>
 
 <style>
-  .back {
-    display: inline-block;
-    font-size: 14px;
-    color: var(--color-ink-faint);
-    margin-bottom: var(--space-3);
-  }
-
-  .back:hover {
-    color: var(--color-accent);
-  }
-
-  /* Hero */
-  .case-hero-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: var(--space-5);
-    align-items: center;
+  /* Hero: centered headline/lede/CTA/lockup, then a full-width
+     banner image below — per the reference layout. */
+  .case-hero-center {
+    text-align: center;
+    max-width: 760px;
+    margin-inline: auto;
   }
 
   .case-hero h1 {
@@ -790,7 +795,6 @@ const measurementRows = [
     letter-spacing: -0.02em;
     font-size: clamp(34px, 5.5vw, 58px);
     line-height: 1.15;
-    margin-top: var(--space-2);
   }
 
   .case-subtitle {
@@ -800,9 +804,39 @@ const measurementRows = [
     margin-top: var(--space-3);
   }
 
-  .case-hero-phone {
-    justify-self: center;
-    max-width: 260px;
+  .case-hero-btn {
+    margin-top: var(--space-4);
+  }
+
+  .case-hero-lockup {
+    margin-top: var(--space-3);
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    justify-content: center;
+  }
+
+  .case-hero-sep {
+    color: var(--color-line);
+  }
+
+  .case-hero-banner-frame {
+    position: relative;
+    aspect-ratio: 21 / 9;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-top: var(--space-5);
+  }
+
+  .case-hero-banner-frame :global(.case-hero-banner-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   /* Chapter shell */
@@ -2082,7 +2116,6 @@ const measurementRows = [
   }
 
   @media (max-width: 900px) {
-    .case-hero-grid,
     .sea-grid,
     .belief-grid,
     .divider,
@@ -2090,9 +2123,8 @@ const measurementRows = [
       grid-template-columns: 1fr;
     }
 
-    .case-hero-phone {
-      order: -1;
-      max-width: 200px;
+    .case-hero-banner-frame {
+      aspect-ratio: 4 / 5;
     }
 
     .eco-branch {
