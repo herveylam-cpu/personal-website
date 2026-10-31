@@ -215,7 +215,7 @@ const measurementRows = [
   </section>
 
   <!-- 01 Business background -->
-  <section class="section case-chapter" id="background">
+  <section class="section case-chapter case-chapter--center" id="background">
     <div class="wrap">
       <header class="sh">
         <p class="eyebrow"><span class="no">01</span>Business background</p>
@@ -832,6 +832,14 @@ const measurementRows = [
   /* Chapter shell */
   .case-chapter--alt {
     background: rgba(23, 20, 15, 0.025);
+  }
+
+  .case-chapter--center .sh {
+    text-align: center;
+  }
+
+  .case-chapter--center .sh h2 {
+    margin-inline: auto;
   }
 
   .sh {
