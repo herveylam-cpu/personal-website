@@ -10,6 +10,9 @@ import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PlaceholderImage from "../../components/PlaceholderImage.astro";
 import toneImage from "../../assets/work/tone.png";
+import directionAImage from "../../assets/work/direction-a.webp";
+import directionBImage from "../../assets/work/direction-b.webp";
+import directionCImage from "../../assets/work/direction-c.webp";
 
 const overviewCards = [
   {
@@ -69,9 +72,9 @@ const ageStats = [
 ];
 
 const directions = [
-  { tag: "Direction A", title: "Light luxury, fashion-forward", body: "Minimal layout and styling paired with fashion-forward models, for a sense of quality." },
-  { tag: "Direction B", title: "Fresh and youthful", body: "Fresh colors and relaxed, approachable young models, for an energetic, no-distance feel." },
-  { tag: "Direction C", title: "Rich, story-driven scenes", body: "Saturated color and scenes with a story, carrying a deeper brand image through the lens." },
+  { tag: "Direction A", title: "Light luxury, fashion-forward", body: "Minimal layout and styling paired with fashion-forward models, for a sense of quality.", image: directionAImage },
+  { tag: "Direction B", title: "Fresh and youthful", body: "Fresh colors and relaxed, approachable young models, for an energetic, no-distance feel.", image: directionBImage },
+  { tag: "Direction C", title: "Rich, story-driven scenes", body: "Saturated color and scenes with a story, carrying a deeper brand image through the lens.", image: directionCImage },
 ];
 
 const scenes = [
@@ -297,7 +300,9 @@ const results = [
         <div class="dirs">
           {directions.map((d) => (
             <div class="dir">
-              <PlaceholderImage ratio="4/5" radius="14px" label={`${d.tag} mood board`} />
+              <div class="dir-frame">
+                <Image src={d.image} alt={`${d.tag} mood board`} widths={[320, 480, 640]} sizes="(max-width: 900px) 90vw, 360px" class="dir-img" />
+              </div>
               <h3>{d.title}</h3><p class="muted">{d.body}</p>
             </div>
           ))}
@@ -1105,6 +1110,22 @@ const results = [
   .dirs h3 {
     font-size: 18px;
     margin-top: 4px;
+  }
+
+  .dir-frame {
+    position: relative;
+    aspect-ratio: 7 / 4;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .dir-frame :global(.dir-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .range {
