@@ -315,7 +315,7 @@ const results = [
             <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
             <span class="axis-dot" style="left:10%;border-color:var(--color-accent)"></span>
             <span class="axis-dot" style="left:50%;border-color:var(--color-ink-soft)"></span>
-            <span class="axis-dot" style="left:90%"></span>
+            <span class="axis-dot" style="left:90%;border-color:#f2b705"></span>
           </div>
           <div class="scenes">
             {scenes.map((s) => (
@@ -1139,7 +1139,7 @@ const results = [
   .axis {
     position: relative;
     height: 80px;
-    margin: 0 8% var(--space-3);
+    margin: 0 0 var(--space-3);
   }
 
   .axis-track {
@@ -1149,7 +1149,7 @@ const results = [
     top: 50px;
     height: 3px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, var(--color-ink));
+    background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, #f2b705);
   }
 
   .axis-end {
@@ -1157,17 +1157,16 @@ const results = [
     top: 0;
     font-weight: 900;
     font-size: 18px;
-    transform: translateX(-50%);
-    background: rgba(23, 20, 15, 0.04);
-    padding: 0 8px;
   }
 
   .axis-end--l {
     left: 0;
+    text-align: left;
   }
 
   .axis-end--r {
-    left: 100%;
+    right: 0;
+    text-align: right;
   }
 
   .axis-end small {
@@ -1565,6 +1564,26 @@ const results = [
 
     .case-hero-banner-frame {
       aspect-ratio: 4 / 5;
+    }
+
+    .axis {
+      height: 130px;
+    }
+
+    .axis-track {
+      top: 95px;
+    }
+
+    .axis-dot {
+      top: 85px;
+    }
+
+    .axis-end {
+      max-width: 44%;
+    }
+
+    .axis-end small {
+      white-space: normal;
     }
   }
 </style>
