@@ -18,7 +18,7 @@ const overviewCards = [
   {
     n: "01",
     title: "Redefine what the brand means",
-    body: "Shift the target audience toward young people just starting their careers.",
+    body: "Use a top-down brand framework to anchor on digital-native Gen Z (16–28), make “simple” the core expression, and land on the tagline “MariBank, Just Works.”",
   },
   {
     n: "02",
@@ -33,7 +33,7 @@ const overviewCards = [
 ];
 
 const ownedAssets = [
-  { mark: "just work", title: "Signature mark", sub: "Handwritten script" },
+  { mark: "Just Works", title: "Signature mark", sub: "Handwritten script" },
   { mark: "◎", title: "Lens point of view", sub: "A distinctive shooting angle" },
   { mark: "“ ”", title: "Brand voice", sub: "Storytelling" },
 ];
@@ -60,15 +60,136 @@ const frameworkBottom = {
   ],
 };
 
-const qNav = [
-  { q: "Q1", label: "How we define ourselves", href: "#q1" },
-  { q: "Q2", label: "What we want users to see", href: "#q2" },
-  { q: "Q3", label: "How users remember us", href: "#memory" },
-];
-
 const ageStats = [
   { label: "Current median user age", value: "~40" },
   { label: "Target · 21–30 share of new accounts", value: "20% → 60%+" },
+];
+
+const frameworkNav = [
+  {
+    n: "1",
+    name: "Brand Purpose",
+    sub: "Why we exist",
+    question: "Why does MariBank exist?",
+    bullets: ["What pain points do users face today?", "What can MariBank uniquely solve?"],
+    outputs: ["Brand promise"],
+    href: "#purpose",
+  },
+  {
+    n: "2",
+    name: "Brand Positioning",
+    sub: "Who we serve",
+    question: "Who does MariBank serve?",
+    bullets: ["Who is the target audience?", "What are their needs, motivations, and pain points?", "How do we win them over?"],
+    outputs: ["Target audience", "User insight", "Positioning statement"],
+    href: "#positioning",
+  },
+  {
+    n: "3",
+    name: "Brand Expression",
+    sub: "Big idea",
+    question: "How should users feel about and remember MariBank? What's the big brand idea?",
+    bullets: ["What emotion moves the target audience?", "What's the tagline, and how do we say it?", "What's the key message?"],
+    outputs: ["Brand tagline", "Brand tone", "OOH & brand video"],
+    href: "#expression",
+  },
+  {
+    n: "4",
+    name: "Brand Promise",
+    sub: "Why believe us",
+    question: "Why will users believe us?",
+    bullets: ["Which products and features deliver on the promise?", "How do we communicate the USP?"],
+    outputs: ["Product branding & USP", "2–3 year product & feature roadmap"],
+    href: "#promise",
+  },
+];
+
+const purposeRows = [
+  {
+    k: "Simple",
+    pains: ["High investment minimums", "Priority-tier segmentation, not inclusive", "Long customer-service wait times", "Requires a branch visit"],
+    fixes: ["Low investment minimum, from $1", "100% online self-serve account opening", "AI tools for instant help", "Mobile-first, available anytime"],
+  },
+  {
+    k: "Reliable",
+    pains: ["Hidden FX markups and transaction fees", "Below-minimum-balance and service fees"],
+    fixes: ["Zero hidden fees, no account-maintenance fee", "Real-time, fully transparent exchange rates"],
+  },
+  {
+    k: "Rewarding",
+    pains: ["Delayed rewards", "Complex tiered perks by level and spend type", "Hard to reconcile manually"],
+    fixes: ["One flat rate and perk, no conditions attached", "Daily interest, credited instantly", "Cashback on every transaction"],
+  },
+];
+
+const segments = [
+  { name: "Gen Alpha", range: "7–15", tag: "Secondary target", tone: "second", stage: "Learning & exploring: primary/secondary schoolers", needs: "Centered on conversational AI; money is a digital tool and game asset; small, parent-supervised autonomy", wants: "Learning, safety, gamified experience" },
+  { name: "Gen Z", range: "16–28", tag: "Primary target", tone: "primary", stage: "Chasing independence: from college into first job and early career", needs: "Self-directed, peer-influenced; mobile-first, instant experience; wants simple, fast, always-improving", wants: "Simple, reliable, rewarding" },
+  { name: "Millennials", range: "29–45", stage: "Building a life: mid-career", needs: "Habit-driven, values convenience; verifies products via trusted platforms and people; needs comprehensive products", wants: "Household finances, convenience" },
+  { name: "Gen X", range: "46–60", stage: "Growing wealth: housing, kids' education, etc. stabilizing", needs: "Values tradition and reputation; experienced investors maximizing returns; wants bespoke, premium advice", wants: "Investing, retirement planning" },
+  { name: "Boomers", range: "61+", stage: "Protecting wealth: retirement", needs: "Wants peace of mind, trust, and safety; more cautious with money; values human service", wants: "Safety, legacy planning" },
+];
+
+const whyGenZ = [
+  { k: "A", title: "Lower switching friction", body: "Older users are loyal to their current bank, usually switching only after a bad experience." },
+  { k: "B", title: "We can win", body: "MariBank delivers the mobile-first, instant banking experience Gen Z wants." },
+  { k: "C", title: "Long-term value", body: "Winning a user at 20 means 20–30 years of runway." },
+];
+
+const rightToWin = [
+  {
+    k: "Simple",
+    quote: "Help me get more without making me work for it.",
+    have: ["Seamless: mobile-first, available anywhere", "Hassle-free: account opening is simple and direct, with friction removed along the way"],
+    want: ["Interface: convenient, smooth, easy to use", "Onboarding & use: fewer frictions in everyday banking, simple flow"],
+  },
+  {
+    k: "Reliable",
+    quote: "I can fully trust the bank to be transparent to me.",
+    have: ["Clear, competitive pricing: zero fees domestically and abroad, competitive FX", "AI-powered experience: an AI assistant in development for real-time support and advice"],
+    want: ["Transparent: no hidden fees or fine print, rules explained upfront", "Stay informed: real-time visibility into account status and market trends"],
+  },
+  {
+    k: "Rewarding",
+    quote: "Every effort of mine pays off, when I achieve all the “adulthood” milestones.",
+    have: ["Low barrier: rewards unlock easily, e.g. higher daily interest via ShopeeVIP", "Daily payout: savings accrue and show interest every day"],
+    want: ["Low-barrier rewards: no unnecessary tiers or conditions — every action counts", "Instant feedback: instant, consistent rewards, no long wait"],
+  },
+];
+
+const mindsetRows = [
+  { k: "Life attitude", old: "“Work now, enjoy later”", genZ: "“Enjoy the moment, fully”" },
+  { k: "Technology", old: "Useful, practical and reliable", genZ: "The default way of life — fast, personalized" },
+  { k: "Rewards", old: "Chasing long-term value maximization", genZ: "Instant, visible gratification" },
+  { k: "Relationship with money", old: "Needs careful management", genZ: "A tool that unlocks opportunity" },
+  { k: "Trust", old: "Built on reputation and history", genZ: "Built on transparency and experience" },
+  { k: "Learning & decisions", old: "Research, read, and ask first, then decide", genZ: "Learn from creators, content, and AI — decide instantly" },
+];
+
+const genZWants = [
+  { title: "Simple / effortless", body: "An intuitive, frictionless, personalized experience", hot: true },
+  { title: "Instant", body: "Real-time support, instant feedback, instant decisions" },
+  { title: "In control", body: "Autonomy, visible progress, tangible rewards" },
+];
+
+const toneOfVoice = [
+  { label: "Simple", title: "Clear, concise", quote: "That was easy.", bubbles: ["Done.", "You're all set.", "Money's in."] },
+  { label: "Reliable", title: "Calm, confident", quote: "I don't have to worry.", bubbles: ["We'll notify you when it's complete.", "Your money is secure.", "We'll take care of the rest."] },
+  { label: "Rewarding", title: "Valued, optimistic", body: "Rewards aren't just cashback — they make users feel like they're making a smart financial decision.", bubbles: ["Nice. You earned cashback.", "Your savings are growing.", "Every little bit adds up."] },
+];
+
+const brandOverview = [
+  { label: "Overall tagline", value: "MariBank, Just Works" },
+  { label: "Target audience", value: "Digital-native Gen Z (16–28)" },
+  { label: "Brand position", value: "Simple, reliable, rewarding" },
+  { label: "Emotional description", value: "Simple / effortless / frictionless" },
+];
+
+const promiseCards = [
+  { label: "Mari Savings", title: "Savings", items: ["No-condition account opening, no minimum deposit", "Daily interest, visible every day", "Zero account-maintenance fee"] },
+  { label: "Mari Credit Card", title: "Credit card", items: ["Uncapped cashback, no minimum spend", "Cashback on every transaction", "No complex tiered perks"] },
+  { label: "Mari Invest", title: "Investing", items: ["Start from $1", "Presented by asset class and risk/return"] },
+  { label: "Transfer & FX", title: "Transfer & FX", items: ["Real-time, transparent exchange rates", "No hidden FX markup"] },
 ];
 
 const directions = [
@@ -267,35 +388,129 @@ const results = [
             <div class="kv"><span class="label" style="color:rgba(255,255,255,.6)">Business strategy</span><p style="color:rgba(255,255,255,.78)">Having built a base of users through Shopee, continued growth needs an independent brand identity that opens acquisition channels beyond Shopee.</p></div>
           </div>
         </div>
-        <p class="sub-p" style="margin:var(--space-4) auto 0">Stage 2 breaks into three questions:</p>
-        <div class="qnav">
-          {qNav.map((q) => (
-            <a class="pill" href={q.href}><b>{q.q}</b>{q.label}</a>
+        <p class="sub-p" style="margin:var(--space-4) auto 0">Stage 2 breaks down into a top-down brand framework: a brand conversation starts with "why we exist" and "who we serve," before deciding the tagline and message. We used four questions to define the second stage's brand semantics, each with a clear output.</p>
+        <div class="fw4">
+          {frameworkNav.map((f) => (
+            <a class="fw-card" href={f.href}>
+              <div class="fw-card-head"><span>{f.n}</span>{f.name}<small>{f.sub}</small></div>
+              <h4>{f.question}</h4>
+              <ul>{f.bullets.map((b) => <li>{b}</li>)}</ul>
+              <div class="fw-card-out"><span class="label">Output</span><div class="chips chips--sm">{f.outputs.map((o) => <span class="pill">{o}</span>)}</div></div>
+            </a>
           ))}
         </div>
 
-        <h3 class="sub-h" id="q1"><span class="no">Q1</span>How we define ourselves: toward young people just starting their careers</h3>
-        <div class="shift">
-          <div class="stats">
-            {ageStats.map((s) => (
-              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
+        <h3 class="sub-h" id="purpose"><span class="no">4.1</span>Brand Purpose: traditional banks' pain points are MariBank's opportunity</h3>
+        <p class="sub-p">Across Simple, Reliable, and Rewarding, users keep feeling the pain points of traditional banks — and MariBank already has the products and capabilities to fix them.</p>
+        <div class="scroll-x">
+          <div class="pf-table">
+            <div class="pf-head"><span></span><span>Traditional banks' pain points today</span><span></span><span>MariBank's products & capabilities</span></div>
+            {purposeRows.map((r) => (
+              <div class="pf-row">
+                <div class="pf-k">{r.k}</div>
+                <ul class="pf-pain">{r.pains.map((p) => <li>{p}</li>)}</ul>
+                <div class="pf-arrow" aria-hidden="true">&rarr;</div>
+                <ul class="pf-fix">{r.fixes.map((f) => <li>{f}</li>)}</ul>
+              </div>
             ))}
           </div>
-          <div class="ages">
-            <div class="age age--old">
-              <h3>Users 40+</h3><span class="label">Core depositors</span>
-              <p>Higher average deposits, but value stability and existing trust — the cost of moving a primary bank relationship over is high, so growth here hits a ceiling.</p>
-            </div>
-            <div class="vs-mid" aria-hidden="true">&rarr;</div>
-            <div class="age age--young">
-              <h3>Users 18–28</h3><span class="label" style="color:rgba(255,255,255,.55)">Growth opportunity</span>
-              <p style="color:rgba(255,255,255,.78)">Just started working and managing their own money, not yet deeply tied to a traditional bank — more room for MariBank to become their primary bank.</p>
+        </div>
+
+        <h3 class="sub-h" id="positioning"><span class="no">4.2</span>Brand Positioning: anchoring on digital-native Gen Z, 16–28</h3>
+        <p class="sub-p">Gen Z is willing to switch banks, lines up well with MariBank's strengths, and brings long-term value.</p>
+        <div class="stats stats--two">
+          {ageStats.map((s) => (
+            <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
+          ))}
+        </div>
+        <div class="seg-wrap">
+          <div class="scroll-x">
+            <div class="segs">
+              <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
+              {segments.map((s) => (
+                <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
+                  <div class="seg-who"><b>{s.name}</b><small>{s.range}</small>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                  <p>{s.stage}</p>
+                  <p>{s.needs}</p>
+                  <p><b>{s.wants}</b></p>
+                </div>
+              ))}
             </div>
           </div>
+          <aside class="why">
+            <span class="label">Why Gen Z</span>
+            {whyGenZ.map((w) => (
+              <div><b>{w.k}</b><p><strong>{w.title}</strong>: {w.body}</p></div>
+            ))}
+          </aside>
         </div>
         <p class="note">The brand expresses a young attitude — it doesn't segment users by age. Users 40+ remain the main source of deposits; the brand shift can't make them feel left behind.</p>
 
-        <h3 class="sub-h" id="q2" style="margin-bottom:var(--space-3)"><span class="no">Q2</span>What we want users to see: approachable and leading</h3>
+        <h4 class="sub-h4">Right to win: MariBank's capabilities line up with what Gen Z expects</h4>
+        <div class="scroll-x">
+          <div class="rtw-table">
+            <div class="rtw-head"><span></span><span>MariBank's existing reputation & capabilities</span><span>What Gen Z expects from a bank</span></div>
+            {rightToWin.map((r) => (
+              <div class="rtw-row">
+                <div class="rtw-attr"><b>{r.k}</b><q>{r.quote}</q></div>
+                <ul>{r.have.map((h) => { const [lead, ...rest] = h.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
+                <ul class="rtw-want">{r.want.map((w) => { const [lead, ...rest] = w.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p class="conclude">MariBank is best positioned to serve Gen Z with a "simple, reliable, rewarding" brand position.</p>
+
+        <h3 class="sub-h" id="expression"><span class="no">4.3</span>Brand Expression: anchoring on "simple / effortless"</h3>
+        <p class="sub-p">Gen Z wants life to be effortless, instant, and in their control. Of the three attributes, users most often associate MariBank with "simple" — so that's our anchor for brand expression.</p>
+        <div class="mind-wrap">
+          <div class="scroll-x">
+            <div class="mindset">
+              <div class="mindset-head"><span>Dimension</span><span>Older generations<small>Millennials · Gen X · Boomers</small></span><span>Gen Z<small>16–28</small></span></div>
+              {mindsetRows.map((m) => (
+                <div class="mindset-row"><b>{m.k}</b><span>{m.old}</span><span class="mindset-genz">{m.genZ}</span></div>
+              ))}
+            </div>
+          </div>
+          <aside class="wants">
+            <span class="label">Gen Z wants life to be</span>
+            {genZWants.map((w) => (
+              <div class={w.hot ? "hot" : ""}><b>{w.title}</b><p>{w.body}</p></div>
+            ))}
+            <p class="anchor-note">Users most often associate MariBank with "simple," so we anchor brand expression there.</p>
+          </aside>
+        </div>
+
+        <div class="tagline-block">
+          <div class="tl-main">
+            <span class="label">Brand tagline · consistent with the "simple/effortless" position</span>
+            <p class="tl">MariBank, <span>Just Works</span></p>
+            <blockquote>&ldquo;I don't have to think about it.&rdquo;</blockquote>
+          </div>
+          <div class="tl-emo">
+            <span class="label">Brand emotion · validated with internal focus groups</span>
+            <ul><li>Smooth, frictionless experience</li><li>Peace of mind and confidence</li><li>The bank quietly handles complexity behind the scenes</li></ul>
+          </div>
+        </div>
+        <div class="bo">
+          {brandOverview.map((b) => (
+            <div><span>{b.label}</span><b>{b.value}</b></div>
+          ))}
+        </div>
+
+        <h4 class="sub-h4">Tone of voice</h4>
+        <div class="tov">
+          {toneOfVoice.map((t) => (
+            <div class="tv">
+              <span class="label">{t.label}</span>
+              <h4>{t.title}</h4>
+              {t.quote ? <q>{t.quote}</q> : <p class="tv-p">{t.body}</p>}
+              <div class="bubbles">{t.bubbles.map((b) => <span>{b}</span>)}</div>
+            </div>
+          ))}
+        </div>
+
+        <h4 class="sub-h4">Visual expression: approachable and leading</h4>
         <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored three visual directions for "young."</p>
         <div class="dirs">
           {directions.map((d) => (
@@ -328,6 +543,15 @@ const results = [
           </div>
           <p class="muted" style="font-size:13px;margin-top:var(--space-2)">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
         </div>
+
+        <h3 class="sub-h" id="promise"><span class="no">4.4</span>Brand Promise: making the product deliver on "Just Works"</h3>
+        <p class="sub-p">The brand promise ultimately has to be earned by the product. Each product line maps to a concrete set of selling points, told in the same voice.</p>
+        <div class="promise-cards">
+          {promiseCards.map((p) => (
+            <div class="pr"><span class="label">{p.label}</span><h4>{p.title}</h4><ul>{p.items.map((i) => <li>{i}</li>)}</ul></div>
+          ))}
+        </div>
+        <PlaceholderImage ratio="21/9" radius="20px" label="2–3 year product & feature roadmap" />
       </div>
     </section>
 
@@ -335,17 +559,17 @@ const results = [
     <section class="section case-chapter case-chapter--dark" id="memory">
       <div class="wrap">
         <header class="sh">
-          <p class="eyebrow"><span class="no">05 · Q3</span>Memory: how users remember us</p>
+          <p class="eyebrow"><span class="no">05</span>Memory: how users remember us</p>
           <h2>Distinctive brand assets, used consistently</h2>
           <p class="sh-sub" style="color:rgba(255,255,255,.65)">Building on Byron Sharp's idea of Distinctive Brand Assets, we built three memory anchors for MariBank.</p>
         </header>
 
         <div class="jw">
-          <img class="jw-mark" src="/images/just-works-logo.png" alt="MariBank's &quot;just work&quot; signature mark" />
+          <img class="jw-mark" src="/images/just-works-logo.png" alt="MariBank's &quot;Just Works&quot; signature mark" />
           <div>
             <span class="label" style="color:var(--color-accent)">Memory anchor 1 · Signature mark</span>
-            <h3 style="font-size:26px;margin-top:8px">The handwritten mark "just work"</h3>
-            <p class="sub-p" style="color:rgba(255,255,255,.75);margin-top:12px">The script stands for an attitude: young, driven, full of life. "just work" is short for "it just works" — banking should be as effortless and reliable as a tool that simply works.</p>
+            <h3 style="font-size:26px;margin-top:8px">The handwritten mark "Just Works"</h3>
+            <p class="sub-p" style="color:rgba(255,255,255,.75);margin-top:12px">The brand tagline "MariBank, Just Works" is distilled into a handwritten signature mark. The script represents youthful, driven energy; "Just Works" comes from "it just works" — banking should be as effortless and reliable as a tool that simply works, so users "don't have to think about it."</p>
             <div class="rules">
               <div><b>01</b><span>Set a minimum size so it stays legible.</span></div>
               <div><b>02</b><span>The script is only used for the mark itself — body copy uses the standard typeface.</span></div>
@@ -353,7 +577,7 @@ const results = [
           </div>
         </div>
         <div class="gallery gallery--3" style="margin-top:var(--space-4)">
-          <PlaceholderImage ratio="1/1" radius="14px" label="just work icon" />
+          <PlaceholderImage ratio="1/1" radius="14px" label="Just Works icon" />
           <PlaceholderImage ratio="1/1" radius="14px" label="Applied example" />
           <PlaceholderImage ratio="1/1" radius="14px" label="Applied example" />
         </div>
@@ -1239,6 +1463,617 @@ const results = [
     font-size: 13px;
   }
 
+  /* Brand framework additions */
+  .scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pill--tint {
+    background: rgba(23, 20, 15, 0.06);
+    border-color: transparent;
+  }
+
+  .fw4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+    text-align: left;
+  }
+
+  .fw-card {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    gap: 12px;
+    padding-bottom: var(--space-2);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .fw-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .fw-card-head {
+    background: var(--color-ink);
+    color: #fff;
+    padding: var(--space-2);
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    font-weight: 700;
+  }
+
+  .fw-card-head span {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .fw-card-head small {
+    font-weight: 400;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .fw-card h4 {
+    padding: 0 var(--space-2);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .fw-card ul {
+    margin: 0;
+    padding: 0 var(--space-2) 0 calc(var(--space-2) + 14px);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    display: grid;
+    gap: 4px;
+  }
+
+  .fw-card-out {
+    margin: 0 var(--space-2);
+    border-top: 1px dashed var(--color-line);
+    padding-top: 10px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .pf-table {
+    display: grid;
+    min-width: 760px;
+  }
+
+  .pf-head,
+  .pf-row {
+    display: grid;
+    grid-template-columns: 8em minmax(0, 1fr) 40px minmax(0, 1fr);
+    gap: var(--space-2);
+    align-items: start;
+  }
+
+  .pf-head {
+    font-weight: 700;
+    font-size: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-ink);
+  }
+
+  .pf-row {
+    padding: var(--space-3) 0;
+    border-bottom: 1px dashed var(--color-line);
+  }
+
+  .pf-k {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .pf-table ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .pf-pain li {
+    color: var(--color-ink-faint);
+    display: flex;
+    gap: 8px;
+  }
+
+  .pf-pain li::before {
+    content: "\2715";
+    font-size: 11px;
+    flex: none;
+    margin-top: 3px;
+  }
+
+  .pf-fix li {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pf-fix li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex: none;
+    margin-top: 6px;
+  }
+
+  .pf-arrow {
+    text-align: center;
+    color: var(--color-accent);
+    font-weight: 300;
+    font-size: 20px;
+  }
+
+  .stats--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: var(--space-3);
+  }
+
+  .seg-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: var(--space-3);
+    align-items: start;
+    text-align: left;
+  }
+
+  .segs {
+    display: grid;
+    gap: 8px;
+    min-width: 720px;
+  }
+
+  .seg-head,
+  .seg {
+    display: grid;
+    grid-template-columns: 9em minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .seg-head {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    padding: 0 var(--space-2) 6px;
+  }
+
+  .seg {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 14px;
+    padding: var(--space-2);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .seg p {
+    margin: 0;
+  }
+
+  .seg-who {
+    display: grid;
+    gap: 4px;
+    justify-items: start;
+  }
+
+  .seg-who b {
+    font-size: 17px;
+  }
+
+  .seg-who small {
+    color: var(--color-ink-faint);
+    font-size: 12px;
+  }
+
+  .seg--primary {
+    background: var(--color-ink);
+    color: #fff;
+    padding-block: var(--space-2);
+  }
+
+  .seg--primary .seg-who small {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .seg--primary p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .seg--second {
+    background: var(--color-accent-soft);
+  }
+
+  .seg:not(.seg--primary):not(.seg--second) {
+    opacity: 0.72;
+  }
+
+  .why {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .why > div {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .why b {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-accent);
+    color: var(--color-accent);
+    display: grid;
+    place-content: center;
+    font-size: 12px;
+  }
+
+  .why strong {
+    font-weight: 700;
+  }
+
+  .rtw-table {
+    display: grid;
+    gap: 10px;
+    min-width: 760px;
+  }
+
+  .rtw-head,
+  .rtw-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: var(--space-2);
+  }
+
+  .rtw-head {
+    font-weight: 700;
+    font-size: 13px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-ink);
+  }
+
+  .rtw-row > div,
+  .rtw-row > ul {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    list-style: none;
+  }
+
+  .rtw-attr {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .rtw-attr b {
+    font-size: 19px;
+  }
+
+  .rtw-attr q {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75);
+    quotes: "\201C" "\201D";
+  }
+
+  .rtw-table em {
+    font-style: normal;
+    font-weight: 700;
+    display: block;
+    color: var(--color-ink);
+  }
+
+  .rtw-want em {
+    color: var(--color-accent);
+  }
+
+  .conclude {
+    margin-top: var(--space-2);
+    background: var(--color-accent-soft);
+    border-radius: 14px;
+    padding: var(--space-2) var(--space-3);
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .mind-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: var(--space-3);
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .mindset {
+    display: grid;
+    min-width: 560px;
+  }
+
+  .mindset-head,
+  .mindset-row {
+    display: grid;
+    grid-template-columns: 9em minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 13px;
+    align-items: start;
+  }
+
+  .mindset-head {
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 2px solid var(--color-ink);
+  }
+
+  .mindset-head small {
+    display: block;
+    font-weight: 400;
+    color: var(--color-ink-faint);
+    font-size: 11px;
+  }
+
+  .mindset-row b {
+    font-weight: 600;
+  }
+
+  .mindset-genz,
+  .mindset-head span:last-child {
+    background: var(--color-accent-soft);
+    margin: -12px 0;
+    padding: 12px 10px;
+  }
+
+  .wants {
+    background: var(--color-ink);
+    color: #fff;
+    border-radius: 20px;
+    padding: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+
+  .wants .label {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .wants > div {
+    border-top: 1px solid #2e3036;
+    padding-top: 10px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .wants > div:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .wants b {
+    font-size: 16px;
+  }
+
+  .wants p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wants .hot b {
+    color: var(--color-accent);
+  }
+
+  .anchor-note {
+    margin-top: 4px;
+    border: 1px solid var(--color-accent);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .tagline-block {
+    margin-top: var(--space-4);
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--color-ink);
+    color: #fff;
+    text-align: left;
+  }
+
+  .tl-main {
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .tl-main .label,
+  .tl-emo .label {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .tl {
+    font-weight: 200;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+  }
+
+  .tl span {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .tagline-block blockquote {
+    margin: 0;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 14px;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .tl-emo {
+    background: #1c1d21;
+    padding: var(--space-4) var(--space-3);
+    display: grid;
+    gap: 12px;
+    align-content: center;
+  }
+
+  .tl-emo ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .tl-emo li {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .tl-emo li::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex: none;
+  }
+
+  .bo {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    text-align: left;
+  }
+
+  .bo > div {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 14px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 6px;
+  }
+
+  .bo span {
+    font-size: 11px;
+    color: var(--color-ink-faint);
+    letter-spacing: 0.06em;
+  }
+
+  .bo b {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .tov {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    text-align: left;
+  }
+
+  .tv {
+    border: 1px solid var(--color-line);
+    border-top: 4px solid var(--color-ink);
+    border-radius: 18px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .tv h4 {
+    font-size: 18px;
+  }
+
+  .tv q {
+    font-size: 17px;
+    font-style: italic;
+    quotes: "\201C" "\201D";
+  }
+
+  .tv-p {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+
+  .bubbles {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+    margin-top: 4px;
+  }
+
+  .bubbles span {
+    background: rgba(23, 20, 15, 0.04);
+    border-radius: 14px 14px 14px 4px;
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+
+  .promise-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+    text-align: left;
+  }
+
+  .pr {
+    background: rgba(23, 20, 15, 0.04);
+    border-top: 4px solid var(--color-accent);
+    border-radius: 18px;
+    padding: var(--space-2);
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .pr h4 {
+    font-size: 17px;
+  }
+
+  .pr ul {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    display: grid;
+    gap: 4px;
+  }
+
   /* 05 Memory (dark band) */
   .jw {
     display: grid;
@@ -1526,8 +2361,19 @@ const results = [
     .jw,
     .story,
     .lockflex,
-    .works {
+    .works,
+    .fw4,
+    .seg-wrap,
+    .mind-wrap,
+    .tagline-block,
+    .stats--two,
+    .tov {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bo,
+    .promise-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .vs-mid {
