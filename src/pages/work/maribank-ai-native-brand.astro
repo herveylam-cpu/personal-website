@@ -194,10 +194,10 @@ const promiseCards = [
 ];
 
 const directions = [
-  { tag: "Direction A", title: "Warm and candid", body: "Soft gradient tones and everyday moments for an approachable, no-distance feel.", image: directionAImage },
-  { tag: "Direction B", title: "Story-driven lifestyle", body: "Saturated color and real-world scenes that carry a deeper brand story.", image: directionBImage },
-  { tag: "Direction C", title: "Bold and graphic", body: "Solid color and oversized type for instant, confident recognition.", image: directionCImage },
-  { tag: "Direction D", title: "Fashion-forward", body: "Editorial styling and attitude for a leading, aspirational tone.", image: directionDImage },
+  { tag: "Direction A", image: directionAImage },
+  { tag: "Direction B", image: directionBImage },
+  { tag: "Direction C", image: directionCImage },
+  { tag: "Direction D", image: directionDImage },
 ];
 
 const scenes = [
@@ -516,13 +516,15 @@ const results = [
         <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored four visual directions for "young."</p>
         <div class="dirs">
           {directions.map((d) => (
-            <div class="dir">
-              <div class="dir-frame">
-                <Image src={d.image} alt={`${d.tag} mood board`} widths={[320, 480, 640]} sizes="(max-width: 900px) 90vw, 360px" class="dir-img" />
-              </div>
-              <h3>{d.title}</h3><p class="muted">{d.body}</p>
+            <div class="dir-frame">
+              <Image src={d.image} alt={`${d.tag} mood board`} widths={[260, 320, 400]} sizes="(max-width: 700px) 22vw, 260px" class="dir-img" />
             </div>
           ))}
+        </div>
+        <div class="dir-spectrum" aria-hidden="true">
+          <span class="dir-spectrum-label dir-spectrum-label--l">Warm and approachable</span>
+          <span class="dir-spectrum-arrow"></span>
+          <span class="dir-spectrum-label dir-spectrum-label--r">Fashion-forward and leading</span>
         </div>
         <div class="range">
           <p class="sub-p" style="margin-bottom:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
@@ -1328,19 +1330,13 @@ const results = [
 
   .dirs {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
-    text-align: left;
-  }
-
-  .dirs h3 {
-    font-size: 18px;
-    margin-top: 4px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
   }
 
   .dir-frame {
     position: relative;
-    aspect-ratio: 7 / 4;
+    aspect-ratio: 1425 / 2000;
     border-radius: 14px;
     overflow: hidden;
   }
@@ -1350,8 +1346,51 @@ const results = [
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+  }
+
+  .dir-spectrum {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .dir-spectrum-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+  }
+
+  .dir-spectrum-label--l {
+    color: var(--color-accent);
+  }
+
+  .dir-spectrum-label--r {
+    color: #c98b00;
+  }
+
+  .dir-spectrum-arrow {
+    flex: 1;
+    height: 2px;
+    min-width: 40px;
+    background: linear-gradient(90deg, var(--color-accent), #f2b705);
+    position: relative;
+  }
+
+  .dir-spectrum-arrow::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid #f2b705;
   }
 
   .range {
@@ -2383,11 +2422,19 @@ const results = [
     }
 
     .focus3,
-    .dirs,
     .scenes,
     .owns,
     .gallery--3 {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dirs {
+      gap: var(--space-1);
+    }
+
+    .dir-spectrum-label {
+      font-size: 11px;
+      white-space: normal;
     }
 
     .gallery--4 {
