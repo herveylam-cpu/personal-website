@@ -194,10 +194,10 @@ const promiseCards = [
 ];
 
 const directions = [
-  { tag: "Direction A", image: directionAImage },
-  { tag: "Direction B", image: directionBImage },
-  { tag: "Direction C", image: directionCImage },
   { tag: "Direction D", image: directionDImage },
+  { tag: "Direction C", image: directionCImage },
+  { tag: "Direction B", image: directionBImage },
+  { tag: "Direction A", image: directionAImage },
 ];
 
 const scenes = [
@@ -514,17 +514,17 @@ const results = [
 
         <h4 class="sub-h4">Visual expression: approachable and leading</h4>
         <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored four visual directions for "young."</p>
+        <div class="dir-spectrum" aria-hidden="true">
+          <span class="dir-spectrum-label dir-spectrum-label--l">Fashion-forward and leading</span>
+          <span class="dir-spectrum-arrow"></span>
+          <span class="dir-spectrum-label dir-spectrum-label--r">Warm and approachable</span>
+        </div>
         <div class="dirs">
           {directions.map((d) => (
             <div class="dir-frame">
               <Image src={d.image} alt={`${d.tag} mood board`} widths={[260, 320, 400]} sizes="(max-width: 700px) 22vw, 260px" class="dir-img" />
             </div>
           ))}
-        </div>
-        <div class="dir-spectrum" aria-hidden="true">
-          <span class="dir-spectrum-label dir-spectrum-label--l">Warm and approachable</span>
-          <span class="dir-spectrum-arrow"></span>
-          <span class="dir-spectrum-label dir-spectrum-label--r">Fashion-forward and leading</span>
         </div>
         <div class="range">
           <p class="sub-p" style="margin-bottom:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
@@ -1354,7 +1354,7 @@ const results = [
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    margin-top: var(--space-3);
+    margin-bottom: var(--space-3);
   }
 
   .dir-spectrum-label {
@@ -1365,18 +1365,18 @@ const results = [
   }
 
   .dir-spectrum-label--l {
-    color: var(--color-accent);
+    color: #c98b00;
   }
 
   .dir-spectrum-label--r {
-    color: #c98b00;
+    color: var(--color-accent);
   }
 
   .dir-spectrum-arrow {
     flex: 1;
     height: 2px;
     min-width: 40px;
-    background: linear-gradient(90deg, var(--color-accent), #f2b705);
+    background: linear-gradient(90deg, #f2b705, var(--color-accent));
     position: relative;
   }
 
@@ -1390,7 +1390,7 @@ const results = [
     height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-left: 7px solid #f2b705;
+    border-left: 7px solid var(--color-accent);
   }
 
   .range {
