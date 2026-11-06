@@ -194,10 +194,10 @@ const promiseCards = [
 ];
 
 const directions = [
-  { tag: "Direction D", image: directionDImage },
-  { tag: "Direction C", image: directionCImage },
-  { tag: "Direction B", image: directionBImage },
-  { tag: "Direction A", image: directionAImage },
+  { tag: "Direction A", image: directionAImage, pos: 10 },
+  { tag: "Direction B", image: directionBImage, pos: 36.67 },
+  { tag: "Direction C", image: directionCImage, pos: 63.33 },
+  { tag: "Direction D", image: directionDImage, pos: 90 },
 ];
 
 const scenes = [
@@ -514,27 +514,19 @@ const results = [
 
         <h4 class="sub-h4">Visual expression: approachable and leading</h4>
         <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored four visual directions for "young."</p>
-        <div class="dir-spectrum" aria-hidden="true">
-          <span class="dir-spectrum-label dir-spectrum-label--l">Fashion-forward and leading</span>
-          <span class="dir-spectrum-arrow"></span>
-          <span class="dir-spectrum-label dir-spectrum-label--r">Warm and approachable</span>
-        </div>
-        <div class="dirs">
-          {directions.map((d) => (
-            <div class="dir-frame">
-              <Image src={d.image} alt={`${d.tag} mood board`} widths={[260, 320, 400]} sizes="(max-width: 700px) 22vw, 260px" class="dir-img" />
-            </div>
-          ))}
-        </div>
         <div class="range">
           <p class="sub-p" style="margin-bottom:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
           <div class="axis" aria-hidden="true">
-            <div class="axis-track"></div>
             <span class="axis-end axis-end--l">Approachable<small>I'm one of you</small></span>
             <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
-            <span class="axis-dot" style="left:10%;border-color:var(--color-accent)"></span>
-            <span class="axis-dot" style="left:50%;border-color:var(--color-ink-soft)"></span>
-            <span class="axis-dot" style="left:90%;border-color:#f2b705"></span>
+            {directions.map((d) => (
+              <div class="axis-img" style={`left:${d.pos}%`}>
+                <div class="dir-frame">
+                  <Image src={d.image} alt={`${d.tag} mood board`} widths={[90, 120, 180]} sizes="90px" class="dir-img" />
+                </div>
+              </div>
+            ))}
+            <div class="axis-track"></div>
           </div>
           <div class="scenes">
             {scenes.map((s) => (
@@ -1328,17 +1320,12 @@ const results = [
     color: var(--color-ink-soft);
   }
 
-  .dirs {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-2);
-  }
-
   .dir-frame {
     position: relative;
     aspect-ratio: 1425 / 2000;
-    border-radius: 14px;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 2px 10px rgba(23, 20, 15, 0.14);
   }
 
   .dir-frame :global(.dir-img) {
@@ -1350,47 +1337,11 @@ const results = [
     display: block;
   }
 
-  .dir-spectrum {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
-  }
-
-  .dir-spectrum-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--color-ink-soft);
-    white-space: nowrap;
-  }
-
-  .dir-spectrum-label--l {
-    color: #c98b00;
-  }
-
-  .dir-spectrum-label--r {
-    color: var(--color-accent);
-  }
-
-  .dir-spectrum-arrow {
-    flex: 1;
-    height: 2px;
-    min-width: 40px;
-    background: linear-gradient(90deg, #f2b705, var(--color-accent));
-    position: relative;
-  }
-
-  .dir-spectrum-arrow::after {
-    content: "";
+  .axis-img {
     position: absolute;
-    right: -1px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 7px solid var(--color-accent);
+    top: 46px;
+    width: 90px;
+    transform: translateX(-50%);
   }
 
   .range {
@@ -1403,7 +1354,7 @@ const results = [
 
   .axis {
     position: relative;
-    height: 80px;
+    height: 200px;
     margin: 0 0 var(--space-3);
   }
 
@@ -1411,7 +1362,7 @@ const results = [
     position: absolute;
     left: 0;
     right: 0;
-    top: 50px;
+    top: 182px;
     height: 3px;
     border-radius: 2px;
     background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, #f2b705);
@@ -1441,17 +1392,6 @@ const results = [
     color: var(--color-ink-faint);
     white-space: nowrap;
     margin-top: 2px;
-  }
-
-  .axis-dot {
-    position: absolute;
-    top: 43px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--color-bg);
-    border: 4px solid var(--color-ink);
-    transform: translateX(-50%);
   }
 
   .scenes {
@@ -2428,15 +2368,6 @@ const results = [
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .dirs {
-      gap: var(--space-1);
-    }
-
-    .dir-spectrum-label {
-      font-size: 11px;
-      white-space: normal;
-    }
-
     .gallery--4 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -2462,15 +2393,16 @@ const results = [
     }
 
     .axis {
-      height: 130px;
+      height: 172px;
     }
 
     .axis-track {
-      top: 95px;
+      top: 154px;
     }
 
-    .axis-dot {
-      top: 85px;
+    .axis-img {
+      top: 76px;
+      width: 50px;
     }
 
     .axis-end {
