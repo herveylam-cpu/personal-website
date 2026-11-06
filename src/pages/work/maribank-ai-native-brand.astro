@@ -13,6 +13,7 @@ import toneImage from "../../assets/work/tone.png";
 import directionAImage from "../../assets/work/direction-a.webp";
 import directionBImage from "../../assets/work/direction-b.webp";
 import directionCImage from "../../assets/work/direction-c.webp";
+import directionDImage from "../../assets/work/direction-d.webp";
 
 const overviewCards = [
   {
@@ -193,9 +194,10 @@ const promiseCards = [
 ];
 
 const directions = [
-  { tag: "Direction C", title: "Rich, story-driven scenes", body: "Saturated color and scenes with a story, carrying a deeper brand image through the lens.", image: directionCImage },
-  { tag: "Direction B", title: "Fresh and youthful", body: "Fresh colors and relaxed, approachable young models, for an energetic, no-distance feel.", image: directionBImage },
-  { tag: "Direction A", title: "Light luxury, fashion-forward", body: "Minimal layout and styling paired with fashion-forward models, for a sense of quality.", image: directionAImage },
+  { tag: "Direction A", title: "Warm and candid", body: "Soft gradient tones and everyday moments for an approachable, no-distance feel.", image: directionAImage },
+  { tag: "Direction B", title: "Story-driven lifestyle", body: "Saturated color and real-world scenes that carry a deeper brand story.", image: directionBImage },
+  { tag: "Direction C", title: "Bold and graphic", body: "Solid color and oversized type for instant, confident recognition.", image: directionCImage },
+  { tag: "Direction D", title: "Fashion-forward", body: "Editorial styling and attitude for a leading, aspirational tone.", image: directionDImage },
 ];
 
 const scenes = [
@@ -511,7 +513,7 @@ const results = [
         </div>
 
         <h4 class="sub-h4">Visual expression: approachable and leading</h4>
-        <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored three visual directions for "young."</p>
+        <p class="sub-p" style="text-align:center;margin-bottom:var(--space-4)">We explored four visual directions for "young."</p>
         <div class="dirs">
           {directions.map((d) => (
             <div class="dir">
@@ -1326,7 +1328,7 @@ const results = [
 
   .dirs {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
     text-align: left;
   }
