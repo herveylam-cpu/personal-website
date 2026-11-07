@@ -445,18 +445,21 @@ const results = [
 
         <h3 class="sub-h" id="purpose"><span class="no">4.1</span>Brand Purpose: traditional banks' pain points are MariBank's opportunity</h3>
         <p class="sub-p">Across Simple, Reliable, and Rewarding, users keep feeling the pain points of traditional banks — and MariBank already has the products and capabilities to fix them.</p>
-        <div class="scroll-x">
-          <div class="pf-table">
-            <div class="pf-head"><span></span><span>Traditional banks' pain points today</span><span></span><span>MariBank's products & capabilities</span></div>
-            {purposeRows.map((r) => (
-              <div class="pf-row">
-                <div class="pf-k">{r.k}</div>
+        <div class="pf-banners" aria-hidden="true">
+          <div class="pf-banner">Traditional banks' pain points today</div>
+          <div class="pf-banner pf-banner--next">MariBank's products &amp; capabilities</div>
+        </div>
+        <div class="pf-cards">
+          {purposeRows.map((r) => (
+            <div class="pf-card">
+              <div class="pf-k">{r.k}</div>
+              <div class="pf-card-cols">
                 <ul class="pf-pain">{r.pains.map((p) => <li>{p}</li>)}</ul>
                 <div class="pf-arrow" aria-hidden="true">&rarr;</div>
                 <ul class="pf-fix">{r.fixes.map((f) => <li>{f}</li>)}</ul>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         <h3 class="sub-h" id="positioning"><span class="no">4.2</span>Brand Positioning: anchoring on digital-native Gen Z, 16–28</h3>
@@ -1622,29 +1625,45 @@ const results = [
     gap: 8px;
   }
 
-  .pf-table {
-    display: grid;
-    min-width: 760px;
+  .pf-banners {
+    display: flex;
+    margin-bottom: var(--space-3);
   }
 
-  .pf-head,
-  .pf-row {
+  .pf-banner {
+    flex: 1;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    padding: 16px 32px;
+    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
+  }
+
+  .pf-banner--next {
+    margin-left: -28px;
+    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%, 28px 50%);
+  }
+
+  .pf-cards {
     display: grid;
-    grid-template-columns: 8em minmax(0, 1fr) 40px minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .pf-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    padding: var(--space-3);
+  }
+
+  .pf-card-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
     gap: var(--space-2);
     align-items: start;
-  }
-
-  .pf-head {
-    font-weight: 700;
-    font-size: 14px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-ink);
-  }
-
-  .pf-row {
-    padding: var(--space-3) 0;
-    border-bottom: 1px dashed var(--color-line);
+    margin-top: var(--space-2);
   }
 
   .pf-k {
@@ -1652,7 +1671,8 @@ const results = [
     font-size: 18px;
   }
 
-  .pf-table ul {
+  .pf-pain,
+  .pf-fix {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -2447,8 +2467,30 @@ const results = [
     .mind-wrap,
     .tagline-block,
     .stats--two,
-    .tov {
+    .tov,
+    .pf-card-cols {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pf-banners {
+      flex-direction: column;
+    }
+
+    .pf-banner {
+      font-size: 13px;
+      padding: 14px 20px;
+      clip-path: none;
+    }
+
+    .pf-banner--next {
+      margin-left: 0;
+      margin-top: 4px;
+      clip-path: none;
+    }
+
+    .pf-arrow {
+      transform: rotate(90deg);
+      padding: 4px 0;
     }
 
     .bo,
