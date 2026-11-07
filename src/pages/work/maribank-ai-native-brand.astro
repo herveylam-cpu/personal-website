@@ -64,7 +64,7 @@ const frameworkBottom = {
 };
 
 const ageStats = [
-  { label: "Current median user age", value: "~40" },
+  { label: "Current median user age", value: "~40 yrs old" },
   { label: "Target · 21–30 share of new accounts", value: "20% → 60%+" },
 ];
 
@@ -466,7 +466,7 @@ const results = [
           <div class="stat stat--merged">
             {ageStats.map((s, i) => (
               <>
-                {i > 0 && <div class="stat-divider" aria-hidden="true"></div>}
+                {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
                 <div class="stat-half"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
               </>
             ))}
@@ -1741,12 +1741,21 @@ const results = [
     flex: 1;
     display: grid;
     gap: 6px;
+    min-width: 0;
   }
 
-  .stat-divider {
-    width: 1px;
-    align-self: stretch;
-    background: var(--color-line);
+  .stat--merged .stat-n {
+    font-size: 28px;
+    white-space: nowrap;
+  }
+
+  .stat-arrow {
+    flex: none;
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 13px solid var(--color-accent);
   }
 
   .seg-card {
@@ -1777,7 +1786,7 @@ const results = [
   }
 
   .seg {
-    background: var(--color-bg);
+    background: transparent;
     border-radius: 14px;
     padding: 10px;
     font-size: 11.5px;
@@ -2502,9 +2511,9 @@ const results = [
       align-items: stretch;
     }
 
-    .stat-divider {
-      width: auto;
-      height: 1px;
+    .stat-arrow {
+      align-self: center;
+      transform: rotate(90deg);
     }
 
     .segs {
