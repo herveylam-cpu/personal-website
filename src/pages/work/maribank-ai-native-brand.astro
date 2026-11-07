@@ -462,35 +462,42 @@ const results = [
 
         <h3 class="sub-h" id="positioning"><span class="no">4.2</span>Brand Positioning: anchoring on digital-native Gen Z, 16–28</h3>
         <p class="sub-p pf-intro">Gen Z is willing to switch banks, lines up well with MariBank's strengths, and brings long-term value.</p>
-        <div class="pos-top">
-          {ageStats.map((s, i) => (
-            <>
-              {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
-              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.sub && <span class="stat-n-sub">{s.sub}</span>}{s.value}</div></div>
-            </>
-          ))}
-          <aside class="why">
-            <span class="label">Why Gen Z</span>
-            {whyGenZ.map((w) => (
-              <div><b>{w.k}</b><p><strong>{w.title}</strong>: {w.body}</p></div>
+        <div class="pos-wrap">
+          <div class="pos-top">
+            {ageStats.map((s, i) => (
+              <>
+                {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
+                <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.sub && <span class="stat-n-sub">{s.sub}</span>}{s.value}</div></div>
+              </>
             ))}
-          </aside>
-        </div>
-        <div class="seg-card">
-          <div class="scroll-x">
-            <div class="segs">
-              <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
-              {segments.map((s) => (
-                <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
-                  <div class="seg-who">
-                    <div class="seg-who-top"><b>{s.name}</b>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
-                    <small>{s.range}</small>
-                  </div>
-                  <p>{s.stage}</p>
-                  <p>{s.needs}</p>
-                  <p><b>{s.wants}</b></p>
-                </div>
+            <aside class="why">
+              <div class="why-head">
+                <span class="label">Why Gen Z</span>
+                <button type="button" class="view-details-trigger">View Details</button>
+              </div>
+              {whyGenZ.map((w) => (
+                <div><b>{w.k}</b><p><strong>{w.title}</strong>: {w.body}</p></div>
               ))}
+            </aside>
+          </div>
+          <div class="seg-popover">
+            <div class="seg-card">
+              <div class="scroll-x">
+                <div class="segs">
+                  <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
+                  {segments.map((s) => (
+                    <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
+                      <div class="seg-who">
+                        <div class="seg-who-top"><b>{s.name}</b>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                        <small>{s.range}</small>
+                      </div>
+                      <p>{s.stage}</p>
+                      <p>{s.needs}</p>
+                      <p><b>{s.wants}</b></p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1723,13 +1730,68 @@ const results = [
     margin-top: 6px;
   }
 
+  .pos-wrap {
+    position: relative;
+    margin-bottom: var(--space-2);
+  }
+
   .pos-top {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-2);
     align-items: stretch;
     text-align: left;
-    margin-bottom: var(--space-2);
+  }
+
+  .why-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .why-head .label {
+    white-space: nowrap;
+  }
+
+  .view-details-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .seg-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .seg-popover .seg-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    box-shadow: 0 24px 60px rgba(23, 20, 15, 0.2);
+  }
+
+  .pos-wrap:has(.view-details-trigger:hover) .seg-popover,
+  .pos-wrap:has(.view-details-trigger:focus) .seg-popover,
+  .pos-wrap:has(.seg-popover:hover) .seg-popover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .pos-top .stat-n {
