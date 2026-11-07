@@ -321,16 +321,10 @@ const results = [
         <div class="groups">
           <div class="group group--keep">
             <h3 class="group-title">Keep the link with Shopee</h3>
-            <div class="keep-visual">
-              <div class="keep-ui">
-                <Image src={keepLinkUiImage} alt="Shopee app interface using MariBank orange" widths={[240, 320, 480]} sizes="220px" class="keep-ui-img" />
-              </div>
-              <div class="swatch swatch--stack">
-                <i aria-hidden="true"></i>
-                <div><b>Color</b><p class="muted">MariBank orange</p></div>
-              </div>
-            </div>
             <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
+            <div class="keep-ui">
+              <Image src={keepLinkUiImage} alt="Shopee app interface using MariBank orange" widths={[240, 320, 480]} sizes="220px" class="keep-ui-img" />
+            </div>
           </div>
           <div class="groups-arrow" aria-hidden="true">
             <span class="groups-arrow-ico">&rarr;</span>
@@ -338,6 +332,7 @@ const results = [
           </div>
           <div class="group group--own">
             <h3 class="group-title">Build independent recognition</h3>
+            <p class="muted">The part the brand can take with it once it moves beyond Shopee.</p>
             <div class="owns owns--vertical">
               {ownedAssets.map((a) => (
                 <div>
@@ -346,7 +341,6 @@ const results = [
                 </div>
               ))}
             </div>
-            <p class="muted">The part the brand can take with it once it moves beyond Shopee.</p>
           </div>
         </div>
       </div>
@@ -1076,18 +1070,14 @@ const results = [
     letter-spacing: -0.01em;
   }
 
-  .keep-visual {
-    display: flex;
-    gap: var(--space-2);
-    align-items: stretch;
-  }
-
   .keep-ui {
     position: relative;
     aspect-ratio: 739 / 1600;
     border-radius: 14px;
     overflow: hidden;
-    flex: 0 0 140px;
+    width: 170px;
+    justify-self: center;
+    margin-top: 4px;
   }
 
   .keep-ui :global(.keep-ui-img) {
@@ -1097,28 +1087,6 @@ const results = [
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-
-  .swatch {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-  }
-
-  .swatch i {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    background: var(--color-accent);
-    flex: none;
-  }
-
-  .swatch--stack {
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
   }
 
   .owns--vertical {
