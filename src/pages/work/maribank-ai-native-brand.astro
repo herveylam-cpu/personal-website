@@ -196,10 +196,10 @@ const promiseCards = [
 ];
 
 const directions = [
-  { tag: "Direction A", image: directionAImage, pos: 10 },
-  { tag: "Direction B", image: directionBImage, pos: 36.67 },
-  { tag: "Direction C", image: directionCImage, pos: 63.33 },
-  { tag: "Direction D", image: directionDImage, pos: 90 },
+  { tag: "Direction A", image: directionAImage, pos: 0 },
+  { tag: "Direction B", image: directionBImage, pos: 33.33 },
+  { tag: "Direction C", image: directionCImage, pos: 66.67 },
+  { tag: "Direction D", image: directionDImage, pos: 100 },
 ];
 
 const scenes = [
@@ -593,7 +593,7 @@ const results = [
             <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
             <div class="axis-bar"></div>
             {directions.map((d) => (
-              <div class="axis-img" style={`left:${d.pos}%`}>
+              <div class="axis-img" style={`left:calc(${d.pos}% + var(--axis-img-w) * ${(0.5 - d.pos / 100).toFixed(4)})`}>
                 <div class="dir-frame">
                   <Image src={d.image} alt={`${d.tag} mood board`} widths={[90, 120, 180]} sizes="90px" class="dir-img" />
                 </div>
@@ -610,7 +610,7 @@ const results = [
             ))}
           </div>
           <p class="sub-p" style="margin-top:var(--space-3);text-align:center">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
-          <p class="muted" style="font-size:13px;margin-top:var(--space-2)">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
+          <p class="muted" style="font-size:13px;margin-top:var(--space-2);text-align:center">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
         </div>
 
         <h3 class="sub-h" id="promise"><span class="no">4.4</span>Brand Promise: making the product deliver on "Just Works"</h3>
@@ -1463,7 +1463,8 @@ const results = [
   .axis-img {
     position: absolute;
     top: 76px;
-    width: 220px;
+    --axis-img-w: 220px;
+    width: var(--axis-img-w);
     transform: translateX(-50%);
   }
 
@@ -2831,7 +2832,7 @@ const results = [
 
     .axis-img {
       top: 104px;
-      width: 66px;
+      --axis-img-w: 66px;
     }
 
     .axis-bar {
