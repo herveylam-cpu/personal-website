@@ -463,14 +463,12 @@ const results = [
         <h3 class="sub-h" id="positioning"><span class="no">4.2</span>Brand Positioning: anchoring on digital-native Gen Z, 16–28</h3>
         <p class="sub-p pf-intro">Gen Z is willing to switch banks, lines up well with MariBank's strengths, and brings long-term value.</p>
         <div class="pos-top">
-          <div class="stat stat--merged">
-            {ageStats.map((s, i) => (
-              <>
-                {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
-                <div class="stat-half"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
-              </>
-            ))}
-          </div>
+          {ageStats.map((s, i) => (
+            <>
+              {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
+              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
+            </>
+          ))}
           <aside class="why">
             <span class="label">Why Gen Z</span>
             {whyGenZ.map((w) => (
@@ -1724,32 +1722,20 @@ const results = [
 
   .pos-top {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-2);
     align-items: stretch;
     text-align: left;
     margin-bottom: var(--space-2);
   }
 
-  .stat--merged {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .stat-half {
-    flex: 1;
-    display: grid;
-    gap: 6px;
-    min-width: 0;
-  }
-
-  .stat--merged .stat-n {
+  .pos-top .stat-n {
     font-size: 28px;
     white-space: nowrap;
   }
 
   .stat-arrow {
+    align-self: center;
     flex: none;
     width: 0;
     height: 0;
@@ -1801,6 +1787,7 @@ const results = [
     display: grid;
     gap: 2px;
     justify-items: start;
+    max-width: 100%;
   }
 
   .seg-who b {
@@ -1810,6 +1797,15 @@ const results = [
   .seg-who small {
     color: var(--color-ink-faint);
     font-size: 10.5px;
+  }
+
+  .seg-who .pill {
+    font-size: 9.5px;
+    padding: 3px 8px;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    margin-top: 2px;
   }
 
   .seg--primary {
@@ -2504,11 +2500,6 @@ const results = [
     .pf-row,
     .pf-banners {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    .stat--merged {
-      flex-direction: column;
-      align-items: stretch;
     }
 
     .stat-arrow {
