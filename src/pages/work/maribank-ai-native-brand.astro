@@ -431,7 +431,7 @@ const results = [
             <div class="kv"><span class="label" style="color:rgba(255,255,255,.6)">Business strategy</span><p style="color:rgba(255,255,255,.78)">Having built a base of users through Shopee, continued growth needs an independent brand identity that opens acquisition channels beyond Shopee.</p></div>
           </div>
         </div>
-        <p class="sub-p" style="margin:var(--space-4) auto 0">Stage 2 breaks down into a top-down brand framework: a brand conversation starts with "why we exist" and "who we serve," before deciding the tagline and message. We used four questions to define the second stage's brand semantics, each with a clear output.</p>
+        <p class="sub-p" style="margin:var(--space-4) auto 0">We used four questions to define the second stage's brand semantics, each with a clear output.</p>
         <div class="fw4">
           {frameworkNav.map((f) => (
             <a class="fw-card" href={f.href}>
@@ -1541,6 +1541,7 @@ const results = [
   .fw4 {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
     gap: var(--space-2);
     text-align: left;
   }
@@ -1550,6 +1551,8 @@ const results = [
     border-radius: 18px;
     overflow: hidden;
     display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
     gap: 12px;
     padding-bottom: var(--space-2);
     color: inherit;
