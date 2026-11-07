@@ -65,7 +65,7 @@ const frameworkBottom = {
 
 const ageStats = [
   { label: "Current median user age", value: "~40 yrs old" },
-  { label: "Target · 21–30 share of new accounts", value: "20% → 60%+" },
+  { label: "Target users", sub: "21–30 share of new accounts", value: "20% → 60%+" },
 ];
 
 const frameworkNav = [
@@ -126,8 +126,8 @@ const purposeRows = [
 ];
 
 const segments = [
-  { name: "Gen Alpha", range: "7–15", tag: "Secondary target", tone: "second", stage: "Learning & exploring: primary/secondary schoolers", needs: "Centered on conversational AI; money is a digital tool and game asset; small, parent-supervised autonomy", wants: "Learning, safety, gamified experience" },
-  { name: "Gen Z", range: "16–28", tag: "Primary target", tone: "primary", stage: "Chasing independence: from college into first job and early career", needs: "Self-directed, peer-influenced; mobile-first, instant experience; wants simple, fast, always-improving", wants: "Simple, reliable, rewarding" },
+  { name: "Gen Alpha", range: "7–15", tag: "Secondary", tone: "second", stage: "Learning & exploring: primary/secondary schoolers", needs: "Centered on conversational AI; money is a digital tool and game asset; small, parent-supervised autonomy", wants: "Learning, safety, gamified experience" },
+  { name: "Gen Z", range: "16–28", tag: "Primary", tone: "primary", stage: "Chasing independence: from college into first job and early career", needs: "Self-directed, peer-influenced; mobile-first, instant experience; wants simple, fast, always-improving", wants: "Simple, reliable, rewarding" },
   { name: "Millennials", range: "29–45", stage: "Building a life: mid-career", needs: "Habit-driven, values convenience; verifies products via trusted platforms and people; needs comprehensive products", wants: "Household finances, convenience" },
   { name: "Gen X", range: "46–60", stage: "Growing wealth: housing, kids' education, etc. stabilizing", needs: "Values tradition and reputation; experienced investors maximizing returns; wants bespoke, premium advice", wants: "Investing, retirement planning" },
   { name: "Boomers", range: "61+", stage: "Protecting wealth: retirement", needs: "Wants peace of mind, trust, and safety; more cautious with money; values human service", wants: "Safety, legacy planning" },
@@ -466,7 +466,7 @@ const results = [
           {ageStats.map((s, i) => (
             <>
               {i > 0 && <span class="stat-arrow" aria-hidden="true"></span>}
-              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
+              <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.sub && <span class="stat-n-sub">{s.sub}</span>}{s.value}</div></div>
             </>
           ))}
           <aside class="why">
@@ -482,7 +482,10 @@ const results = [
               <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
               {segments.map((s) => (
                 <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
-                  <div class="seg-who"><b>{s.name}</b><small>{s.range}</small>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                  <div class="seg-who">
+                    <div class="seg-who-top"><b>{s.name}</b>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                    <small>{s.range}</small>
+                  </div>
                   <p>{s.stage}</p>
                   <p>{s.needs}</p>
                   <p><b>{s.wants}</b></p>
@@ -1730,8 +1733,17 @@ const results = [
   }
 
   .pos-top .stat-n {
-    font-size: 28px;
+    font-size: 32px;
+    font-weight: 700;
     white-space: nowrap;
+  }
+
+  .stat-n-sub {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: normal;
+    margin-bottom: 4px;
   }
 
   .stat-arrow {
@@ -1758,7 +1770,7 @@ const results = [
   .seg-head,
   .seg {
     display: grid;
-    grid-template-columns: 7em minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
+    grid-template-columns: 11.5rem minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
     gap: 10px;
     align-items: center;
   }
@@ -1790,6 +1802,13 @@ const results = [
     max-width: 100%;
   }
 
+  .seg-who-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
   .seg-who b {
     font-size: 14px;
   }
@@ -1800,12 +1819,11 @@ const results = [
   }
 
   .seg-who .pill {
-    font-size: 9.5px;
-    padding: 3px 8px;
-    white-space: normal;
+    font-size: 10px;
+    padding: 2px 8px;
+    white-space: nowrap;
     text-align: center;
     max-width: 100%;
-    margin-top: 2px;
   }
 
   .seg--primary {
