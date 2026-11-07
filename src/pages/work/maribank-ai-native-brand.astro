@@ -91,7 +91,7 @@ const frameworkNav = [
     n: "3",
     name: "Brand Expression",
     sub: "Big idea",
-    question: "How should users feel about and remember MariBank? What's the big brand idea?",
+    question: "How should users feel about and remember MariBank?",
     bullets: ["What emotion moves the target audience?", "What's the tagline, and how do we say it?", "What's the key message?"],
     outputs: ["Brand tagline", "Brand tone", "OOH & brand video"],
     href: "#expression",
@@ -431,11 +431,11 @@ const results = [
             <div class="kv"><span class="label" style="color:rgba(255,255,255,.6)">Business strategy</span><p style="color:rgba(255,255,255,.78)">Having built a base of users through Shopee, continued growth needs an independent brand identity that opens acquisition channels beyond Shopee.</p></div>
           </div>
         </div>
-        <p class="sub-p" style="margin:var(--space-4) auto 0">We used four questions to define the second stage's brand semantics, each with a clear output.</p>
+        <p class="sub-p" style="margin:var(--space-4) auto var(--space-4)">We used four questions to define the second stage's brand semantics, each with a clear output.</p>
         <div class="fw4">
           {frameworkNav.map((f) => (
             <a class="fw-card" href={f.href}>
-              <div class="fw-card-head"><span>{f.n}</span>{f.name}<small>{f.sub}</small></div>
+              <div class="fw-card-head"><div class="fw-card-head-top"><span>{f.n}</span>{f.name}</div><small>{f.sub}</small></div>
               <h4>{f.question}</h4>
               <ul>{f.bullets.map((b) => <li>{b}</li>)}</ul>
               <div class="fw-card-out"><span class="label">Output</span><div class="chips chips--sm">{f.outputs.map((o) => <span class="pill">{o}</span>)}</div></div>
@@ -975,6 +975,8 @@ const results = [
   .chips {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
     gap: 8px;
     justify-content: center;
   }
@@ -982,6 +984,11 @@ const results = [
   .chips--sm .pill {
     font-size: 12px;
     padding: 4px 11px;
+  }
+
+  .fw-card-out .pill {
+    white-space: normal;
+    text-align: center;
   }
 
   .gallery {
@@ -1568,11 +1575,15 @@ const results = [
     background: var(--color-ink);
     color: #fff;
     padding: var(--space-2);
+    display: grid;
+    gap: 4px;
+    font-weight: 700;
+  }
+
+  .fw-card-head-top {
     display: flex;
     gap: 10px;
     align-items: baseline;
-    flex-wrap: wrap;
-    font-weight: 700;
   }
 
   .fw-card-head span {
