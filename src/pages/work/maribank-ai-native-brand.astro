@@ -34,9 +34,9 @@ const overviewCards = [
 ];
 
 const ownedAssets = [
-  { mark: "Just Works", title: "Signature mark", sub: "Handwritten script" },
-  { mark: "◎", title: "Lens point of view", sub: "A distinctive shooting angle" },
-  { mark: "“ ”", title: "Brand voice", sub: "Storytelling" },
+  { title: "Signature mark", sub: "Handwritten script" },
+  { title: "Lens point of view", sub: "A distinctive shooting angle" },
+  { title: "Brand voice", sub: "Storytelling" },
 ];
 
 const frameworkTop = {
@@ -319,15 +319,24 @@ const results = [
         </header>
         <div class="groups">
           <div class="group group--keep">
-            <span class="label">Keep the link</span>
-            <div class="swatch"><i aria-hidden="true"></i><div><b>Color</b><p class="muted">MariBank orange</p></div></div>
+            <h3 class="group-title">Keep the link with Shopee</h3>
+            <div class="keep-visual">
+              <PlaceholderImage ratio="4/5" radius="14px" label="Interface example" class="keep-ui" />
+              <div class="swatch swatch--stack">
+                <i aria-hidden="true"></i>
+                <div><b>Color</b><p class="muted">MariBank orange</p></div>
+              </div>
+            </div>
             <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
           </div>
           <div class="group group--own">
-            <span class="label" style="color:rgba(255,255,255,.55)">Build independent recognition</span>
+            <h3 class="group-title" style="color:#fff">Build independent recognition</h3>
             <div class="owns">
               {ownedAssets.map((a) => (
-                <div><span class="owns-mark" aria-hidden="true">{a.mark}</span><b>{a.title}</b><span>{a.sub}</span></div>
+                <div>
+                  <div class="owns-icon"><PlaceholderImage ratio="1/1" radius="10px" label="Icon" /></div>
+                  <b>{a.title}</b><span>{a.sub}</span>
+                </div>
               ))}
             </div>
             <p style="color:rgba(255,255,255,.7)">The part the brand can take with it once it moves beyond Shopee.</p>
@@ -1041,6 +1050,22 @@ const results = [
     color: #fff;
   }
 
+  .group-title {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .keep-visual {
+    display: flex;
+    gap: var(--space-2);
+    align-items: stretch;
+  }
+
+  .keep-visual :global(.keep-ui) {
+    flex: 1 1 56%;
+  }
+
   .swatch {
     display: flex;
     gap: 14px;
@@ -1053,6 +1078,14 @@ const results = [
     border-radius: 16px;
     background: var(--color-accent);
     flex: none;
+  }
+
+  .swatch--stack {
+    flex: 1 1 44%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
   }
 
   .owns {
@@ -1078,11 +1111,9 @@ const results = [
     color: rgba(255, 255, 255, 0.65);
   }
 
-  .owns-mark {
-    font-style: italic;
-    font-weight: 700;
-    font-size: 26px;
-    color: var(--color-accent);
+  .owns-icon {
+    width: 36px;
+    margin-bottom: 4px;
   }
 
   .weightbar {
