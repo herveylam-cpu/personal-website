@@ -382,7 +382,17 @@ const results = [
               ))}
             </div>
           </div>
-          <div class="layer-between"><i aria-hidden="true"></i><span>Standards are written into the system</span><i aria-hidden="true"></i></div>
+          <div class="layer-between">
+            <div class="layer-arrows">
+              <span></span>
+              <div class="layer-arrows-inner" aria-hidden="true">
+                <span class="layer-arrow">&darr;</span>
+                <span class="layer-arrow">&darr;</span>
+                <span class="layer-arrow">&darr;</span>
+              </div>
+            </div>
+            <p class="layer-between-caption">Standards are written into the system</p>
+          </div>
           <div class="layer layer--bottom">
             <div class="layer-who"><span class="label" style="color:rgba(255,255,255,.5)">{frameworkBottom.label}</span><h3>{frameworkBottom.title}</h3><p style="color:rgba(255,255,255,.65)">{frameworkBottom.sub}</p></div>
             <div class="layer-steps">
@@ -1196,11 +1206,18 @@ const results = [
   .layer-step {
     background: var(--color-bg);
     border: 1px solid var(--color-line);
-    border-radius: 14px;
+    border-radius: 50%;
+    width: 148px;
+    height: 148px;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: var(--space-2);
     text-align: center;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .layer-step--dark {
@@ -1211,26 +1228,39 @@ const results = [
   .layer-step small {
     display: block;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 4px;
     opacity: 0.65;
   }
 
   .layer-between {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
-    font-size: 13px;
-    color: var(--color-ink-faint);
+    padding: 10px 0;
   }
 
-  .layer-between i {
-    width: 2px;
-    height: 24px;
-    background: var(--color-line);
-    display: block;
+  .layer-arrows {
+    display: grid;
+    grid-template-columns: 12em minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .layer-arrows-inner {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .layer-arrow {
+    justify-self: center;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .layer-between-caption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    margin-top: 4px;
   }
 
   /* 04 Semantic layer — vs-grid is already a light/arrow/dark recipe,
@@ -2421,6 +2451,21 @@ const results = [
 
     .groups-arrow-ico {
       transform: rotate(90deg);
+    }
+
+    .layer-step {
+      width: 92px;
+      height: 92px;
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    .layer-step small {
+      font-size: 10px;
+    }
+
+    .layer-arrows {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .gallery--4 {
