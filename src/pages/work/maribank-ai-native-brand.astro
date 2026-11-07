@@ -1832,9 +1832,14 @@ const results = [
   .seg-head,
   .seg {
     display: grid;
-    grid-template-columns: 11.5rem minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
+    grid-template-columns: 10rem minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
     gap: 10px;
     align-items: center;
+  }
+
+  .seg-head span:last-child,
+  .seg p:last-child {
+    text-align: center;
   }
 
   .seg-head {
@@ -1926,7 +1931,7 @@ const results = [
     line-height: 1.6;
   }
 
-  .why b {
+  .why > div > b {
     width: 24px;
     height: 24px;
     border-radius: 50%;
