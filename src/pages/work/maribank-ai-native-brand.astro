@@ -178,7 +178,7 @@ const genZWants = [
 const toneOfVoice = [
   { label: "Simple", title: "Clear, concise", quote: "That was easy.", bubbles: ["Done.", "You're all set.", "Money's in."] },
   { label: "Reliable", title: "Calm, confident", quote: "I don't have to worry.", bubbles: ["We'll notify you when it's complete.", "Your money is secure.", "We'll take care of the rest."] },
-  { label: "Rewarding", title: "Valued, optimistic", body: "Rewards aren't just cashback — they make users feel like they're making a smart financial decision.", bubbles: ["Nice. You earned cashback.", "Your savings are growing.", "Every little bit adds up."] },
+  { label: "Rewarding", title: "Valued, optimistic", quote: "I am making a smart financial decision.", bubbles: ["Nice. You earned cashback.", "Your savings are growing.", "Every little bit adds up."] },
 ];
 
 const brandOverview = [
@@ -2356,6 +2356,11 @@ const results = [
   .bo b {
     font-size: 15px;
     line-height: 1.4;
+  }
+
+  .sub-h4 {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-3);
   }
 
   .tov {
