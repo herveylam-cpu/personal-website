@@ -445,19 +445,18 @@ const results = [
 
         <h3 class="sub-h" id="purpose"><span class="no">4.1</span>Brand Purpose: traditional banks' pain points are MariBank's opportunity</h3>
         <p class="sub-p">Across Simple, Reliable, and Rewarding, users keep feeling the pain points of traditional banks — and MariBank already has the products and capabilities to fix them.</p>
-        <div class="pf-banners" aria-hidden="true">
-          <div class="pf-banner">Traditional banks' pain points today</div>
-          <div class="pf-banner pf-banner--next">MariBank's products &amp; capabilities</div>
+        <div class="pf-banner" aria-hidden="true">
+          <span>Traditional banks' pain points today</span>
+          <svg class="pf-banner-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+          <span>MariBank's products &amp; capabilities</span>
         </div>
-        <div class="pf-cards">
+        <div class="pf-rows">
           {purposeRows.map((r) => (
-            <div class="pf-card">
+            <div class="pf-row">
               <div class="pf-k">{r.k}</div>
-              <div class="pf-card-cols">
-                <ul class="pf-pain">{r.pains.map((p) => <li>{p}</li>)}</ul>
-                <div class="pf-arrow" aria-hidden="true">&rarr;</div>
-                <ul class="pf-fix">{r.fixes.map((f) => <li>{f}</li>)}</ul>
-              </div>
+              <div class="pf-list-card"><ul class="pf-pain">{r.pains.map((p) => <li>{p}</li>)}</ul></div>
+              <div class="pf-arrow" aria-hidden="true">&rarr;</div>
+              <div class="pf-list-card"><ul class="pf-fix">{r.fixes.map((f) => <li>{f}</li>)}</ul></div>
             </div>
           ))}
         </div>
@@ -1625,45 +1624,44 @@ const results = [
     gap: 8px;
   }
 
-  .pf-banners {
+  .pf-banner {
     display: flex;
+    align-items: center;
+    background: var(--color-ink);
+    border-radius: 14px;
     margin-bottom: var(--space-3);
   }
 
-  .pf-banner {
+  .pf-banner span {
     flex: 1;
-    background: var(--color-accent);
     color: #fff;
     font-weight: 700;
     font-size: 15px;
     text-align: center;
-    padding: 16px 32px;
-    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
+    padding: 16px 20px;
   }
 
-  .pf-banner--next {
-    margin-left: -28px;
-    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%, 28px 50%);
+  .pf-banner-arrow {
+    flex: none;
   }
 
-  .pf-cards {
+  .pf-rows {
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
 
-  .pf-card {
+  .pf-row {
+    display: grid;
+    grid-template-columns: 8em minmax(0, 1fr) 40px minmax(0, 1fr);
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .pf-list-card {
     background: var(--color-bg);
     border: 1px solid var(--color-line);
-    border-radius: 16px;
+    border-radius: 14px;
     padding: var(--space-3);
-  }
-
-  .pf-card-cols {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
-    gap: var(--space-2);
-    align-items: start;
-    margin-top: var(--space-2);
   }
 
   .pf-k {
@@ -2468,24 +2466,21 @@ const results = [
     .tagline-block,
     .stats--two,
     .tov,
-    .pf-card-cols {
+    .pf-row {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .pf-banners {
+    .pf-banner {
       flex-direction: column;
     }
 
-    .pf-banner {
+    .pf-banner span {
       font-size: 13px;
       padding: 14px 20px;
-      clip-path: none;
     }
 
-    .pf-banner--next {
-      margin-left: 0;
-      margin-top: 4px;
-      clip-path: none;
+    .pf-banner-arrow {
+      transform: rotate(90deg);
     }
 
     .pf-arrow {
