@@ -2175,23 +2175,33 @@ const results = [
   .mindset {
     display: grid;
     min-width: 560px;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    overflow: hidden;
   }
 
   .mindset-head,
   .mindset-row {
     display: grid;
     grid-template-columns: 9em minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--space-2);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--color-line);
     font-size: 13px;
-    align-items: start;
+    align-items: stretch;
+  }
+
+  .mindset-head > span,
+  .mindset-row > b,
+  .mindset-row > span {
+    padding: 14px 16px;
+  }
+
+  .mindset-row {
+    border-top: 1px solid var(--color-line);
   }
 
   .mindset-head {
     font-weight: 700;
     font-size: 14px;
-    border-bottom: 2px solid var(--color-ink);
+    background: rgba(23, 20, 15, 0.04);
   }
 
   .mindset-head small {
@@ -2202,14 +2212,14 @@ const results = [
   }
 
   .mindset-row b {
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: rgba(168, 69, 42, 0.06);
   }
 
   .mindset-genz,
   .mindset-head span:last-child {
     background: var(--color-accent-soft);
-    margin: -12px 0;
-    padding: 12px 10px;
   }
 
   .wants {
