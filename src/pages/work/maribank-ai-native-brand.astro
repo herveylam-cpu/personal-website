@@ -445,17 +445,15 @@ const results = [
 
         <h3 class="sub-h" id="purpose"><span class="no">4.1</span>Brand Purpose: traditional banks' pain points are MariBank's opportunity</h3>
         <p class="sub-p">Across Simple, Reliable, and Rewarding, users keep feeling the pain points of traditional banks — and MariBank already has the products and capabilities to fix them.</p>
-        <div class="pf-banner" aria-hidden="true">
-          <span>Traditional banks' pain points today</span>
-          <svg class="pf-banner-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
-          <span>MariBank's products &amp; capabilities</span>
+        <div class="pf-banners" aria-hidden="true">
+          <div class="pf-banner pf-banner--pain">Traditional banks' pain points today</div>
+          <div class="pf-banner pf-banner--fix">MariBank's products &amp; capabilities</div>
         </div>
         <div class="pf-rows">
           {purposeRows.map((r) => (
             <div class="pf-row">
               <div class="pf-k">{r.k}</div>
               <div class="pf-list-card"><ul class="pf-pain">{r.pains.map((p) => <li>{p}</li>)}</ul></div>
-              <div class="pf-arrow" aria-hidden="true">&rarr;</div>
               <div class="pf-list-card"><ul class="pf-fix">{r.fixes.map((f) => <li>{f}</li>)}</ul></div>
             </div>
           ))}
@@ -1624,25 +1622,30 @@ const results = [
     gap: 8px;
   }
 
-  .pf-banner {
+  .pf-banners {
     display: flex;
-    align-items: center;
-    background: var(--color-ink);
-    border-radius: 14px;
+    gap: var(--space-2);
     margin-bottom: var(--space-3);
   }
 
-  .pf-banner span {
+  .pf-banner {
     flex: 1;
     color: #fff;
     font-weight: 700;
     font-size: 15px;
     text-align: center;
-    padding: 16px 20px;
+    padding: 16px 40px 16px 20px;
+    clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 50%, calc(100% - 24px) 100%, 0 100%);
   }
 
-  .pf-banner-arrow {
-    flex: none;
+  .pf-banner--pain {
+    background: var(--color-ink-soft);
+  }
+
+  .pf-banner--fix {
+    background: var(--color-ink);
+    padding-right: 20px;
+    clip-path: polygon(24px 0, 100% 0, 100% 100%, 24px 100%, 0 50%);
   }
 
   .pf-rows {
@@ -1652,7 +1655,7 @@ const results = [
 
   .pf-row {
     display: grid;
-    grid-template-columns: 8em minmax(0, 1fr) 40px minmax(0, 1fr);
+    grid-template-columns: 8em minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-2);
     align-items: center;
   }
@@ -1705,13 +1708,6 @@ const results = [
     background: var(--color-accent);
     flex: none;
     margin-top: 6px;
-  }
-
-  .pf-arrow {
-    text-align: center;
-    color: var(--color-accent);
-    font-weight: 300;
-    font-size: 20px;
   }
 
   .stats--two {
@@ -2470,22 +2466,15 @@ const results = [
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .pf-banner {
+    .pf-banners {
       flex-direction: column;
     }
 
-    .pf-banner span {
+    .pf-banner,
+    .pf-banner--fix {
       font-size: 13px;
       padding: 14px 20px;
-    }
-
-    .pf-banner-arrow {
-      transform: rotate(90deg);
-    }
-
-    .pf-arrow {
-      transform: rotate(90deg);
-      padding: 4px 0;
+      clip-path: none;
     }
 
     .bo,
