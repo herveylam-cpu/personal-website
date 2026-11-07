@@ -14,6 +14,7 @@ import directionAImage from "../../assets/work/direction-a.webp";
 import directionBImage from "../../assets/work/direction-b.webp";
 import directionCImage from "../../assets/work/direction-c.webp";
 import directionDImage from "../../assets/work/direction-d.webp";
+import keepLinkUiImage from "../../assets/work/keep-link-ui.jpg";
 
 const overviewCards = [
   {
@@ -321,7 +322,9 @@ const results = [
           <div class="group group--keep">
             <h3 class="group-title">Keep the link with Shopee</h3>
             <div class="keep-visual">
-              <PlaceholderImage ratio="4/5" radius="14px" label="Interface example" class="keep-ui" />
+              <div class="keep-ui">
+                <Image src={keepLinkUiImage} alt="Shopee app interface using MariBank orange" widths={[240, 320, 480]} sizes="220px" class="keep-ui-img" />
+              </div>
               <div class="swatch swatch--stack">
                 <i aria-hidden="true"></i>
                 <div><b>Color</b><p class="muted">MariBank orange</p></div>
@@ -330,7 +333,7 @@ const results = [
             <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
           </div>
           <div class="group group--own">
-            <h3 class="group-title" style="color:#fff">Build independent recognition</h3>
+            <h3 class="group-title">Build independent recognition</h3>
             <div class="owns">
               {ownedAssets.map((a) => (
                 <div>
@@ -339,7 +342,7 @@ const results = [
                 </div>
               ))}
             </div>
-            <p style="color:rgba(255,255,255,.7)">The part the brand can take with it once it moves beyond Shopee.</p>
+            <p class="muted">The part the brand can take with it once it moves beyond Shopee.</p>
           </div>
         </div>
         <div class="weightbar">
@@ -1041,13 +1044,9 @@ const results = [
     align-content: start;
   }
 
-  .group--keep {
-    background: rgba(23, 20, 15, 0.04);
-  }
-
+  .group--keep,
   .group--own {
-    background: var(--color-ink);
-    color: #fff;
+    background: rgba(23, 20, 15, 0.04);
   }
 
   .group-title {
@@ -1062,8 +1061,21 @@ const results = [
     align-items: stretch;
   }
 
-  .keep-visual :global(.keep-ui) {
+  .keep-ui {
+    position: relative;
+    aspect-ratio: 739 / 1600;
+    border-radius: 14px;
+    overflow: hidden;
     flex: 1 1 56%;
+  }
+
+  .keep-ui :global(.keep-ui-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .swatch {
@@ -1095,7 +1107,8 @@ const results = [
   }
 
   .owns > div {
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid var(--color-line);
+    background: var(--color-bg);
     border-radius: 14px;
     padding: var(--space-2);
     display: grid;
@@ -1108,7 +1121,7 @@ const results = [
 
   .owns span {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--color-ink-faint);
   }
 
   .owns-icon {
