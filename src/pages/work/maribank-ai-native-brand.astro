@@ -591,6 +591,7 @@ const results = [
           <div class="axis" aria-hidden="true">
             <span class="axis-end axis-end--l">Approachable<small>I'm one of you</small></span>
             <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
+            <div class="axis-bar"></div>
             {directions.map((d) => (
               <div class="axis-img" style={`left:${d.pos}%`}>
                 <div class="dir-frame">
@@ -608,7 +609,7 @@ const results = [
               </div>
             ))}
           </div>
-          <p class="sub-p" style="margin-top:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
+          <p class="sub-p" style="margin-top:var(--space-3);text-align:center">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
           <p class="muted" style="font-size:13px;margin-top:var(--space-2)">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
         </div>
 
@@ -1461,9 +1462,19 @@ const results = [
 
   .axis-img {
     position: absolute;
-    top: 48px;
+    top: 76px;
     width: 220px;
     transform: translateX(-50%);
+  }
+
+  .axis-bar {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, var(--color-ink));
   }
 
   .range {
@@ -2819,8 +2830,12 @@ const results = [
     }
 
     .axis-img {
-      top: 76px;
+      top: 104px;
       width: 66px;
+    }
+
+    .axis-bar {
+      top: 84px;
     }
 
     .axis-end {
