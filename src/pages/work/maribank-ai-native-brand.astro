@@ -332,9 +332,13 @@ const results = [
             </div>
             <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
           </div>
+          <div class="groups-arrow" aria-hidden="true">
+            <span class="groups-arrow-ico">&rarr;</span>
+            <small>As the share of users from beyond Shopee grows, the owned assets carry more weight</small>
+          </div>
           <div class="group group--own">
             <h3 class="group-title">Build independent recognition</h3>
-            <div class="owns">
+            <div class="owns owns--vertical">
               {ownedAssets.map((a) => (
                 <div>
                   <div class="owns-icon"><PlaceholderImage ratio="1/1" radius="10px" label="Icon" /></div>
@@ -344,11 +348,6 @@ const results = [
             </div>
             <p class="muted">The part the brand can take with it once it moves beyond Shopee.</p>
           </div>
-        </div>
-        <div class="weightbar">
-          <span class="label">Weight shift</span>
-          <div class="weightbar-bar" aria-hidden="true"></div>
-          <div class="weightbar-ends"><span>Today: color carries most of the recognition</span><span>As the share of users from beyond Shopee grows, the owned assets carry more weight &rarr;</span></div>
         </div>
       </div>
     </section>
@@ -1030,10 +1029,32 @@ const results = [
   /* 02 Brand element strategy */
   .groups {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.4fr);
     gap: var(--space-3);
     align-items: stretch;
     text-align: left;
+  }
+
+  .groups-arrow {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 110px;
+    text-align: center;
+  }
+
+  .groups-arrow-ico {
+    font-size: 28px;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .groups-arrow small {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--color-ink-faint);
   }
 
   .group {
@@ -1100,23 +1121,26 @@ const results = [
     gap: 10px;
   }
 
-  .owns {
+  .owns--vertical {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
   }
 
-  .owns > div {
+  .owns--vertical > div {
     border: 1px solid var(--color-line);
+    border-left: 3px solid var(--color-accent);
     background: var(--color-bg);
     border-radius: 14px;
-    padding: var(--space-2);
-    display: grid;
-    gap: 4px;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
   }
 
   .owns b {
     font-size: 15px;
+    display: block;
   }
 
   .owns span {
@@ -1126,32 +1150,7 @@ const results = [
 
   .owns-icon {
     width: 36px;
-    margin-bottom: 4px;
-  }
-
-  .weightbar {
-    margin-top: var(--space-3);
-    background: rgba(23, 20, 15, 0.04);
-    border-radius: 20px;
-    padding: var(--space-3) var(--space-4);
-    display: grid;
-    gap: 12px;
-    text-align: left;
-  }
-
-  .weightbar-bar {
-    height: 12px;
-    border-radius: 99px;
-    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent) 20%, var(--color-ink) 100%);
-  }
-
-  .weightbar-ends {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-2);
-    font-size: 13px;
-    color: var(--color-ink-faint);
-    flex-wrap: wrap;
+    flex: none;
   }
 
   /* 03 Framework */
@@ -2407,9 +2406,17 @@ const results = [
 
     .focus3,
     .scenes,
-    .owns,
     .gallery--3 {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .groups-arrow {
+      width: auto;
+      padding: var(--space-2) 0;
+    }
+
+    .groups-arrow-ico {
+      transform: rotate(90deg);
     }
 
     .gallery--4 {
