@@ -384,7 +384,7 @@ const results = [
           </div>
           <div class="layer-between">
             <div class="layer-arrows">
-              <span></span>
+              <p class="layer-between-caption">Standards are written into the system</p>
               <div class="layer-arrows-inner" aria-hidden="true">
                 {[0, 1, 2].map((i) => (
                   <svg class="layer-arrow-ico" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
@@ -399,7 +399,6 @@ const results = [
                 ))}
               </div>
             </div>
-            <p class="layer-between-caption">Standards are written into the system</p>
           </div>
           <div class="layer layer--bottom">
             <div class="layer-who"><span class="label" style="color:rgba(255,255,255,.5)">{frameworkBottom.label}</span><h3>{frameworkBottom.title}</h3><p style="color:rgba(255,255,255,.65)">{frameworkBottom.sub}</p></div>
@@ -1249,6 +1248,7 @@ const results = [
     display: grid;
     grid-template-columns: 12em minmax(0, 1fr);
     gap: var(--space-3);
+    align-items: center;
   }
 
   .layer-arrows-inner {
@@ -1268,7 +1268,6 @@ const results = [
     text-align: left;
     font-size: 13px;
     color: var(--color-ink-faint);
-    margin-top: 4px;
   }
 
   /* 04 Semantic layer — vs-grid is already a light/arrow/dark recipe,
