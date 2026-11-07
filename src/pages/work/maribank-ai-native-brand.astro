@@ -524,8 +524,16 @@ const results = [
           </div>
         </div>
         <div class="rtw-badges">
+          {rightToWin.map((r, i) => (
+            <div class={`rtw-badge rtw-badge--${i}`}><span>{r.k}</span></div>
+          ))}
+        </div>
+        <div class="rtw-trio-text">
           {rightToWin.map((r) => (
-            <div class="rtw-badge"><span>{r.k}</span></div>
+            <div class="rtw-trio-col">
+              <h5>{r.k}</h5>
+              <p>{r.quote}</p>
+            </div>
           ))}
         </div>
         <p class="conclude">MariBank is best positioned to serve Gen Z with a "simple, reliable, rewarding" brand position.</p>
@@ -1992,7 +2000,7 @@ const results = [
     list-style: none;
   }
 
-  .rtw-attr {
+  .rtw-row > .rtw-attr {
     background: var(--color-ink);
     color: #fff;
   }
@@ -2080,19 +2088,36 @@ const results = [
   .rtw-badges {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-3);
     margin-top: var(--space-3);
   }
 
   .rtw-badge {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     flex: none;
     border-radius: 50%;
-    background: var(--color-ink);
     display: grid;
     place-content: center;
+    position: relative;
+  }
+
+  .rtw-badge + .rtw-badge {
+    margin-left: -28px;
+  }
+
+  .rtw-badge--0 {
+    background: var(--color-ink);
+    z-index: 1;
+  }
+
+  .rtw-badge--1 {
+    background: var(--color-ink-soft);
+    z-index: 2;
+  }
+
+  .rtw-badge--2 {
+    background: var(--color-accent);
+    z-index: 3;
   }
 
   .rtw-badge span {
@@ -2102,6 +2127,31 @@ const results = [
     text-align: center;
   }
 
+  .rtw-trio-text {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .rtw-trio-col {
+    border-top: 2px solid var(--color-line);
+    padding-top: var(--space-2);
+  }
+
+  .rtw-trio-col h5 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  .rtw-trio-col p {
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+
   .conclude {
     margin-top: var(--space-2);
     background: var(--color-accent-soft);
@@ -2109,6 +2159,7 @@ const results = [
     padding: var(--space-2) var(--space-3);
     font-weight: 700;
     color: var(--color-accent);
+    text-align: center;
   }
 
   .mind-wrap {
@@ -2679,8 +2730,18 @@ const results = [
     .tagline-block,
     .tov,
     .pf-row,
-    .pf-banners {
+    .pf-banners,
+    .rtw-trio-text {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rtw-badge {
+      width: 96px;
+      height: 96px;
+    }
+
+    .rtw-badge span {
+      font-size: 13px;
     }
 
     .stat-arrow {
