@@ -588,7 +588,6 @@ const results = [
 
         <h4 class="sub-h4" style="margin-bottom:var(--space-2)">Visual expression: four visual directions for "young."</h4>
         <div class="range">
-          <p class="sub-p" style="margin-bottom:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
           <div class="axis" aria-hidden="true">
             <span class="axis-end axis-end--l">Approachable<small>I'm one of you</small></span>
             <span class="axis-end axis-end--r">Leading<small>Hand the complicated stuff to me</small></span>
@@ -599,7 +598,6 @@ const results = [
                 </div>
               </div>
             ))}
-            <div class="axis-track"></div>
           </div>
           <div class="scenes">
             {scenes.map((s) => (
@@ -610,6 +608,7 @@ const results = [
               </div>
             ))}
           </div>
+          <p class="sub-p" style="margin-top:var(--space-3)">We didn't pick just one direction. MariBank needs to carry two attitudes at once: the approachability of "I'm one of you," and the leadership of "hand the complicated stuff to me." We defined a range between the two, and set rules for which end different situations lean toward.</p>
           <p class="muted" style="font-size:13px;margin-top:var(--space-2)">This rule table is also written into the brand knowledge base — AI picks the right expression for each scene when generating assets.</p>
         </div>
 
@@ -1468,7 +1467,7 @@ const results = [
   }
 
   .range {
-    margin-top: var(--space-5);
+    margin-top: var(--space-2);
     background: rgba(23, 20, 15, 0.04);
     border-radius: 20px;
     padding: var(--space-4);
@@ -1479,16 +1478,6 @@ const results = [
     position: relative;
     height: 385px;
     margin: 0 0 var(--space-3);
-  }
-
-  .axis-track {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 369px;
-    height: 3px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-ink-soft) 50%, #f2b705);
   }
 
   .axis-end {
@@ -2827,10 +2816,6 @@ const results = [
 
     .axis {
       height: 200px;
-    }
-
-    .axis-track {
-      top: 180px;
     }
 
     .axis-img {
