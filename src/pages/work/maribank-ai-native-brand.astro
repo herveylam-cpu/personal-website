@@ -386,9 +386,17 @@ const results = [
             <div class="layer-arrows">
               <span></span>
               <div class="layer-arrows-inner" aria-hidden="true">
-                <span class="layer-arrow">&darr;</span>
-                <span class="layer-arrow">&darr;</span>
-                <span class="layer-arrow">&darr;</span>
+                {[0, 1, 2].map((i) => (
+                  <svg class="layer-arrow-ico" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id={`layerArrowGrad${i}`} x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" style="stop-color:#f4e2db" />
+                        <stop offset="100%" style="stop-color:var(--color-accent)" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0 28 H54 V8 L116 50 L54 92 V72 H0 Z" fill={`url(#layerArrowGrad${i})`} />
+                  </svg>
+                ))}
               </div>
             </div>
             <p class="layer-between-caption">Standards are written into the system</p>
@@ -1234,7 +1242,7 @@ const results = [
   }
 
   .layer-between {
-    padding: 10px 0;
+    padding: 10px var(--space-3);
   }
 
   .layer-arrows {
@@ -1249,15 +1257,15 @@ const results = [
     gap: var(--space-2);
   }
 
-  .layer-arrow {
+  .layer-arrow-ico {
     justify-self: center;
-    font-size: 24px;
-    line-height: 1;
-    color: var(--color-accent);
+    width: 56px;
+    height: 46px;
+    transform: rotate(90deg);
   }
 
   .layer-between-caption {
-    text-align: center;
+    text-align: left;
     font-size: 13px;
     color: var(--color-ink-faint);
     margin-top: 4px;
