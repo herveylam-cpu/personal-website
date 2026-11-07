@@ -2172,9 +2172,15 @@ const results = [
     text-align: left;
   }
 
+  .mind-wrap > .scroll-x {
+    height: 100%;
+  }
+
   .mindset {
     display: grid;
+    grid-template-columns: 9em minmax(0, 1fr) minmax(0, 1fr);
     min-width: 560px;
+    height: 100%;
     border: 1px solid var(--color-line);
     border-radius: 20px;
     overflow: hidden;
@@ -2182,23 +2188,22 @@ const results = [
 
   .mindset-head,
   .mindset-row {
-    display: grid;
-    grid-template-columns: 9em minmax(0, 1fr) minmax(0, 1fr);
-    font-size: 13px;
-    align-items: stretch;
+    display: contents;
   }
 
   .mindset-head > span,
   .mindset-row > b,
   .mindset-row > span {
     padding: 14px 16px;
+    font-size: 13px;
   }
 
-  .mindset-row {
+  .mindset-row > b,
+  .mindset-row > span {
     border-top: 1px solid var(--color-line);
   }
 
-  .mindset-head {
+  .mindset-head > span {
     font-weight: 700;
     font-size: 14px;
     background: rgba(23, 20, 15, 0.04);
@@ -2211,14 +2216,13 @@ const results = [
     font-size: 11px;
   }
 
-  .mindset-row b {
+  .mindset-row > b {
     font-weight: 700;
     color: var(--color-accent);
-    background: rgba(168, 69, 42, 0.06);
   }
 
   .mindset-genz,
-  .mindset-head span:last-child {
+  .mindset-head > span:last-child {
     background: var(--color-accent-soft);
   }
 
