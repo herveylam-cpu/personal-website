@@ -15,6 +15,7 @@ import directionBImage from "../../assets/work/direction-b.webp";
 import directionCImage from "../../assets/work/direction-c.webp";
 import directionDImage from "../../assets/work/direction-d.webp";
 import keepLinkUiImage from "../../assets/work/keep-link-ui.jpg";
+import keepLinkUiMaribankImage from "../../assets/work/keep-link-ui-maribank.jpg";
 
 const overviewCards = [
   {
@@ -322,12 +323,32 @@ const results = [
           <div class="group group--keep">
             <h3 class="group-title">Keep the link with Shopee</h3>
             <p class="muted">Carries forward the trust and traffic Shopee brings.</p>
-            <div class="keep-ui">
-              <Image src={keepLinkUiImage} alt="Shopee app interface using MariBank orange" widths={[240, 320, 480]} sizes="220px" class="keep-ui-img" />
+            <div class="keep-uis">
+              <figure class="keep-ui-figure">
+                <div class="keep-ui">
+                  <Image src={keepLinkUiImage} alt="Shopee app interface using MariBank orange" widths={[200, 280, 360]} sizes="150px" class="keep-ui-img" />
+                </div>
+                <figcaption>Shopee</figcaption>
+              </figure>
+              <figure class="keep-ui-figure">
+                <div class="keep-ui">
+                  <Image src={keepLinkUiMaribankImage} alt="MariBank app interface using MariBank orange" widths={[200, 280, 360]} sizes="150px" class="keep-ui-img" />
+                </div>
+                <figcaption>MariBank</figcaption>
+              </figure>
             </div>
           </div>
           <div class="groups-arrow" aria-hidden="true">
-            <span class="groups-arrow-ico">&rarr;</span>
+            <svg class="groups-arrow-ico" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="groupsArrowGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" style="stop-color:#f4e2db" />
+                  <stop offset="100%" style="stop-color:var(--color-accent)" />
+                </linearGradient>
+              </defs>
+              <path d="M0 28 H54 V8 L116 50 L54 92 V72 H0 Z" fill="url(#groupsArrowGrad)" />
+              <rect x="108" y="2" width="6" height="96" rx="3" fill="var(--color-accent)" />
+            </svg>
             <small>As the share of users from beyond Shopee grows, the owned assets carry more weight</small>
           </div>
           <div class="group group--own">
@@ -1040,9 +1061,8 @@ const results = [
   }
 
   .groups-arrow-ico {
-    font-size: 28px;
-    line-height: 1;
-    color: var(--color-accent);
+    width: 72px;
+    height: 60px;
   }
 
   .groups-arrow small {
@@ -1070,14 +1090,31 @@ const results = [
     letter-spacing: -0.01em;
   }
 
+  .keep-uis {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: 4px;
+  }
+
+  .keep-ui-figure {
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+  }
+
+  .keep-ui-figure figcaption {
+    font-size: 12px;
+    color: var(--color-ink-faint);
+  }
+
   .keep-ui {
     position: relative;
     aspect-ratio: 739 / 1600;
     border-radius: 14px;
     overflow: hidden;
-    width: 170px;
-    justify-self: center;
-    margin-top: 4px;
+    width: 130px;
   }
 
   .keep-ui :global(.keep-ui-img) {
