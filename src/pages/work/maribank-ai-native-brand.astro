@@ -461,24 +461,26 @@ const results = [
         </div>
 
         <h3 class="sub-h" id="positioning"><span class="no">4.2</span>Brand Positioning: anchoring on digital-native Gen Z, 16–28</h3>
-        <p class="sub-p">Gen Z is willing to switch banks, lines up well with MariBank's strengths, and brings long-term value.</p>
+        <p class="sub-p pf-intro">Gen Z is willing to switch banks, lines up well with MariBank's strengths, and brings long-term value.</p>
         <div class="stats stats--two">
           {ageStats.map((s) => (
             <div class="stat"><span class="label">{s.label}</span><div class="stat-n">{s.value}</div></div>
           ))}
         </div>
         <div class="seg-wrap">
-          <div class="scroll-x">
-            <div class="segs">
-              <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
-              {segments.map((s) => (
-                <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
-                  <div class="seg-who"><b>{s.name}</b><small>{s.range}</small>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
-                  <p>{s.stage}</p>
-                  <p>{s.needs}</p>
-                  <p><b>{s.wants}</b></p>
-                </div>
-              ))}
+          <div class="seg-card">
+            <div class="scroll-x">
+              <div class="segs">
+                <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
+                {segments.map((s) => (
+                  <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
+                    <div class="seg-who"><b>{s.name}</b><small>{s.range}</small>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                    <p>{s.stage}</p>
+                    <p>{s.needs}</p>
+                    <p><b>{s.wants}</b></p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <aside class="why">
@@ -1728,6 +1730,13 @@ const results = [
     gap: var(--space-3);
     align-items: start;
     text-align: left;
+  }
+
+  .seg-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: var(--space-3);
   }
 
   .segs {
