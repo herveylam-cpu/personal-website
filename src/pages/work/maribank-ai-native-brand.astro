@@ -474,31 +474,31 @@ const results = [
               <div class="why-head">
                 <span class="label">Why Gen Z</span>
                 <button type="button" class="view-details-trigger">View Details</button>
+                <div class="seg-popover">
+                  <div class="seg-card">
+                    <div class="scroll-x">
+                      <div class="segs">
+                        <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
+                        {segments.map((s) => (
+                          <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
+                            <div class="seg-who">
+                              <div class="seg-who-top"><b>{s.name}</b>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
+                              <small>{s.range}</small>
+                            </div>
+                            <p>{s.stage}</p>
+                            <p>{s.needs}</p>
+                            <p><b>{s.wants}</b></p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               {whyGenZ.map((w) => (
                 <div><b>{w.k}</b><p><strong>{w.title}</strong>: {w.body}</p></div>
               ))}
             </aside>
-          </div>
-          <div class="seg-popover">
-            <div class="seg-card">
-              <div class="scroll-x">
-                <div class="segs">
-                  <div class="seg-head"><span>Audience</span><span>Life stage</span><span>Financial needs</span><span>Wants from a bank</span></div>
-                  {segments.map((s) => (
-                    <div class={`seg ${s.tone ? `seg--${s.tone}` : ""}`}>
-                      <div class="seg-who">
-                        <div class="seg-who-top"><b>{s.name}</b>{s.tag && <span class={`pill ${s.tone === "primary" ? "pill--accent" : "pill--tint"}`}>{s.tag}</span>}</div>
-                        <small>{s.range}</small>
-                      </div>
-                      <p>{s.stage}</p>
-                      <p>{s.needs}</p>
-                      <p><b>{s.wants}</b></p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <p class="note">The brand expresses a young attitude — it doesn't segment users by age. Users 40+ remain the main source of deposits; the brand shift can't make them feel left behind.</p>
@@ -1744,6 +1744,7 @@ const results = [
   }
 
   .why-head {
+    position: relative;
     display: flex;
     align-items: baseline;
     gap: 10px;
@@ -1770,7 +1771,7 @@ const results = [
     position: absolute;
     top: 100%;
     right: 0;
-    width: min(760px, 100%);
+    width: min(760px, calc(100vw - 2 * var(--pad-inline)));
     z-index: 40;
     margin-top: 10px;
     opacity: 0;
@@ -1785,9 +1786,9 @@ const results = [
     box-shadow: 0 24px 60px rgba(23, 20, 15, 0.2);
   }
 
-  .pos-wrap:has(.view-details-trigger:hover) .seg-popover,
-  .pos-wrap:has(.view-details-trigger:focus) .seg-popover,
-  .pos-wrap:has(.seg-popover:hover) .seg-popover {
+  .why-head:has(.view-details-trigger:hover) .seg-popover,
+  .why-head:has(.view-details-trigger:focus) .seg-popover,
+  .why-head:has(.seg-popover:hover) .seg-popover {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
