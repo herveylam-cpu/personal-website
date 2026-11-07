@@ -189,10 +189,10 @@ const brandOverview = [
 ];
 
 const promiseCards = [
-  { label: "Mari Savings", title: "Savings", items: ["No-condition account opening, no minimum deposit", "Daily interest, visible every day", "Zero account-maintenance fee"] },
-  { label: "Mari Credit Card", title: "Credit card", items: ["Uncapped cashback, no minimum spend", "Cashback on every transaction", "No complex tiered perks"] },
-  { label: "Mari Invest", title: "Investing", items: ["Start from $1", "Presented by asset class and risk/return"] },
-  { label: "Transfer & FX", title: "Transfer & FX", items: ["Real-time, transparent exchange rates", "No hidden FX markup"] },
+  { label: "Mari Savings", title: "Savings" },
+  { label: "Mari Credit Card", title: "Credit card" },
+  { label: "Mari Invest", title: "Investing" },
+  { label: "Transfer & FX", title: "Transfer & FX" },
 ];
 
 const directions = [
@@ -614,10 +614,14 @@ const results = [
         </div>
 
         <h3 class="sub-h" id="promise"><span class="no">4.4</span>Brand Promise: making the product deliver on "Just Works"</h3>
-        <p class="sub-p">The brand promise ultimately has to be earned by the product. Each product line maps to a concrete set of selling points, told in the same voice.</p>
+        <p class="sub-p" style="margin-bottom:var(--space-4)">The brand promise ultimately has to be earned by the product. Each product line maps to a concrete set of selling points, told in the same voice.</p>
         <div class="promise-cards">
           {promiseCards.map((p) => (
-            <div class="pr"><span class="label">{p.label}</span><h4>{p.title}</h4><ul>{p.items.map((i) => <li>{i}</li>)}</ul></div>
+            <div class="pr">
+              <span class="label">{p.label}</span>
+              <h4>{p.title}</h4>
+              <PlaceholderImage ratio="4/3" radius="12px" label={`${p.title} visual`} />
+            </div>
           ))}
         </div>
         <PlaceholderImage ratio="21/9" radius="20px" label="2–3 year product & feature roadmap" />
@@ -2428,15 +2432,6 @@ const results = [
 
   .pr h4 {
     font-size: 17px;
-  }
-
-  .pr ul {
-    margin: 0;
-    padding-left: 16px;
-    font-size: 13px;
-    color: var(--color-ink-soft);
-    display: grid;
-    gap: 4px;
   }
 
   /* 05 Memory (dark band) */
