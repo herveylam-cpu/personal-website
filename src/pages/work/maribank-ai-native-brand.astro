@@ -501,20 +501,32 @@ const results = [
             </aside>
           </div>
         </div>
-        <p class="note">The brand expresses a young attitude — it doesn't segment users by age. Users 40+ remain the main source of deposits; the brand shift can't make them feel left behind.</p>
+        <p class="note">The brand expresses a young attitude — it doesn't segment users by age.</p>
 
-        <h4 class="sub-h4">Right to win: MariBank's capabilities line up with what Gen Z expects</h4>
-        <div class="scroll-x">
-          <div class="rtw-table">
-            <div class="rtw-head"><span></span><span>MariBank's existing reputation & capabilities</span><span>What Gen Z expects from a bank</span></div>
-            {rightToWin.map((r) => (
-              <div class="rtw-row">
-                <div class="rtw-attr"><b>{r.k}</b><q>{r.quote}</q></div>
-                <ul>{r.have.map((h) => { const [lead, ...rest] = h.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
-                <ul class="rtw-want">{r.want.map((w) => { const [lead, ...rest] = w.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
+        <div class="rtw-head-row">
+          <h4 class="rtw-title">Right to win: MariBank's capabilities line up with what Gen Z expects</h4>
+          <button type="button" class="view-more-trigger">View More</button>
+          <div class="rtw-popover">
+            <div class="rtw-card">
+              <div class="scroll-x">
+                <div class="rtw-table">
+                  <div class="rtw-head"><span></span><span>MariBank's existing reputation & capabilities</span><span>What Gen Z expects from a bank</span></div>
+                  {rightToWin.map((r) => (
+                    <div class="rtw-row">
+                      <div class="rtw-attr"><b>{r.k}</b><q>{r.quote}</q></div>
+                      <ul>{r.have.map((h) => { const [lead, ...rest] = h.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
+                      <ul class="rtw-want">{r.want.map((w) => { const [lead, ...rest] = w.split(": "); return <li><em>{lead}</em>{rest.join(": ")}</li>; })}</ul>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
           </div>
+        </div>
+        <div class="rtw-badges">
+          {rightToWin.map((r) => (
+            <div class="rtw-badge"><span>{r.k}</span></div>
+          ))}
         </div>
         <p class="conclude">MariBank is best positioned to serve Gen Z with a "simple, reliable, rewarding" brand position.</p>
 
@@ -2004,6 +2016,90 @@ const results = [
 
   .rtw-want em {
     color: var(--color-accent);
+  }
+
+  .rtw-head-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 4px;
+    text-align: center;
+  }
+
+  .rtw-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .view-more-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .rtw-popover {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, calc(100vw - 2 * var(--pad-inline)));
+    z-index: 40;
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .rtw-popover .rtw-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: var(--space-3);
+    box-shadow: 0 24px 60px rgba(23, 20, 15, 0.2);
+  }
+
+  .rtw-head-row:has(.view-more-trigger:hover) .rtw-popover,
+  .rtw-head-row:has(.view-more-trigger:focus) .rtw-popover,
+  .rtw-head-row:has(.rtw-popover:hover) .rtw-popover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .rtw-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  .rtw-badge {
+    width: 120px;
+    height: 120px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--color-ink);
+    display: grid;
+    place-content: center;
+  }
+
+  .rtw-badge span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
   }
 
   .conclude {
