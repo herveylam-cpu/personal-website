@@ -84,7 +84,7 @@ const frameworkNav = [
     sub: "Who we serve",
     question: "Who does MariBank serve?",
     bullets: ["Who is the target audience?", "What are their needs, motivations, and pain points?", "How do we win them over?"],
-    outputs: ["Target audience", "User insight", "Positioning statement"],
+    outputs: ["Target users", "User insight", "Positioning statement"],
     href: "#positioning",
   },
   {
@@ -102,7 +102,7 @@ const frameworkNav = [
     sub: "Why believe us",
     question: "Why will users believe us?",
     bullets: ["Which products and features deliver on the promise?", "How do we communicate the USP?"],
-    outputs: ["Product branding & USP", "2–3 year product & feature roadmap"],
+    outputs: ["Product branding & USP", "Product & feature roadmap"],
     href: "#promise",
   },
 ];
@@ -1617,6 +1617,8 @@ const results = [
     border-top: 1px dashed var(--color-line);
     padding-top: 10px;
     display: grid;
+    grid-template-rows: auto auto;
+    align-content: start;
     gap: 8px;
   }
 
