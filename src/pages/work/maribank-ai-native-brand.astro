@@ -1746,8 +1746,7 @@ const results = [
   .why-head {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-2);
+    gap: 10px;
   }
 
   .why-head .label {
@@ -1770,8 +1769,8 @@ const results = [
   .seg-popover {
     position: absolute;
     top: 100%;
-    left: 0;
     right: 0;
+    width: min(760px, 100%);
     z-index: 40;
     margin-top: 10px;
     opacity: 0;
