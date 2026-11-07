@@ -446,6 +446,7 @@ const results = [
         <h3 class="sub-h" id="purpose"><span class="no">4.1</span>Brand Purpose: traditional banks' pain points are MariBank's opportunity</h3>
         <p class="sub-p">Across Simple, Reliable, and Rewarding, users keep feeling the pain points of traditional banks — and MariBank already has the products and capabilities to fix them.</p>
         <div class="pf-banners" aria-hidden="true">
+          <span></span>
           <div class="pf-banner pf-banner--pain">Traditional banks' pain points today</div>
           <div class="pf-banner pf-banner--fix">MariBank's products &amp; capabilities</div>
         </div>
@@ -1623,13 +1624,13 @@ const results = [
   }
 
   .pf-banners {
-    display: flex;
+    display: grid;
+    grid-template-columns: 8em minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-2);
     margin-bottom: var(--space-3);
   }
 
   .pf-banner {
-    flex: 1;
     color: #fff;
     font-weight: 700;
     font-size: 15px;
@@ -2462,12 +2463,9 @@ const results = [
     .tagline-block,
     .stats--two,
     .tov,
-    .pf-row {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
+    .pf-row,
     .pf-banners {
-      flex-direction: column;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .pf-banner,
