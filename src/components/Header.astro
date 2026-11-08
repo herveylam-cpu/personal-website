@@ -2,6 +2,7 @@
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Project", href: "/project" },
+  { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
 ];
 const path = new URL(Astro.request.url).pathname;
@@ -37,6 +38,11 @@ const path = new URL(Astro.request.url).pathname;
     background: color-mix(in srgb, var(--color-bg) 92%, transparent);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--color-line);
+    transition: transform 0.25s ease;
+  }
+
+  .site-header--hidden {
+    transform: translateY(-100%);
   }
 
   .bar {
@@ -50,11 +56,18 @@ const path = new URL(Astro.request.url).pathname;
     font-style: italic;
     font-weight: 600;
     font-size: 18px;
+    white-space: nowrap;
   }
 
   nav ul {
     display: flex;
     gap: var(--space-4);
+  }
+
+  @media (max-width: 420px) {
+    nav ul {
+      gap: var(--space-2);
+    }
   }
 
   nav a {
@@ -75,3 +88,44 @@ const path = new URL(Astro.request.url).pathname;
     border-bottom-color: var(--color-accent);
   }
 </style>
+
+<script>
+  // Hides the header on scroll-down, reveals it again on scroll-up —
+  // runs on every page since Header is shared via BaseLayout. Stays
+  // visible near the very top so it doesn't vanish on a tiny nudge.
+  function setupHeaderScroll() {
+    const header = document.querySelector<HTMLElement>(".site-header");
+    if (!header) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function update() {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= header!.offsetHeight) {
+        header!.classList.remove("site-header--hidden");
+      } else if (delta > 0) {
+        header!.classList.add("site-header--hidden");
+      } else if (delta < 0) {
+        header!.classList.remove("site-header--hidden");
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  setupHeaderScroll();
+</script>
